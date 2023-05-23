@@ -135,9 +135,11 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Log in to enter</h3>
-						<form class="row login_form" action="login" method="post" id="contactForm" novalidate="novalidate">
+						<form class="row login_form" action="#" th:action="@{/login/submit}" method="post" id="contactForm" novalidate="novalidate" th:object="${user}">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" th:field="*{username}">
+								<div class="alert alert-warning" th:if="${#fields.hasErrors('username')}"
+								th:errors="*{username}"></div>
 							</div>
 							<div class="col-md-12 form-group">
 								<input type="password" class="form-control" id="name" name="name" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
