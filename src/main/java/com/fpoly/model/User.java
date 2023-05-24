@@ -1,9 +1,13 @@
 package com.fpoly.model;
 
+import jakarta.validation.constraints.NotBlank;
+
+// hello
 public class User {
+	@NotBlank(message = "vui lòng nhập username")
 	String username;
 	String password;
-	public User(String username, String password) {
+	public User(@NotBlank(message = "vui lòng nhập username") String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -23,6 +27,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	
 	
 

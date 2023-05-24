@@ -25,7 +25,7 @@ public class IndexController {
 	}
 
 	@PostMapping("/login/submit")
-	public String submit(@Valid @ModelAttribute("user") User user,BindingResult result, Model model) {
+	public String submit(@Valid @ModelAttribute("User") User user,BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "views/user/login";
 		}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="utf-8">
 <head>
@@ -137,12 +138,11 @@
 						<h3>Log in to enter</h3>
 						<form class="row login_form" action="#" th:action="@{/login/submit}" method="post" id="contactForm" novalidate="novalidate" th:object="${user}">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" th:field="*{username}">
-								<div class="alert alert-warning" th:if="${#fields.hasErrors('username')}"
-								th:errors="*{username}"></div>
+								<input type="text" class="form-control" id="name" name="username" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" th:field="*{username}">
+								<div class="alert alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="password" class="form-control" id="name" name="name" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+								<input type="password" class="form-control" id="name"  placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="creat_account">
