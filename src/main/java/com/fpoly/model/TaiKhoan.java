@@ -1,18 +1,31 @@
 package com.fpoly.model;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 public class TaiKhoan {
-	@NotEmpty(message = "Không được để trống")
-	String userName;
-	String password;
 
-	public String getUserName() {
-		return userName;
+	@NotBlank(message = "{Blank.Email}")
+	@Email(message = "{Format.Email}")
+	String email;
+	@NotBlank(message = "{Blank.Password}")
+	String password;
+	Boolean rule;
+
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Boolean getRule() {
+		return rule;
+	}
+
+	public void setRule(Boolean rule) {
+		this.rule = rule;
 	}
 
 	public String getPassword() {
@@ -23,14 +36,15 @@ public class TaiKhoan {
 		this.password = password;
 	}
 
-	public TaiKhoan(String userName, String password) {
-		super();
-		this.userName = userName;
-		this.password = password;
-	}
-
 	public TaiKhoan() {
 		super();
+	}
+
+	public TaiKhoan(String email, String password, Boolean rule) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.rule = rule;
 	}
 
 }
