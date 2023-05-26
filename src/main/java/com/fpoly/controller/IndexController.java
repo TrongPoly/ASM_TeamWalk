@@ -36,6 +36,41 @@ public class IndexController {
 	public String details() {
 		return "views/user/ChiTietSP";
 	}
+	
+	@RequestMapping("/admined")
+	public String Admin() {
+		return "views/Admin/adminn";
+	}
+	
+	@RequestMapping("/customered")
+	public String Customer() {
+		return "views/Admin/customered";
+	}
+	
+	@RequestMapping("/customerRanked")
+	public String CustomerRank() {
+		return "views/Admin/customerRanked";
+	}
+	
+	@RequestMapping("/customerTabled")
+	public String CustomerTable() {
+		return "views/Admin/customerTabled";
+	}
+	
+	@RequestMapping("/productadd")
+	public String productadd() {
+		return "views/Admin/productadd";
+	}
+	
+	@RequestMapping("/productTabled")
+	public String ProductTable() {
+		return "views/Admin/productTabled";	
+	}
+	
+	@RequestMapping("/customerRankTabled")
+	public String customerProductTable() {
+		return "views/Admin/customerRankTabled";
+	}
 
 	@GetMapping("/register")
 	public String FormRegres(@ModelAttribute("taikhoan") TaiKhoan taiKhoan) {
