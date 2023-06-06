@@ -33,70 +33,9 @@
 <body>
 
 	<!-- Start Header Area -->
-	<header class="header_area sticky-header">
-		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light main_box">
-				<div class="container">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="index.html"><img th:src="@{/img/logo.jpg}" width="200px" alt=""></a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-							<li class="nav-item submenu dropdown">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Shop</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="">MÁY TÍNH PC</a></li>
-									<li class="nav-item"><a class="nav-link" href="MayTinh.html">LAPTOP</a></li>
-									<li class="nav-item"><a class="nav-link" href="checkout.html">ĐIỆN THOẠI</a></li>
-									<li class="nav-item"><a class="nav-link" href="cart.html">MÁY TÍNH BẢNG</a></li>
-								</ul>
-							</li>
-							<li class="nav-item submenu dropdown">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">accessory</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="TrangLienKet">Bàn Phím</a></li>
-									<li class="nav-item"><a class="nav-link" href="TrangLienKet">Loa</a></li>
-									<li class="nav-item"><a class="nav-link" href="TrangLienKet">Tay Nghe</a></li>
-								</ul>
-							</li>
-							<li class="nav-item submenu dropdown">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Pages</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-								</ul>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-							<li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
-							<li class="nav-item">
-								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-		<div class="search_input" id="search_input_box">
-			<div class="container">
-				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
-					<button type="submit" class="btn"></button>
-					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-				</form>
-			</div>
-		</div>
-	</header>
+	<div th:replace="~{fragments/header :: header}"></div>
+	<!-- End Header Area -->
+	
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
@@ -121,37 +60,30 @@
 				<div class="col-lg-6">
 					<div class="s_Product_carousel">
 						<div class="single-prd-item">
-							<img class="img-fluid" src="/img/product/p1.jpg" alt="">
+							<img class="img-fluid" th:src="@{/img/product/__${sp.anhSanPham}__}" alt="">
 						</div>
 						<div class="single-prd-item">
-							<img class="img-fluid" src="/img/product/p1.jpg" alt="">
+							<img class="img-fluid" src="@{/img/product/__${sp.anhSanPham}__}" alt="">
 						</div>
 						<div class="single-prd-item">
-							<img class="img-fluid" src="/img/product/p1.jpg" alt="">
+							<img class="img-fluid" src="@{/img/product/__${sp.anhSanPham}__}" alt="">
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
-						<h3>Acer Gaming Nitro 5 2021 AN515-57 Ryzen 5-5600H/8GB/512GB/GTX 1650 15.6 INCH FHD</h3>
-						<h2>15.000.000 đ</h2>
+						<h3 th:text="${sp.tenSanPham}"></h3>
+						<h2 th:text="${sp.donGia}"></h2>
 						<ul class="list">
-							<li><a class="active" href="#"><span>Category</span> : Học sinh, sinh viên</a></li>
-							<li><a href="#"><span>Availibility</span> : Còn hàng</a></li>
+							<li> Số lượng còn lại:  <span th:text="${sp.soLuongTon}"></span> </li>
+												<li> Loại sản phẩm: <span th:text="${sp.maLoai.tenLoai}"></span></li>
 						</ul>
-						
-						<p> Acer vừa ra mắt phiên bản mới nhất của dòng máy gaming Nitro 5 - Nitro 5 AN515-45 R6EV được trang bị bộ vi xử lý AMD Ryzen 5 5600H, card đồ họa Geforce GTX 1650 4GB và tốc độ làm mới 144Hz cho hiệu năng xử lí mạnh mẽ cùng với hỗ trợ bàn phím RGB cá tính giúp mang lại trải nghiệm chơi game tốt nhất.
-							Công nghệ dẫn đầu.
-							 Nitro 5 AN515-45 tích hợp những “vũ khí” mới nhất. Với sự kết hợp từ CPU AMD Ryzen 5 5600H và VGA NVIDIA GeForce GTX 1650, AN515-45 sẽ cho hiệu năng xử lý mạnh mẽ để xử lý tốt các công việc đồ họa đơn giản trên các phần mềm chuyên dụng, tốc độ xử lý thông tin cũng tương đối nhanh và mượt mà.</p>
-						
-						<div class="product_count">
-							<label for="qty">Quantity:</label>
-							<input type="number" name="qty" id="sst" min="" value="1" title="Quantity:" class="input-text qty">
-							
-						</div>
-						<div class="card_area d-flex align-items-center">
-							<a class="primary-btn" href="/card/add">Add to Cart</a>
+						<div th:if="${sp.trangThai}"  class="card_area d-flex align-items-center">
+							<a class="primary-btn" th:href="@{/sanpham/addtocart?id=__${sp.id}__}">Add to Cart</a>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+						</div>
+						<div th:unless="${sp.trangThai}">
+							<h3>Hết hàng!</h3>
 						</div>
 					</div>
 				</div>

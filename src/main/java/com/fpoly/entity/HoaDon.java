@@ -12,26 +12,27 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "hoa_don")
 public class HoaDon {
-    @Id
-    @Column(name = "ma_hoa_don", nullable = false)
-    private Long id;
+	@Id
+	@Column(name = "ma_hoa_don", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "ngay_lap")
-    private LocalDate ngayLap;
+	@Column(name = "ngay_lap")
+	private LocalDate ngayLap;
 
-    @Nationalized
-    @Lob
-    @Column(name = "ghi_chu")
-    private String ghiChu;
+	@Nationalized
+	@Lob
+	@Column(name = "ghi_chu")
+	private String ghiChu;
 
-    @Column(name = "ngay_thanh_toan")
-    private LocalDate ngayThanhToan;
+	@Column(name = "ngay_thanh_toan")
+	private LocalDate ngayThanhToan;
 
-    @Column(name = "trang_thai")
-    private Boolean trangThai;
+	@Column(name = "trang_thai")
+	private Boolean trangThai;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nguoi_mua")
-    private KhachHang nguoiMua;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "nguoi_mua")
+	private KhachHang nguoiMua;
 
 }
