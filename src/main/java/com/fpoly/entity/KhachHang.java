@@ -1,9 +1,16 @@
 package com.fpoly.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+
 import org.hibernate.annotations.Nationalized;
 
 @Getter
@@ -19,30 +26,37 @@ public class KhachHang {
 	@Size(max = 50)
 	@Nationalized
 	@Column(name = "ten_khach_hang", length = 50)
+	@NotBlank
 	private String tenKhachHang;
 
 	@Nationalized
 	@Lob
 	@Column(name = "dia_chi")
+	@NotEmpty
 	private String diaChi;
 
 	@Size(max = 15)
 	@Column(name = "so_dien_thoai", length = 15)
+	@NotNull
 	private String soDienThoai;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "email")
+	@NotNull
 	private TaiKhoan email;
 
 	@Size(max = 15)
 	@Column(name = "so_can_cuoc", length = 15)
+	@NotNull
 	private String soCanCuoc;
 
 	@Column(name = "diem_tich_luy")
+	@NotNull
 	private Integer diemTichLuy;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "hang_khach_hang")
+	@NotNull
 	private HangKhachHang hangKhachHang;
 
 	public Long getId() {

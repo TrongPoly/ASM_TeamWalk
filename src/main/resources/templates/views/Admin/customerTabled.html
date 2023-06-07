@@ -107,68 +107,27 @@
 				<table class="table col-10 offset-1">
         <thead class="thead-white">
           <tr>
-            <th scope="col">Mã Hạng</th>
-            <th scope="col">Tên Hạng</th>
-            <th scope="col">Điểm Tối Thiểu</th>
-            <th scope="col">Mô Tả</th>
-            <th scope="col">Trạng Thái</th>
-            <th></th>
+            <th scope="col">Mã Khách Hàng</th>
+            <th scope="col">Họ Và Tên</th>
+            <th scope="col">Số Điện Thoại</th>
+            <th scope="col">Email</th>
+            <th scope="col">Địa Chỉ</th>
+            <th scope="col">CCCD</th>
+            <th scope="col">Điểm Tích Lũy</th>
+            <th scope="col">Hạng Khách Hàng</th>
+            <th	scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>HHK001</th>
-            <td>Hạng 1</td>
-            <td>3500</td>
-            <td>Hạng 1 </td>
-            <td>Top BXH</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-
-          <tr>
-            <th>HHK001</th>
-            <td>Hạng 1</td>
-            <td>3500</td>
-            <td>Hạng 1 </td>
-            <td>Top BXH</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-          <tr>
-            <th>HHK001</th>
-            <td>Hạng 1</td>
-            <td>3500</td>
-            <td>Hạng 1 </td>
-            <td>Top BXH</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-
-          <tr>
-            <th>HHK001</th>
-            <td>Hạng 1</td>
-            <td>3500</td>
-            <td>Hạng 1 </td>
-            <td>Top BXH</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-
-          <tr>
-            <th>HHK001</th>
-            <td>Hạng 1</td>
-            <td>3500</td>
-            <td>Hạng 1 </td>
-            <td>Top BXH</td>
+          <tr th:each="kh : ${khs} " >
+            <td th:text="${kh.id}"></td>
+            <td	th:text="${kh.tenKhachHang}"></td>
+            <td	th:text="${kh.diaChi}"></td>
+            <td	th:text="${kh.soDienThoai}"></td>
+            <td	th:text="${kh.diaChi}"></td>
+            <td	th:text="${kh.soCanCuoc}"></td>
+            <td	th:text="${kh.diemTichLuy}"></td>
+            <td	th:text="${kh.hangKhachHang.id}"></td>
             <td>
                 <a href="#" class="btn btn-warning" >Sửa</a>
                 <a href="#"><span class="btn btn-danger">Xoá</span></a>
