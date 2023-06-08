@@ -14,6 +14,7 @@ import org.hibernate.annotations.Nationalized;
 public class HangKhachHang {
     @Id
     @Column(name = "ma_hang", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Size(max = 50)

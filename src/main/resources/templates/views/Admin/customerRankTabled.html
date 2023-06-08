@@ -116,64 +116,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>HHK001</th>
-            <td>Hạng 1</td>
-            <td>3500</td>
-            <td>Hạng 1 </td>
-            <td>Top BXH</td>
+          <tr th:each=" hkh : ${hkhs}">
+            <th th:text="${hkh.id}"></th>
+            <td	th:text="${hkh.tenHang}"></td>
+            <td	th:text="${hkh.moTa}"></td>
+            <td	th:text="${hkh.diemToiThieu}"></td>
+            <td	th:text="${hkh.trangThai"></td>
             <td>
                 <a href="#" class="btn btn-warning" >Sửa</a>
                 <a href="#"><span class="btn btn-danger">Xoá</span></a>
             </td>
           </tr>
 
-          <tr>
-            <th>HHK001</th>
-            <td>Hạng 1</td>
-            <td>3500</td>
-            <td>Hạng 1 </td>
-            <td>Top BXH</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-          <tr>
-            <th>HHK001</th>
-            <td>Hạng 1</td>
-            <td>3500</td>
-            <td>Hạng 1 </td>
-            <td>Top BXH</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-
-          <tr>
-            <th>HHK001</th>
-            <td>Hạng 1</td>
-            <td>3500</td>
-            <td>Hạng 1 </td>
-            <td>Top BXH</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-
-          <tr>
-            <th>HHK001</th>
-            <td>Hạng 1</td>
-            <td>3500</td>
-            <td>Hạng 1 </td>
-            <td>Top BXH</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
+         
          
          </tbody>
 			</div>

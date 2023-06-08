@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fpoly.dao.KhachHangDAO;
 import com.fpoly.entity.KhachHang;
@@ -26,7 +28,7 @@ public class KhachHangController {
 	@Autowired
 	KhachHangDAO khdao;
 	
-	@RequestMapping("/customerTable")
+	@RequestMapping("/customerTabled")
 	public String KhachHang(@ModelAttribute("khachhang") KhachHang kh, Model model) {	
 		List<KhachHang> khs = khdao.findAll();
 		model.addAttribute("khs",khs);// buộc lên bảng
@@ -40,7 +42,8 @@ public class KhachHangController {
 		return "views/Admin/customered";
 	}
 	
-	@RequestMapping("/customer/save")
+	
+	@RequestMapping( value = "/customer/save" , method = RequestMethod.POST)
 	public String Save(@Valid @ModelAttribute("khachhang") KhachHang kh, BindingResult khresult,Model model) {
 		
 		if(khresult.hasErrors()) {
@@ -49,21 +52,28 @@ public class KhachHangController {
 		khdao.save(kh);
 		
 		model.addAttribute("kh",kh);
-		return "views/Admin/customered";
+		return "redirect:/customerTabled";
 	}
 	
 	
-	@RequestMapping("/customer/edit/{id}")
-	public String edit(Model model, @PathVariable("id") Long id) {
+	@RequestMapping(value =  "/customer/edit")
+	public String edit(@PathVariable("id") Long id,Model model) {
 		KhachHang kh = khdao.findById(id).get();
+		model.addAttribute("kh",kh);
 		List<KhachHang> khs = khdao.findAll();
 		model.addAttribute("khs",khs);
-		return "redirect:/views/Admin/customered";
+		return "redirect:/customered";
 	}
 	
-//	@RequestMapping("/customer/delete/{id}")
-//	public String delete(@PathVariable("id") Long id) {
-//	
-//	}
-
+	@RequestMapping(value = "/customer/update")
+	public String update(@ModelAttribute("khachhang") KhachHang kh, Model model) {
+		khdao.save(kh);
+		return "redirect:/customer/edit" + kh.getId();
+	}
+	
+	@RequestMapping(value = "/customer/delete/{id}")
+	public String deleteId(@PathVariable("id") Long id ) {
+		khdao.deleteById(id);
+		return "redirect:/customerTabled";
+	}
 }

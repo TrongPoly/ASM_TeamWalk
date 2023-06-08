@@ -118,23 +118,23 @@
             <th	scope="col"></th>
           </tr>
         </thead>
-        <tbody>
+       
           <tr th:each="kh : ${khs} " >
             <td th:text="${kh.id}"></td>
             <td	th:text="${kh.tenKhachHang}"></td>
-            <td	th:text="${kh.diaChi}"></td>
-            <td	th:text="${kh.soDienThoai}"></td>
+           	<td	th:text="${kh.soDienThoai}"></td>
+            <td	th:text="${kh.email.email}"></td>
             <td	th:text="${kh.diaChi}"></td>
             <td	th:text="${kh.soCanCuoc}"></td>
             <td	th:text="${kh.diemTichLuy}"></td>
             <td	th:text="${kh.hangKhachHang.id}"></td>
             <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
+                <a th:href="@{/customer/edit?id=__${kh.id}__}"><span class="btn btn-warning">Sửa</span></a> 
+                <a th:href="@{/customer/delete/__${kh.id}__}"><span class="btn btn-danger">Xoá</span></a>
             </td>
           </tr>
          
-         </tbody>
+        
 			</div>
 		</div>
 	</section>

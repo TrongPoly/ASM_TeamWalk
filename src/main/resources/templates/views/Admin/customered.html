@@ -117,20 +117,21 @@
                 <div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Costumer Form</h3>
-						<form class="row login_form" action="#" th:action="@{/costumer/save}" method="post" id="contactForm" th:object="${khachhang}">
+						<form class="row login_form" action="#" th:action="@{/customer/save}" method="post" id="contactForm" th:object="${khachhang}">
+                      
                             <div class="col-md-12 form-group p_star">
                                 <input th:field="*{tenKhachHang}" type="text" class="form-control" placeholder="Họ Tên Khách Hàng" id="" name="">                      
                                 <div class="alert alert-warning" th:if="${#fields.hasErrors('tenKhachHang')}"
 			th:errors="*{tenKhachHang}"></div>
                             </div>
-							<div class="col-md-6 form-group p_star">
+							<div class="col-md-12 form-group p_star">
 							<input th:field="*{soDienThoai}" type="text" class="form-control" id="number" name="number" placeholder="Số Điện Thoại">
 							
 							<div class="alert alert-warning" th:if="${#fields.hasErrors('soDienThoai')}"
 			th:errors="*{soDienThoai}"></div>
 						</div>
-						<div class="col-md-6 form-group p_star">
-							<input th:field="*{email}" type="text" class="form-control" id="" name="" placeholder="Email">
+						<div class="col-md-12 form-group p_star">
+							<input th:field="*{email.email}" type="text" class="form-control" id="" name="" placeholder="Email">
 						
 						<div class="alert alert-warning" th:if="${#fields.hasErrors('email')}"
 			th:errors="*{email}"></div>
@@ -161,7 +162,7 @@
                             </div>
                           
 							<div class="col-md-12 form-group">
-									<button class="primary-btn">Save</button>
+									<button class="primary-btn" type="submit">Save</button>
 							</div>
 							
 						</form>

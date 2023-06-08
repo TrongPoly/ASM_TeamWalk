@@ -17,7 +17,7 @@ import org.hibernate.annotations.Nationalized;
 @Setter
 @Entity
 @Table(name = "khach_hang")
-public class KhachHang {
+public class KhachHang implements Serializable{
 	@Id
 	@Column(name = "ma_khach_hang", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +26,11 @@ public class KhachHang {
 	@Size(max = 50)
 	@Nationalized
 	@Column(name = "ten_khach_hang", length = 50)
-	@NotBlank
 	private String tenKhachHang;
 
 	@Nationalized
 	@Lob
 	@Column(name = "dia_chi")
-	@NotEmpty
 	private String diaChi;
 
 	@Size(max = 15)
@@ -42,21 +40,17 @@ public class KhachHang {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "email")
-	@NotNull
 	private TaiKhoan email;
 
 	@Size(max = 15)
 	@Column(name = "so_can_cuoc", length = 15)
-	@NotNull
 	private String soCanCuoc;
 
 	@Column(name = "diem_tich_luy")
-	@NotNull
 	private Integer diemTichLuy;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "hang_khach_hang")
-	@NotNull
 	private HangKhachHang hangKhachHang;
 
 	public Long getId() {
