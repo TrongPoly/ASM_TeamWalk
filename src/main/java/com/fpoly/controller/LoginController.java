@@ -14,6 +14,7 @@ import com.fpoly.dao.TaiKhoanDAO;
 import com.fpoly.entity.TaiKhoan;
 import com.fpoly.services.CookieImpl;
 import com.fpoly.services.CookieService;
+import com.fpoly.services.SessionService;
 import com.fpoly.services.UserService;
 
 import jakarta.validation.Valid;
@@ -24,6 +25,10 @@ public class LoginController {
 	UserService userService;
 	@Autowired
 	CookieImpl cookieImpl;
+	@Autowired
+	SessionService sessionService;
+	@Autowired
+	TaiKhoanDAO taiKhoanDAO;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String formLogin(@ModelAttribute("taikhoan") TaiKhoan taiKhoan, Model model) {
@@ -36,15 +41,28 @@ public class LoginController {
 			return "views/user/login";
 		}
 		if (userService.checkLogin(taiKhoan.getEmail(), taiKhoan.getMatKhau())) {
+			System.out.println("Email: " + taiKhoan.getEmail());
+			System.out.println("Model attribute type: " + taiKhoan.getClass().getName());
+			TaiKhoan tk = taiKhoanDAO.getById(taiKhoan.getEmail());
+			System.out.println("Phân Quyền: " + tk.getPhanQuyen());
+
+			sessionService.set("user", tk);
+//			String uri = sessionService.get("security-uri");
+//			if (uri != null) {
+//				return "redirect:/" + uri;
+//			} else {
 			cookieImpl.add("cuser", taiKhoan.getEmail(), 10);
+//			model.addAttribute("message", "Login succeed");
 			return "redirect:/index";
 		}
+//		}
 		return "redirect:/login";
 	}
 
 	@RequestMapping("/logout")
 	public String logout() {
 		cookieImpl.remove("cuser");
+		sessionService.remove("user");
 		return "redirect:/index";
 	}
 }
