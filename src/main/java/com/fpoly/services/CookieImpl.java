@@ -39,4 +39,16 @@ public class CookieImpl implements CookieService {
 		return null;
 	}
 
+	@Override
+	public Cookie get(String name) {
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals(name)) {
+					return cookie;
+				}
+			}
+		}
+		return null;
+	}
 }

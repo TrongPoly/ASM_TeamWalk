@@ -33,7 +33,7 @@
 <body>
 
 	<!-- Start Header Area -->
-	<div th:replace="fragments/header :: header"></div>
+	<div th:replace="~{fragments/header :: header}"></div>
 	<!-- End Header Area -->
 
 	<!-- start banner Area -->
@@ -231,14 +231,14 @@
 	<div class="row col-12">
 
 		<div th:each="item : ${sp}" class="single-product col-md-3">
-			<img class="" th:src="@{/img/product/__${item.anhSanPham}__}"
+			<img class="img-product" th:src="@{/img/product/__${item.anhSanPham}__}" 
 				alt="load">
 			<div class="product-details">
 				<h6 th:text="${item.tenSanPham}"></h6>
 				<div class="price">
 					<h6 th:text="${item.donGia}"></h6>
 				</div>
-				<div class="prd-bottom">
+				<div th:if="${item.trangThai}" class="prd-bottom">
 
 					<a th:href="@{/sanpham/addtocart?id=__${item.id}__}" class="social-info"> <span class="ti-bag"></span>
 						<p class="hover-text">add to bag</p>
@@ -250,6 +250,9 @@
 						class="social-info"> <span class="lnr lnr-move"></span>
 						<p class="hover-text">view more</p>
 					</a>
+				</div>
+				<div th:unless="${item.trangThai}" > <br>
+				<h3 class="text-danger" >Hết hàng</h3>
 				</div>
 			</div>
 		</div>

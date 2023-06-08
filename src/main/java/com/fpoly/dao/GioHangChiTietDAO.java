@@ -10,4 +10,6 @@ import com.fpoly.entity.GioHang;
 
 public interface GioHangChiTietDAO extends JpaRepository<GioHangChiTiet, GioHangChiTietId> {
 	GioHangChiTiet getByMaSanPhamAndMaGioHang(SanPham maSanPham, GioHang maGioHang);
+
+	List<GioHangChiTiet> findByMaGioHang(GioHang maGioHang);
 }
