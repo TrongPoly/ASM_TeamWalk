@@ -1,16 +1,23 @@
 package com.fpoly.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+
 import org.hibernate.annotations.Nationalized;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "khach_hang")
-public class KhachHang {
+public class KhachHang implements Serializable{
 	@Id
 	@Column(name = "ma_khach_hang", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +35,7 @@ public class KhachHang {
 
 	@Size(max = 15)
 	@Column(name = "so_dien_thoai", length = 15)
+	@NotNull
 	private String soDienThoai;
 
 	@OneToOne(fetch = FetchType.LAZY)
