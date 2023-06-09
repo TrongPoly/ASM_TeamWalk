@@ -8,4 +8,6 @@ import com.fpoly.entity.SanPham;
 
 public interface SanPhamDAO extends JpaRepository<SanPham, Long> {
 	List<SanPham> findAllById(long id);
+
+	SanPham getByTenSanPham(String tenSanPham);
 }

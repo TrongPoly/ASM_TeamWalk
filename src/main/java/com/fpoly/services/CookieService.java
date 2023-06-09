@@ -9,4 +9,6 @@ public interface CookieService {
 
 	String getValue(String name);
 
+	Cookie get(String name);
+
 }

@@ -2,6 +2,7 @@ package com.fpoly.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.fpoly.dao.TaiKhoanDAO;
 
@@ -19,6 +20,15 @@ public class UserServiceImpl implements UserService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void checkLogged(Model model) {
+		if (cookieImpl.getValue("cuser") != null) {
+			boolean isUser = true;
+			model.addAttribute("emailAccount", cookieImpl.getValue("cuser"));
+			model.addAttribute("isUser", isUser);
+		}
 	}
 
 }

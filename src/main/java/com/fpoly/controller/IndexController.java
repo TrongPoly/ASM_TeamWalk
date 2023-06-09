@@ -20,6 +20,9 @@ import com.fpoly.dao.SanPhamDAO;
 import com.fpoly.entity.SanPham;
 import com.fpoly.entity.TaiKhoan;
 import com.fpoly.services.CookieImpl;
+import com.fpoly.services.SessionService;
+import com.fpoly.services.UserService;
+import com.fpoly.services.UserServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -29,20 +32,18 @@ import lombok.experimental.var;
 public class IndexController {
 	@Autowired
 	HttpServletRequest request;
-
+	@Autowired
+	SessionService sessionService;
 	@Autowired
 	CookieImpl cookieImpl;
 	@Autowired
 	SanPhamDAO spDAO;
+	@Autowired
+	UserServiceImpl userServiceImpl;
 
 	@GetMapping("/index")
 	public String getindex(Model model, @RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
-		if (cookieImpl.getValue("cuser") != null) {
-			boolean isUser = true;
-			model.addAttribute("emailAccount", cookieImpl.getValue("cuser"));
-			model.addAttribute("isUser", isUser);
-		}
-		System.out.println(cookieImpl.getValue("cuser"));
+		userServiceImpl.checkLogged(model);
 		Pageable pageable = PageRequest.of(pageNo, 8);
 		var sp = spDAO.findAll(pageable);
 		model.addAttribute("sp", sp);
@@ -51,11 +52,8 @@ public class IndexController {
 
 	@GetMapping("/sanpham/chitiet")
 	public String sanPhamChiTiet(Model model, @RequestParam("id") long id) {
-		if (cookieImpl.getValue("cuser") != null) {
-			boolean isUser = true;
-			model.addAttribute("emailAccount", cookieImpl.getValue("cuser"));
-			model.addAttribute("isUser", isUser);
-		}
+		userServiceImpl.checkLogged(model);
+
 		SanPham sanpham = spDAO.getById(id);
 		model.addAttribute("sp", sanpham);
 		return "views/user/chiTietSP";

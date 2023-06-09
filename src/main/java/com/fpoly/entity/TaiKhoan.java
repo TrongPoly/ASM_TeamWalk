@@ -23,7 +23,7 @@ public class TaiKhoan {
 	@NotBlank(message = "{Blank.Password}")
 	private String matKhau;
 
-	@Column(name = "phan_quyen")
+	@Column(name = "phan_quyen", columnDefinition = "boolean default false")
 	private Boolean phanQuyen;
 
 	public String getEmail() {

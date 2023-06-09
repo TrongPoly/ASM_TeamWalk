@@ -32,11 +32,10 @@
 </head>
 
 <body>
-
 	<!-- Start Header Area -->
-	<div th:replace="fragments/header :: header"></div>
+	<div th:replace="~{fragments/header :: header}"></div>
 	<!-- End Header Area -->
-
+	
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
@@ -73,29 +72,28 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Register an account</h3>
-						<form class="row login_form" action="#" th:action="@{/register}" th:object="${taikhoan}"
-							method="post" id="contactForm" novalidate="novalidate">
-							
+						<form class="row login_form" action="#" th:action="@{/register}"
+							th:object="${taikhoan}" method="post" id="contactForm"
+							novalidate="novalidate">
+
 							<div class="col-md-12 form-group p_star">
 								<input type="email" class="form-control" th:field="*{email}"
-									placeholder="Email" >
+									placeholder="Email">
 								<div class="alert alert-warning"
 									th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 							</div>
 							<div class="col-md-12 form-group">
-							<input type="password" class="form-control"
-									th:field="*{matKhau}"  name="matKhau" placeholder="Password"
-									>
+								<input type="password" class="form-control"
+									th:field="*{matKhau}" name="matKhau" placeholder="Password">
 								<div class="alert alert-warning"
-									th:if="${#fields.hasErrors('matKhau')}"
-									th:errors="*{matKhau}"></div>
+									th:if="${#fields.hasErrors('matKhau')}" th:errors="*{matKhau}"></div>
 							</div>
 							<div class="col-md-12 form-group">
 								<input type="password" class="form-control" name="comfirm"
-									placeholder="Comfirm Password" >
-									<div class="text-danger" th:text="${errConfirm}" 
-									></div>
+									placeholder="Comfirm Password">
+								<div class="text-danger" th:text="${errConfirm}"></div>
 							</div>
+
 
 							<div class="col-md-12 form-group">
 								<div class="creat_account">

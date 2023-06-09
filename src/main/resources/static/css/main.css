@@ -16,6 +16,11 @@
     .section_gap {
       padding: 80px 0; } }
 
+.img-product{
+	  width: 100%; /* Đảm bảo rằng ảnh sẽ điền vào phần tử cha */
+  height: 200px; /* Thiết lập chiều cao của phần tử cha */
+  object-fit: contain; /* Co giãn ảnh để che kín phần tử cha và giữ nguyên tỷ lệ khung hình */
+}
 .section_gap_top_75 {
   padding: 75px 0; }
   @media (max-width: 991px) {
