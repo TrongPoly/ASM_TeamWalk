@@ -4793,7 +4793,7 @@ label {
   display: block; }
 
 .pagination {
-	margin-top: -50px;
+	margin-top: -15px;
     border-left: 1px solid #eee;
     border-radius: 0px;
     display: flex;

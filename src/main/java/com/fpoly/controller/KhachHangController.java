@@ -1,8 +1,12 @@
 package com.fpoly.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,14 +33,20 @@ public class KhachHangController {
 	KhachHangDAO khdao;
 	
 	@RequestMapping("/customerTabled")
-	public String KhachHang(@ModelAttribute("khachhang") KhachHang kh, Model model) {	
-		List<KhachHang> khs = khdao.findAll();
+	public String customerTable(@ModelAttribute("khachhang") KhachHang kh, Model model,
+		@RequestParam("p") Optional<Integer> p) {	
+		var numberOfRecords = khdao.count();
+		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
+		model.addAttribute("numberOfPages", numberOfPages);
+		Pageable sort = PageRequest.of(p.orElse(0), 5, Sort.by("hangKhachHang").ascending());
+		model.addAttribute("currIndex", p.orElse(0));
+		var khs = khdao.findAll(sort);
 		model.addAttribute("khs",khs);// buộc lên bảng
 		return "views/Admin/customerTabled";	
 	}
 	
 	@RequestMapping("/customered")
-	public String Customer(@ModelAttribute("khachhang") KhachHang kh ,Model model) {
+	public String Customer(@ModelAttribute("khachhang") KhachHang kh ,Model model, Optional<Integer> p) {
 //		KhachHang kh = new KhachHang();
 //		model.addAttribute("khachhang",kh);
 		return "views/Admin/customered";
@@ -56,19 +66,23 @@ public class KhachHangController {
 	}
 	
 	
-	@RequestMapping(value =  "/customer/edit")
-	public String edit(@PathVariable("id") Long id,Model model) {
+	@RequestMapping("/customer/edit/{id}")
+	public String edit(Model model,@PathVariable("id") Long id) {
 		KhachHang kh = khdao.findById(id).get();
 		model.addAttribute("kh",kh);
 		List<KhachHang> khs = khdao.findAll();
 		model.addAttribute("khs",khs);
 		return "redirect:/customered";
 	}
+	@GetMapping("/customer/page")
+	public String paginate(@ModelAttribute("khachhang") KhachHang kh, Model model,@RequestParam("p") Optional<Integer> p) {
+		return this.customerTable(kh, model,p);
+	}
 	
-	@RequestMapping(value = "/customer/update")
+	@RequestMapping("/customer/update")
 	public String update(@ModelAttribute("khachhang") KhachHang kh, Model model) {
 		khdao.save(kh);
-		return "redirect:/customer/edit" + kh.getId();
+		return "redirect:/customer/edit/" + kh.getId();
 	}
 	
 	@RequestMapping(value = "/customer/delete/{id}")

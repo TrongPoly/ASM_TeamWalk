@@ -75,14 +75,7 @@
 				</div>
 			</nav>
 		</div>
-		<div class="search_input" id="search_input_box">
-			<div class="container">
-				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
-					<button type="submit" class="btn"></button>
-					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-				</form>
-			</div>
+		
 		</div>
 	</header>
 	<!-- End Header Area --
@@ -110,40 +103,36 @@
 						<div class="hover">
 							<h4>New Customer Rank?</h4>
 							<p>This is the page to add new Rank</p>
-							<a class="primary-btn" href="/customerRankTabled">Customer Rank Details</a>
+							<a class="primary-btn" href="/admin/customerRankTabled">Customer Rank Details</a>
 						</div>
 					</div>
 				</div>
                 <div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Costumer Form</h3>
-						<form class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-							<div class="col-md-12 form-group p_star">
-								<input type="text" class="form-control" id="" name="">
-								<span class="placeholder" data-placeholder="Mã Hạng"></span>
-							</div>
-						
+						<form class="row login_form" action="#" th:action="@{/admin/customerRankTabled/save}" method="post" id="contactForm" 
+						th:object="${hangkhachhang}">					
                             <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="" name="">
+                                <input th:field="*{tenHang}" type="text" class="form-control" id="" name="">
                                 <span class="placeholder" data-placeholder="Tên Hạng"></span>
                             </div>
 							<div class="col-md-12 form-group p_star">
-							<input type="text" class="form-control" id="number" name="number">
+							<input th:field="*{diemToiThieu}" type="text" class="form-control" id="number" name="number">
 							<span class="placeholder" data-placeholder="Điểm Tối Thiểu"></span>
 						</div>
 						
                         <div class="col-md-12 form-group p_star">
-							<input type="text" class="form-control" id="" name="">
+							<input th:field="*{moTa}" type="text" class="form-control" id="" name="">
 							<span class="placeholder" data-placeholder="Mô Tả"></span>
 						</div>
 					
                            
 							<div class="col-md-12 form-group p_star">
 								<div class="creat_account">
-									<input type="radio" id="f-option2" name="selector" >
-									<label for="f-option2">Lựa Chọn 1</label>
+									<input th:filed="*{trangThai}" type="radio" id="f-option1" name="selector" value="option1" >
+									<label for="f-option1">Lựa Chọn 1</label>
                                    
-                                    <input type="radio" id="f-option2" name="selector">
+                                    <input th:field="*{trangThai}" 	type="radio" id="f-option2" name="selector" value="option2">
 									<label for="f-option2">Lựa Chọn 2</label>
 								</div>
 							</div>
