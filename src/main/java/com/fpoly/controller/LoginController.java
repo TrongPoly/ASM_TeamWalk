@@ -47,7 +47,8 @@ public class LoginController {
 			cookieImpl.add("cuser", taiKhoan.getEmail(), 10);
 			return "redirect:/index";
 		}
-		return "redirect:/login";
+		model.addAttribute("msg", "Sai email hoặc mật khẩu");
+		return "views/user/login";
 	}
 
 	@RequestMapping("/logout")
