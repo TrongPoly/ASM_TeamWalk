@@ -30,7 +30,7 @@
 <link rel="stylesheet" th:href="@{/css/nouislider.min.css}">
 <link rel="stylesheet" th:href="@{/css/ion.rangeSlider.css}" />
 <link rel="stylesheet" th:href="@{/css/ion.rangeSlider.skinFlat.css}" />
-<link rel="stylesheet" th:href="@{/css/mainForm.css}">
+<link rel="stylesheet" th:href="@{/css/mainsp.css}">
 </head>
 
 <body>
@@ -108,88 +108,41 @@
           <tr>
             <th scope="col"> Mã SP</th>
             <th scope="col">Tên SP</th>
-            <th scope="col">Loại SP</th>
+            <th scope="col">Hình Ảnh</th>
+            <th scope="col">Loại</th>
             <th scope="col">Đơn Giá</th>
             <th scope="col">Số Lượng Tồn</th>
-            <th scope="col">NSX</th>
             <th scope="col">Trạng Thái</th>
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th>SP001</th>
-            <td>Laptop Acer Nitro 5</td>
-            <td>Laptop</td>
-            <td>22.000.000</td>
-            <td>1000</td>
-            <td>Acer </td>
-            <td>Còn Hàng</td>
+        
+          <tr th:each="sp : ${sps}">
+            <td th:text="${sp.id}"></td>
+            <td th:text="${sp.tenSanPham}"></td>
+            <td> <img alt="" th:src="@{'/img/product/' + ${sp.anhSanPham}}" width="100px" height="100px"/></td>
+            <td th:text="${sp.maLoai.id}"></td>
+            <td	th:text="${sp.donGia}"></td>
+            <td	th:text="${sp.soLuongTon}"></td>
+            <td	th:text="${sp.trangThai}"></td>
             <td>
                 <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
+                <a th:href="@{/admin/product/delete/__${sp.id}__}"><span class="btn btn-danger">Xoá</span></a>
             </td>
           </tr>
-
-               <tr>
-            <th>SP001</th>
-            <td>Laptop Acer Nitro 5</td>
-            <td>Laptop</td>
-            <td>22.000.000</td>
-            <td>1000</td>
-            <td>Acer </td>
-            <td>Còn Hàng</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-          
-                <tr>
-            <th>SP001</th>
-            <td>Laptop Acer Nitro 5</td>
-            <td>Laptop</td>
-            <td>22.000.000</td>
-            <td>1000</td>
-            <td>Acer </td>
-            <td>Còn Hàng</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-          
-                <tr>
-            <th>SP001</th>
-            <td>Laptop Acer Nitro 5</td>
-            <td>Laptop</td>
-            <td>22.000.000</td>
-            <td>1000</td>
-            <td>Acer </td>
-            <td>Còn Hàng</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-          
-                <tr>
-            <th>SP001</th>
-            <td>Laptop Acer Nitro 5</td>
-            <td>Laptop</td>
-            <td>22.000.000</td>
-            <td>1000</td>
-            <td>Acer </td>
-            <td>Còn Hàng</td>
-            <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
-                <a href="#"><span class="btn btn-danger">Xoá</span></a>
-            </td>
-          </tr>
-          
          </table>
 			</div>
 		</div>
+			 <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" th:href="@{/admin/product/page?p=__${currIndex-1}__}" href="#">Previous</a></li>
+        <tr th:each="i: ${#numbers.sequence(0, numberOfPages - 1)}">
+          <li class="page-item"><a th:style="${'background-color:' + (i==currIndex?'lightgrey':'white')}" 
+          th:href="@{/admin/product/page?p=__${i}__}" class="page-link" href="#" th:text="${i+1}"></a></li>
+        </tr>
+        <li class="page-item"><a class="page-link" th:href="@{/admin/product/page?p=__${currIndex+1}__}" href="#">Next</a></li>
+      </ul>
+    </nav>
 	</section>
 	<!--================End Login Box Area =================-->
 

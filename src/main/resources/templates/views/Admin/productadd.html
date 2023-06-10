@@ -117,39 +117,45 @@
                 <div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Product Form</h3>
-						<form class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-							<div class="col-md-6 form-group p_star">
-								<input type="text" class="form-control" id="" name="">
-								<span class="placeholder" data-placeholder="Mã Sản Phẩm"></span>
+						<form class="row login_form" action="#" th:action="@{/admin/product/save}" method="post" id="contactForm" novalidate="novalidate"
+						th:object="${sanpham}">
+							
+							<div class="col-md-12 form-group ">
+								<input th:field="*{tenSanPham}" type="text" class="form-control" id="last" name="name"
+								 placeholder="Tên Sản Phẩm">
+								
 							</div>
-							<div class="col-md-6 form-group p_star">
-								<input type="text" class="form-control" id="last" name="name">
-								<span class="placeholder" data-placeholder="Tên Sản Phẩm"></span>
-							</div>
-                            <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="number" name="number">
-                                <span class="placeholder" data-placeholder="Loại Sản Phẩm"></span>
+                            <div class="col-md-12 form-group">
+                                <input th:field="*{anhSanPham}" type="file" class="form-control" id="file" name="file">
+                                
                             </div>
-							<div class="col-md-12 form-group p_star">
-							<input type="text" class="form-control" id="number" name="number">
-							<span class="placeholder" data-placeholder="Đơn Giá"></span>
-						</div>
+							
+							<select class="col-md-12 form-group " th:field="*{maLoai.id}">
+											    <option th:each="option : ${options}" 
+											            th:value="${option.key}"
+											            th:text="${option.key}">
+											    </option>
+											</select>
+							
+						
+						<div class="col-md-12 form-group p_star">
+								<input th:field="*{donGia}" type="text" class="form-control" id="" name="" placeholder="Đơn Giá" >
+                               
+                            </div>
+						
 
 							<div class="col-md-12 form-group p_star">
-								<input type="text" class="form-control" id="name" name="name"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
-                                <span class="placeholder" data-placeholder="Số Lượng Tồn"></span>
+								<input th:field="*{soLuongTon}" type="text" class="form-control" id="" name="" placeholder="Số Lượng Tồn" >
+                               
                             </div>
-							<div class="col-md-12 form-group p_star">
-								<input type="text" class="form-control" id="name" name="name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
-                                <span class="placeholder" data-placeholder="Nhà Sản Xuất"></span>
-                            </div>
+						
                            
 							<div class="col-md-12 form-group p_star">
 								<div class="creat_account">
-									<input type="radio" id="f-option2" name="selector" >
+									<input th:field="*{trangThai}" type="radio" id="f-option2" name="selector" th:value="true">
 									<label for="f-option2">Còn Hàng</label>
                                    
-                                    <input type="radio" id="f-option2" name="selector">
+                                    <input  th:field="*{trangThai}" type="radio" id="f-option2" name="selector" th:value="false">
 									<label for="f-option2">Hết Hàng</label>
 								</div>
 							</div>

@@ -32,7 +32,7 @@ public class KhachHangController {
 	@Autowired
 	KhachHangDAO khdao;
 	
-	@RequestMapping("/customerTabled")
+	@RequestMapping("/admin/customerTabled")
 	public String customerTable(@ModelAttribute("khachhang") KhachHang kh, Model model,
 		@RequestParam("p") Optional<Integer> p) {	
 		var numberOfRecords = khdao.count();
@@ -45,10 +45,12 @@ public class KhachHangController {
 		return "views/Admin/customerTabled";	
 	}
 	
-	@RequestMapping("/customered")
-	public String Customer(@ModelAttribute("khachhang") KhachHang kh ,Model model, Optional<Integer> p) {
-//		KhachHang kh = new KhachHang();
-//		model.addAttribute("khachhang",kh);
+	@RequestMapping("/admin/customered")
+	public String Customer(Model model, Optional<Integer> p) {
+		KhachHang kh = new KhachHang();
+		model.addAttribute("khachhang",kh);
+		List<KhachHang> khs = khdao.findAll();
+		model.addAttribute("khs",khs);
 		return "views/Admin/customered";
 	}
 	
