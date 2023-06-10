@@ -106,31 +106,26 @@
 						</div>
 					</div>
 				</div>
-                <div class="col-lg-6">	
+                <div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Costumer Form</h3>
 						<form class="row login_form" action="#" th:action="@{/admin/customerRankTabled/save}" method="post" id="contactForm" 
-						th:object="${hangkhachhang}">
-						 <label style="padding-left: 15px "> Mã Hạng</label>
-						<div class="col-md-12 form-group p_star">
-                           
-                                <input th:field="*{id}" type="text" readonly="true" class="form-control" id="" name="">
-                               
-                            </div>
-						 <label style="padding-left: 15px "> Tên Hạng</label>					
+						th:object="${hangkhachhang}">	
+						 <div class="col-md-12 form-group p_star">
+                                <input th:field="*{id}" type="text" class="form-control" placeholder="Mã Hạng" readonly="true">
+                                
+                            </div>				
                             <div class="col-md-12 form-group p_star">
-                           
-                                <input th:field="*{tenHang}" type="text" class="form-control" id="" name="">
-                               
+                                <input th:field="*{tenHang}" type="text" class="form-control" placeholder="Tên Hạng">
+                                
                             </div>
-                            <label style="padding-left: 15px "> Điểm Tối Thiểu</label>	
 							<div class="col-md-12 form-group p_star">
-							<input th:field="*{diemToiThieu}" type="text" class="form-control" id="number" name="number">
+							<input th:field="*{diemToiThieu}" type="text" class="form-control" placeholder="Điểm Tối Thiểu">
 							
 						</div>
-						<label style="padding-left: 15px "> Mô Tả</label>	
+						
                         <div class="col-md-12 form-group p_star">
-							<input th:field="*{moTa}" type="text" class="form-control" id="" name="">
+							<input th:field="*{moTa}" type="text" class="form-control" placeholder="Mô Tả">
 							
 						</div>
 					
@@ -144,15 +139,11 @@
 									<label for="f-option2">Lựa Chọn 2</label>
 								</div>
 							</div>
-									<div class="col-md-6 form-group">
+							<div class="col-md-12 form-group">
 								
 									<button type="save" value="save" class="primary-btn">Save</button>
-										
-							</div>
-							<div class="col-md-6 form-group">
 								
-									
-									<button th:formaction="@{/admin/customerRank/update}" class="primary-btn">update</button>		
+								
 							</div>
 						</form>
 					</div>

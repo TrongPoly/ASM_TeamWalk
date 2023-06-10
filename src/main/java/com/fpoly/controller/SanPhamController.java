@@ -41,8 +41,6 @@ public class SanPhamController {
 		model.addAttribute("sps",sps);
 		model.addAttribute("options", options);
 		
-		
-		
 		return "views/Admin/productadd";
 	}
 	

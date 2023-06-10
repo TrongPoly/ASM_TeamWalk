@@ -80,7 +80,7 @@ public class IndexController {
 	public String Admin() {
 		return "views/Admin/adminn";
 	}
-//
+
 //	@RequestMapping("/customered")
 //	public String Customer() {
 //		return "views/Admin/customered";

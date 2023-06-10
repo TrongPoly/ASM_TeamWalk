@@ -84,12 +84,12 @@ public class KhachHangController {
 	@RequestMapping("/admin/customer/update")
 	public String update(@ModelAttribute("khachhang") KhachHang kh, Model model) {
 		khdao.save(kh);
-		return "redirect:/admin/customer/edit/" + kh.getId();
+		return "views/Admin/customered";
 	}
 	
 	@RequestMapping(value = "/admin/customer/delete/{id}")
 	public String deleteId(@PathVariable("id") Long id ) {
 		khdao.deleteById(id);
-		return "redirect:/admin/customerTabled";
+		return "redirect:/customerTabled";
 	}
 }

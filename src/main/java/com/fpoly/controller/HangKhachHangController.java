@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import com.fpoly.dao.HangKhachHangDAO;
 import com.fpoly.entity.HangKhachHang;
 
@@ -38,7 +37,7 @@ public class HangKhachHangController {
 	
 	@RequestMapping("/admin/customerRanktabled")
 	public String customerRankTable(@ModelAttribute("hangkhachhang") HangKhachHang hkh, Model model,
-		@RequestParam("p") Optional<Integer> p) {
+			@RequestParam("p") Optional<Integer> p) {
 		var numberOfRecords = hkhdao.count();
 		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
 		model.addAttribute("numberOfPages", numberOfPages);
@@ -51,10 +50,10 @@ public class HangKhachHangController {
 	
 	@RequestMapping("/admin/customerRank/edit/{id}")
 	public String edit(Model model,@PathVariable("id") Integer id) {
-		HangKhachHang kh = hkhdao.findById(id).get();
-		model.addAttribute("hangkhachhang",kh);
-		List<HangKhachHang> hkhs = hkhdao.findAll();	
-		model.addAttribute("hks",hkhs);
+		HangKhachHang hkh = hkhdao.findById(id).get();
+		model.addAttribute("hangkhachhang",hkh);
+		List<HangKhachHang> hkhs = hkhdao.findAll();
+		model.addAttribute("hkhs",hkhs);
 		return "views/Admin/customerRanked";
 	}
 	@GetMapping("/admin/customerRank/page")
@@ -69,16 +68,9 @@ public class HangKhachHangController {
 		return "redirect:/admin/customerRanktabled";
 	}
 	
-	@RequestMapping(value = "admin/customerRank/delete/{id}")
+	@RequestMapping(value = "/admin/customerRank/delete/{id}")
 	public String deleteId(@PathVariable("id") Integer id ) {
 		hkhdao.deleteById(id);
-		return "redirect:/admin/customerRanktabled";
-	}
-	@RequestMapping("admin/customerRank/update")
-	public String update(@ModelAttribute("hangkhachhang") HangKhachHang hkh, Model model) {
-		List<HangKhachHang> hkhs = hkhdao.findAll();
-		model.addAttribute("hkhs", hkhs);
-		hkhdao.save(hkh);
 		return "redirect:/admin/customerRanktabled";
 	}
 	
