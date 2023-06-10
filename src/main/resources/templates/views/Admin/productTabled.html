@@ -125,7 +125,7 @@
             <td	th:text="${sp.soLuongTon}"></td>
             <td	th:text="${sp.trangThai}"></td>
             <td>
-                <a href="#" class="btn btn-warning" >Sửa</a>
+                <a th:href="@{/admin/product/edit/__${sp.id}__}" class="btn btn-warning" >Sửa</a>
                 <a th:href="@{/admin/product/delete/__${sp.id}__}"><span class="btn btn-danger">Xoá</span></a>
             </td>
           </tr>
