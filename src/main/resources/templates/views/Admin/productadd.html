@@ -75,15 +75,7 @@
 				</div>
 			</nav>
 		</div>
-		<div class="search_input" id="search_input_box">
-			<div class="container">
-				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
-					<button type="submit" class="btn"></button>
-					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-				</form>
-			</div>
-		</div>
+		
 	</header>
 	<!-- End Header Area --
 
@@ -110,7 +102,7 @@
 						<div class="hover">
 							<h4>New Product?</h4>
 							<p>This is the page to add new products</p>
-							<a class="primary-btn" href="/productTabled">Product Details</a>
+							<a class="primary-btn" href="/admin/productTable">Product Details</a>
 						</div>
 					</div>
 				</div>
@@ -119,6 +111,12 @@
 						<h3>Product Form</h3>
 						<form class="row login_form" action="#" th:action="@{/admin/product/save}" method="post" id="contactForm" novalidate="novalidate"
 						th:object="${sanpham}">
+							
+							<div class="col-md-12 form-group ">
+								<input th:field="*{id}" type="text" readonly="true" class="form-control" id="last" name="name"
+								 placeholder="Mã Sản Phẩm">
+								
+							</div>
 							
 							<div class="col-md-12 form-group ">
 								<input th:field="*{tenSanPham}" type="text" class="form-control" id="last" name="name"
@@ -152,11 +150,11 @@
                            
 							<div class="col-md-12 form-group p_star">
 								<div class="creat_account">
-									<input th:field="*{trangThai}" type="radio" id="f-option2" name="selector" th:value="true">
-									<label for="f-option2">Còn Hàng</label>
+									<input th:field="*{trangThai}" type="radio"  value="true"> còn hàng
+									<label ></label>
                                    
-                                    <input  th:field="*{trangThai}" type="radio" id="f-option2" name="selector" th:value="false">
-									<label for="f-option2">Hết Hàng</label>
+                                    <input  th:field="*{trangThai}"	 type="radio"  value="false"> hết hàng
+									<label ></label>
 								</div>
 							</div>
 							<div class="col-md-12 form-group">

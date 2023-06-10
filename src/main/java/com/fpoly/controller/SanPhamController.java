@@ -2,6 +2,7 @@ package com.fpoly.controller;
 
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class SanPhamController {
 	public OptionServiceLoaiSanPham optionService;
 	
 	
-	@RequestMapping("/product")
+	@RequestMapping("/admin/product")
 	public String ProductForm(Model model) {
 		Map<Long, String> options = optionService.getAllOptions();
 		SanPham sp = new SanPham();
@@ -64,14 +65,37 @@ public class SanPhamController {
 	}
 	
 	@RequestMapping("/admin/product/save")
-	public String save(@ModelAttribute("sanpham") SanPham sp, Model model) {
-		System.out.println(sp.getMaLoai());
+	public String save(@ModelAttribute("sanpham") SanPham sp,Model model) {
+		if (sp.getTrangThai()) {
+			model.addAttribute("TT","Còn Hàng");
+		}else
+			model.addAttribute("TT","Hết Hàng");
+	
 		spdao.save(sp);
-		return "views/Admin/productTabled";
+		return "redirect:/admin/productTable";
 	}
 	@RequestMapping(value = "admin/product/delete/{id}")
 	public String deleteId(@PathVariable("id") Long id ) {
 		spdao.deleteById(id);
 		return "redirect:/admin/productTable";
+	}
+	
+	@RequestMapping("/admin/product/edit/{id}")
+	public String edit(@PathVariable("id") Long id, Model model) {
+		SanPham sp = spdao.findById(id).get();
+		model.addAttribute("sanpham",sp);
+		Map<Long, String> options = optionService.getAllOptions();
+		model.addAttribute("options", options);
+		List<SanPham> sps = spdao.findAll();
+		model.addAttribute("sps",sps);
+		return "views/Admin/productadd";
+	}
+	@ModelAttribute("trangthais")
+	public Map<Boolean, String> getTrangThai(){
+		Map<Boolean, String> map = new HashMap<>();
+		map.put(true, "còn hàng");
+		map.put(false, "hết hàng");
+		return map;
+		
 	}
 }

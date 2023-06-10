@@ -51,19 +51,18 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item"><a class="nav-link" href="/admined">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="/admin">Home</a></li>
            
 							<li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Customer</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="/customered">Customer</a></li>
-									<li class="nav-item"><a class="nav-link" href="/customerRanked">Customer Rank</a></li>
+									<li class="nav-item"><a class="nav-link" href="/admin/customered">Customer</a></li>
+									<li class="nav-item"><a class="nav-link" href="/admin/customerRanked">Customer Rank</a></li>
 								</ul>
 							</li>
-                    	        <li class="nav-item"><a class="nav-link" href="/productadd">Product</a></li>	
-                            <li class="nav-item"><a class="nav-link" href="#">Coupons</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Satistical</a></li>
+                    	        <li class="nav-item"><a class="nav-link" href="/admin/product">Product</a></li>	
+                           
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
@@ -103,7 +102,7 @@
 						<div class="hover">
 							<h4>New Customer Rank?</h4>
 							<p>This is the page to add new Rank</p>
-							<a class="primary-btn" href="/admin/customerRankTabled">Customer Rank Details</a>
+							<a class="primary-btn" href="/admin/customerRanktabled">Customer Rank Details</a>
 						</div>
 					</div>
 				</div>
@@ -111,19 +110,23 @@
 					<div class="login_form_inner">
 						<h3>Costumer Form</h3>
 						<form class="row login_form" action="#" th:action="@{/admin/customerRankTabled/save}" method="post" id="contactForm" 
-						th:object="${hangkhachhang}">					
+						th:object="${hangkhachhang}">	
+						 <div class="col-md-12 form-group p_star">
+                                <input th:field="*{id}" type="text" class="form-control" placeholder="Mã Hạng" readonly="true">
+                                
+                            </div>				
                             <div class="col-md-12 form-group p_star">
-                                <input th:field="*{tenHang}" type="text" class="form-control" id="" name="">
-                                <span class="placeholder" data-placeholder="Tên Hạng"></span>
+                                <input th:field="*{tenHang}" type="text" class="form-control" placeholder="Tên Hạng">
+                                
                             </div>
 							<div class="col-md-12 form-group p_star">
-							<input th:field="*{diemToiThieu}" type="text" class="form-control" id="number" name="number">
-							<span class="placeholder" data-placeholder="Điểm Tối Thiểu"></span>
+							<input th:field="*{diemToiThieu}" type="text" class="form-control" placeholder="Điểm Tối Thiểu">
+							
 						</div>
 						
                         <div class="col-md-12 form-group p_star">
-							<input th:field="*{moTa}" type="text" class="form-control" id="" name="">
-							<span class="placeholder" data-placeholder="Mô Tả"></span>
+							<input th:field="*{moTa}" type="text" class="form-control" placeholder="Mô Tả">
+							
 						</div>
 					
                            

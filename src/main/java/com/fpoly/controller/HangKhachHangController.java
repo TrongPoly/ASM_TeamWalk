@@ -48,15 +48,15 @@ public class HangKhachHangController {
 		return "views/Admin/customerRankTabled";
 	}
 	
-	@RequestMapping("/customerRank/edit/{id}")
+	@RequestMapping("/admin/customerRank/edit/{id}")
 	public String edit(Model model,@PathVariable("id") Integer id) {
-		HangKhachHang kh = hkhdao.findById(id).get();
-		model.addAttribute("kh",kh);
-		List<HangKhachHang> khhs = hkhdao.findAll();
-		model.addAttribute("khhs",khhs);
-		return "redirect:/admin/customerRanked";
+		HangKhachHang hkh = hkhdao.findById(id).get();
+		model.addAttribute("hangkhachhang",hkh);
+		List<HangKhachHang> hkhs = hkhdao.findAll();
+		model.addAttribute("hkhs",hkhs);
+		return "views/Admin/customerRanked";
 	}
-	@GetMapping("/customerRank/page")
+	@GetMapping("/admin/customerRank/page")
 	public String paginate(@ModelAttribute("hangkhachhang") HangKhachHang hkh, Model model,@RequestParam("p") Optional<Integer> p) {
 		return this.customerRankTable(hkh, model,p);
 	}
@@ -68,7 +68,7 @@ public class HangKhachHangController {
 		return "redirect:/admin/customerRanktabled";
 	}
 	
-	@RequestMapping(value = "/customerRank/delete/{id}")
+	@RequestMapping(value = "/admin/customerRank/delete/{id}")
 	public String deleteId(@PathVariable("id") Integer id ) {
 		hkhdao.deleteById(id);
 		return "redirect:/admin/customerRanktabled";

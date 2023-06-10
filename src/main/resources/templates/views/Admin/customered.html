@@ -51,19 +51,18 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item"><a class="nav-link" href="/admined">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="/admin">Home</a></li>
            
 							<li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Customer</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="/customered">Customer</a></li>
-									<li class="nav-item"><a class="nav-link" href="/customerRanked">Customer Rank</a></li>
+									<li class="nav-item"><a class="nav-link" href="/admin/customered">Customer</a></li>
+									<li class="nav-item"><a class="nav-link" href="/admin/customerRanked">Customer Rank</a></li>
 								</ul>
 							</li>
-                    	        <li class="nav-item"><a class="nav-link" href="/productadd">Product</a></li>	
-                            <li class="nav-item"><a class="nav-link" href="#">Coupons</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Satistical</a></li>
+                    	        <li class="nav-item"><a class="nav-link" href="/admin/product">Product</a></li>	
+                        
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
@@ -75,15 +74,7 @@
 				</div>
 			</nav>
 		</div>
-		<div class="search_input" id="search_input_box">
-			<div class="container">
-				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
-					<button type="submit" class="btn"></button>
-					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-				</form>
-			</div>
-		</div>
+		
 	</header>
 	<!-- End Header Area --
 
@@ -110,16 +101,19 @@
 						<div class="hover">
 							<h4>New Customer?</h4>
 							<p>This is the page to add new customer</p>
-							<a class="primary-btn" href="/customerTabled">Customer Details</a>
+							<a class="primary-btn" href="/admin/customerTabled">Customer Details</a>
 						</div>
 					</div>
 				</div>
                 <div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Costumer Form</h3>
-						<form class="row login_form" action="#" th:action="@{/customer/save}" method="post" id="contactForm" 
+						<form class="row login_form" action="#" th:action="@{/admin/customer/save}" method="post" id="contactForm" 
 						th:object="${khachhang}">
-                   
+                   <div class="col-md-12 form-group p_star">
+                                <input th:field="*{id}" type="text" readonly="true" class="form-control" placeholder="Mã Khách Hàng" id="" name="" th:value="${khachhang.tenKhachHang}">                      
+                               
+                            </div>
                             <div class="col-md-12 form-group p_star">
                                 <input th:field="*{tenKhachHang}" type="text" class="form-control" placeholder="Họ Tên Khách Hàng" id="" name="" th:value="${khachhang.tenKhachHang}">                      
                                 <div class="alert alert-warning" th:if="${#fields.hasErrors('tenKhachHang')}"
