@@ -51,19 +51,19 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item"><a class="nav-link" href="/admined">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="/admin">Home</a></li>
            
 							<li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Customer</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="/customered">Customer</a></li>
-									<li class="nav-item"><a class="nav-link" href="/customerRanked">Customer Rank</a></li>
+									<li class="nav-item"><a class="nav-link" href="/admin/customered">Customer</a></li>
+									<li class="nav-item"><a class="nav-link" href="/admin/customerRanked">Customer Rank</a></li>
 								</ul>
 							</li>
-                    	        <li class="nav-item"><a class="nav-link" href="/productadd">Product</a></li>	
-                            <li class="nav-item"><a class="nav-link" href="#">Coupons</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Satistical</a></li>
+                    	        <li class="nav-item"><a class="nav-link" href="/admin/product">Product</a></li>	
+                    	        
+                        
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
@@ -114,8 +114,8 @@
             <td	th:text="${hkh.moTa}"></td>
             <td	th:text="${hkh.trangThai}"></td>
             <td>
-                <a th:href="@{/customerRank/edit/__${hkh.id}__}" class="btn btn-warning" >Sửa</a>
-                <a th:href="@{/customerRank/delete/__${hkh.id}__}"><span class="btn btn-danger">Xoá</span></a>
+                <a th:href="@{/admin/customerRank/edit/__${hkh.id}__}" class="btn btn-warning" >Sửa</a>
+                <a th:href="@{/admin/customerRank/delete/__${hkh.id}__}"><span class="btn btn-danger">Xoá</span></a>
             </td>
           </tr>
 		    	
@@ -123,12 +123,12 @@
 				</table>
 				<nav aria-label="Page navigation example">
       <ul class="pagination">
-        <li class="page-item"><a class="page-link" th:href="@{/customerRank/page?p=__${currIndex-1}__}" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/admin/customerRank/page?p=__${currIndex-1}__}" href="#">Previous</a></li>
         <tr th:each="i: ${#numbers.sequence(0, numberOfPages - 1)}">
           <li class="page-item"><a th:style="${'background-color:' + (i==currIndex?'lightgrey':'white')}" 
-          th:href="@{/customerRank/page?p=__${i}__}" class="page-link" href="#" th:text="${i+1}"></a></li>
+          th:href="@{/admin/customerRank/page?p=__${i}__}" class="page-link" href="#" th:text="${i+1}"></a></li>
         </tr>
-        <li class="page-item"><a class="page-link" th:href="@{/customerRank/page?p=__${currIndex+1}__}" href="#">Next</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/admin/customerRank/page?p=__${currIndex+1}__}" href="#">Next</a></li>
       </ul>
     </nav>
       

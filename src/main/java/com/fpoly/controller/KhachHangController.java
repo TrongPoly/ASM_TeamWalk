@@ -55,7 +55,7 @@ public class KhachHangController {
 	}
 	
 	
-	@RequestMapping( value = "/customer/save" , method = RequestMethod.POST)
+	@RequestMapping( value = "/admin/customer/save" , method = RequestMethod.POST)
 	public String Save(@Valid @ModelAttribute("khachhang") KhachHang kh, BindingResult khresult,Model model) {
 		
 		if(khresult.hasErrors()) {
@@ -64,32 +64,32 @@ public class KhachHangController {
 		khdao.save(kh);
 		
 		model.addAttribute("kh",kh);
-		return "redirect:/customerTabled";
+		return "redirect:/admin/customerTabled";
 	}
 	
 	
-	@RequestMapping("/customer/edit/{id}")
+	@RequestMapping("/admin/customer/edit/{id}")
 	public String edit(Model model,@PathVariable("id") Long id) {
 		KhachHang kh = khdao.findById(id).get();
-		model.addAttribute("kh",kh);
+		model.addAttribute("khachhang",kh);
 		List<KhachHang> khs = khdao.findAll();
 		model.addAttribute("khs",khs);
-		return "redirect:/customered";
+		return "views/Admin/customered";
 	}
-	@GetMapping("/customer/page")
+	@GetMapping("/admin/customer/page")
 	public String paginate(@ModelAttribute("khachhang") KhachHang kh, Model model,@RequestParam("p") Optional<Integer> p) {
 		return this.customerTable(kh, model,p);
 	}
 	
-	@RequestMapping("/customer/update")
+	@RequestMapping("/admin/customer/update")
 	public String update(@ModelAttribute("khachhang") KhachHang kh, Model model) {
 		khdao.save(kh);
-		return "redirect:/customer/edit/" + kh.getId();
+		return "redirect:/admin/customer/edit/" + kh.getId();
 	}
 	
-	@RequestMapping(value = "/customer/delete/{id}")
+	@RequestMapping(value = "/admin/customer/delete/{id}")
 	public String deleteId(@PathVariable("id") Long id ) {
 		khdao.deleteById(id);
-		return "redirect:/customerTabled";
+		return "redirect:/admin/customerTabled";
 	}
 }

@@ -32,7 +32,7 @@ public class SanPhamController {
 	public OptionServiceLoaiSanPham optionService;
 	
 	
-	@RequestMapping("/product")
+	@RequestMapping("/admin/product")
 	public String ProductForm(Model model) {
 		Map<Long, String> options = optionService.getAllOptions();
 		SanPham sp = new SanPham();
@@ -40,6 +40,8 @@ public class SanPhamController {
 		var sps = spdao.findAll();
 		model.addAttribute("sps",sps);
 		model.addAttribute("options", options);
+		
+		
 		
 		return "views/Admin/productadd";
 	}

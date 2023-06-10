@@ -76,10 +76,10 @@ public class IndexController {
 //		return "views/user/ChiTietSP";
 //	}
 //
-//	@RequestMapping("/admined")
-//	public String Admin() {
-//		return "views/Admin/adminn";
-//	}
+	@RequestMapping("/admin")
+	public String Admin() {
+		return "views/Admin/adminn";
+	}
 //
 //	@RequestMapping("/customered")
 //	public String Customer() {
