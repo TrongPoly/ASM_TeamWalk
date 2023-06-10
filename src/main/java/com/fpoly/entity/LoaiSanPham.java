@@ -3,11 +3,14 @@ package com.fpoly.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+
 import org.hibernate.annotations.Nationalized;
 
 @Entity
 @Table(name = "loai_san_pham")
-public class LoaiSanPham {
+public class LoaiSanPham  {
 	@Id
 	@Column(name = "ma_loai", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

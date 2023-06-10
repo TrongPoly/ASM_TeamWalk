@@ -117,55 +117,56 @@
                 <div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Costumer Form</h3>
-						<form class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-							<div class="col-md-6 form-group p_star">
-								<input type="text" class="form-control" id="" name="">
-								<span class="placeholder" data-placeholder="Mã Khách Hàng"></span>
-							</div>
-							<div class="col-md-6 form-group p_star">
-								<input type="text" class="form-control" id="" name="">
-								<span class="placeholder" data-placeholder="Mã Hạng"></span>
-							</div>
+						<form class="row login_form" action="#" th:action="@{/customer/save}" method="post" id="contactForm" 
+						th:object="${khachhang}">
+                   
                             <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="" name="">
-                                <span class="placeholder" data-placeholder="Họ Và Tên"></span>
+                                <input th:field="*{tenKhachHang}" type="text" class="form-control" placeholder="Họ Tên Khách Hàng" id="" name="" th:value="${khachhang.tenKhachHang}">                      
+                                <div class="alert alert-warning" th:if="${#fields.hasErrors('tenKhachHang')}"
+			th:errors="*{tenKhachHang}"></div>
                             </div>
-							<div class="col-md-6 form-group p_star">
-							<input type="text" class="form-control" id="number" name="number">
-							<span class="placeholder" data-placeholder="Số Điện Thoại"></span>
+							<div class="col-md-12 form-group p_star">
+							<input th:field="*{soDienThoai}" type="text" class="form-control" id="number" name="number" placeholder="Số Điện Thoại" th:value="${khachhang.soDienThoai}">
+							
+							<div class="alert alert-warning" th:if="${#fields.hasErrors('soDienThoai')}"
+			th:errors="*{soDienThoai}"></div>
 						</div>
-						<div class="col-md-6 form-group p_star">
-							<input type="text" class="form-control" id="" name="">
-							<span class="placeholder" data-placeholder="Email"></span>
+						<div class="col-md-12 form-group p_star">
+							<input th:field="*{email.email}" type="text" class="form-control" id="" name="" placeholder="Email" th:value="${khachhang.email}">
+						
+						<div class="alert alert-warning" th:if="${#fields.hasErrors('email')}"	
+			th:errors="*{email}"></div>
 						</div>
 							<div class="col-md-12 form-group p_star">
-								<input type="text" class="form-control" id="name" name="name"  onfocus="this.placeholder = ''" onblur="this.placeholder = ''">
-                                <span class="placeholder" data-placeholder="Địa Chỉ"></span>
+								<input th:field="*{diaChi}" type="text" class="form-control" id="name" name="name" placeholder="Địa Chỉ" th:value="${khachhang.diaChi}">
+                                
+                                <div class="alert alert-warning" th:if="${#fields.hasErrors('diaChi')}"
+			th:errors="*{diaChi}"></div>
                             </div>
 							<div class="col-md-6 form-group p_star">
-								<input type="text" class="form-control" id="number" name="" onfocus="this.placeholder = ''" onblur="this.placeholder = ''">
-                                <span class="placeholder" data-placeholder="CCCD"></span>
+								<input th:field="*{soCanCuoc}" type="text" class="form-control" id="number" name="" placeholder="Căn Cước Công Dân" th:value="${khachhang.soCanCuoc}">
+                                
+                                <div class="alert alert-warning" th:if="${#fields.hasErrors('soCanCuoc')}"
+			th:errors="*{soCanCuoc}"></div>
                             </div>
 							<div class="col-md-6 form-group p_star">
-								<input type="text" class="form-control" id="number" name="" onfocus="this.placeholder = ''" onblur="this.placeholder = ''">
-                                <span class="placeholder" data-placeholder="Điểm Tích Lũy"></span>
+								<input th:field="*{diemTichLuy}" type="text" class="form-control" id="number" name="" placeholder="Điểm Tich Lũy" th:value="${khachhang.diemTichLuy}">
+                                
+                                <div class="alert alert-warning" th:if="${#fields.hasErrors('diemTichLuy')}"
+			th:errors="*{diemTichLuy}"></div>
                             </div>
-                           
-							<div class="col-md-12 form-group p_star">
-								<div class="creat_account">
-									<input type="radio" id="f-option2" name="selector" >
-									<label for="f-option2">Lựa Chọn 1</label>
-                                   
-                                    <input type="radio" id="f-option2" name="selector">
-									<label for="f-option2">Lựa Chọn 2</label>
-								</div>
-							</div>
+                            <div class="col-md-12 form-group p_star">
+								<input th:field="*{hangKhachHang.id}" type="text" class="form-control" id="number" name="" placeholder="Hạng Khách Hàng" th:value="${khachhang.hangKhachHang}">
+                               
+                                 <div class="alert alert-warning" th:if="${#fields.hasErrors('hangKhachHang.id')}"
+			th:errors="*{hangKhachHang.id}"></div>
+                            </div>
+                          
 							<div class="col-md-12 form-group">
-								
-									<button type="save" value="save" class="primary-btn">Save</button>
-								
-								
+									<button class="primary-btn" type="submit">Save</button>
+									
 							</div>
+							
 						</form>
 					</div>
 				</div>

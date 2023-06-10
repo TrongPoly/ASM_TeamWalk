@@ -14,6 +14,7 @@ import org.hibernate.annotations.Nationalized;
 public class HangKhachHang {
     @Id
     @Column(name = "ma_hang", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Size(max = 50)
@@ -33,4 +34,59 @@ public class HangKhachHang {
     @Column(name = "trang_thai")
     private Boolean trangThai;
 
+	public HangKhachHang(Integer id, @Size(max = 50) String tenHang, String moTa, @NotNull Integer diemToiThieu,
+			Boolean trangThai) {
+		super();
+		this.id = id;
+		this.tenHang = tenHang;
+		this.moTa = moTa;
+		this.diemToiThieu = diemToiThieu;
+		this.trangThai = trangThai;
+	}
+
+	public HangKhachHang() {
+		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getTenHang() {
+		return tenHang;
+	}
+
+	public void setTenHang(String tenHang) {
+		this.tenHang = tenHang;
+	}
+
+	public String getMoTa() {
+		return moTa;
+	}
+
+	public void setMoTa(String moTa) {
+		this.moTa = moTa;
+	}
+
+	public Integer getDiemToiThieu() {
+		return diemToiThieu;
+	}
+
+	public void setDiemToiThieu(Integer diemToiThieu) {
+		this.diemToiThieu = diemToiThieu;
+	}
+
+	public Boolean getTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(Boolean trangThai) {
+		this.trangThai = trangThai;
+	}
+
+    
 }

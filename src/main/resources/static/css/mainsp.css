@@ -4793,11 +4793,11 @@ label {
   display: block; }
 
 .pagination {
-	margin-top: -50px;
+	margin-top: 0;
     border-left: 1px solid #eee;
     border-radius: 0px;
     display: flex;
-    padding-left: 522px;
+    padding-left: 455px;
 }
 .pagination a{
 	width: 75px;
