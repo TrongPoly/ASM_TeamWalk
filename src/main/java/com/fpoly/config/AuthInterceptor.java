@@ -19,35 +19,28 @@ public class AuthInterceptor implements HandlerInterceptor {
 	SessionService sessionService;
 	@Autowired
 	CookieImpl cookieImpl;
-	@Autowired
-	TaiKhoanDAO taiKhoanDAO;
-	@Autowired
-	HttpSession session;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		// Lấy URL của request
 		String uri = request.getRequestURI();
-		String rollBack = "index";
+		// lấy thông tin về user từ session.
 		TaiKhoan user = sessionService.get("user");
-//		String vlCookie = cookieImpl.getValue("cuser");
-//		if (vlCookie != null) {
-//		TaiKhoan user = taiKhoanDAO.getById(vlCookie);
 		String error = "";
 
 		if (user == null) {
 			error = "Please login!";
 		} else if (!user.getPhanQuyen() && uri.startsWith("/admin")) {
-			System.out.println("URI: " + uri);
 			error = "Access denied!";
 		}
 
 		if (error.length() > 0) {
-			session.setAttribute("security-uri", rollBack);
+			// quay lại trang index
 			response.sendRedirect("/index");
 			return false;
 		}
-//		}
+		// }
 
 		return true;
 	}

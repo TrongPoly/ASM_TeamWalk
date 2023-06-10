@@ -41,21 +41,12 @@ public class LoginController {
 			return "views/user/login";
 		}
 		if (userService.checkLogin(taiKhoan.getEmail(), taiKhoan.getMatKhau())) {
-			System.out.println("Email: " + taiKhoan.getEmail());
-			System.out.println("Model attribute type: " + taiKhoan.getClass().getName());
 			TaiKhoan tk = taiKhoanDAO.getById(taiKhoan.getEmail());
-			System.out.println("Phân Quyền: " + tk.getPhanQuyen());
-
 			sessionService.set("user", tk);
-//			String uri = sessionService.get("security-uri");
-//			if (uri != null) {
-//				return "redirect:/" + uri;
-//			} else {
+
 			cookieImpl.add("cuser", taiKhoan.getEmail(), 10);
-//			model.addAttribute("message", "Login succeed");
 			return "redirect:/index";
 		}
-//		}
 		return "redirect:/login";
 	}
 

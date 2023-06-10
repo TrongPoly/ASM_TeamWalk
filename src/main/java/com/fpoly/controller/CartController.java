@@ -1,6 +1,7 @@
 package com.fpoly.controller;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,6 +48,8 @@ public class CartController {
 	GioHangChiTietDAO gioHangChiTietDAO;
 	@Autowired
 	CartService cart;
+	@Autowired
+	CartService cartService;
 
 	@RequestMapping("/viewCart")
 	public String viewCart(Model model) {
@@ -62,7 +65,8 @@ public class CartController {
 		// Lấy mã giỏ hàng từ đối tượng giỏ hàng tìm được
 		var cartSP = gioHangChiTietDAO.findByMaGioHang(gioHang);
 		model.addAttribute("cartSP", cartSP);
-
+		// Tính total giỏ hàng
+		model.addAttribute("total", cartService.TinhTotal(gioHang));
 		return "/views/user/cart";
 	}
 
@@ -126,8 +130,8 @@ public class CartController {
 
 	@ResponseBody
 	@PostMapping("/cart/item/update")
-	public GioHangChiTiet updateCardItem(@RequestParam("tenSanPham") String tenSP,
-			@RequestParam("soLuong") Integer soLuong) {
+	public GioHangChiTiet updateSLCardItem(@RequestParam("tenSanPham") String tenSP,
+			@RequestParam("soLuong") Integer soLuong, Model model) {
 		// lấy giá trị cookie value = email đã đăng nhập
 		String email = cookieImpl.getValue("cuser");
 		// tìm tài khoản với email
@@ -141,9 +145,27 @@ public class CartController {
 		// Lấy đối tượng ghct theo mã sp của sp tìm được ở trên và
 		// mã giỏ hàng
 		GioHangChiTiet gioHangChiTiet = gioHangChiTietDAO.getByMaSanPhamAndMaGioHang(sp, gioHang);
-		// gọi cartService phương thức update trong service
+		// gọi cartService phương thức update số lượng trong service
 		GioHangChiTiet updatedItem = cart.update(gioHangChiTiet.getId(), soLuong);
 		gioHangChiTietDAO.save(updatedItem);
+		model.addAttribute("total", cartService.TinhTotal(gioHang));
 		return updatedItem;
+	}
+
+	@RequestMapping("/cart/item/delete")
+	public String deleteItem(@RequestParam("maGioHang") String magioHang, @RequestParam("maSanPham") long maSanPham) {
+		// lấy giá trị cookie value = email đã đăng nhập
+		String email = cookieImpl.getValue("cuser");
+		// tìm tài khoản với email
+		TaiKhoan taiKhoan = taiKhoanDAO.getById(email);
+		// Lấy mã khách thông qua email đăng nhập
+		KhachHang IdKhach = khachHangDAO.getByEmail(taiKhoan);
+		// Lấy đối tượng giỏ hàng theo id khách
+		GioHang gioHang = gioHangDAO.getByNguoiSoHuu(IdKhach);
+		// lấy đối tượng sản phẩm theo param tenSP
+		SanPham sp = sanPhamDAO.getById(maSanPham);
+		GioHangChiTiet gioHangChiTiet = gioHangChiTietDAO.getByMaSanPhamAndMaGioHang(sp, gioHang);
+		gioHangChiTietDAO.delete(gioHangChiTiet);
+		return "redirect:/viewCart";
 	}
 }

@@ -42,7 +42,7 @@
 			<div
 				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Cart Page</h1>
+					<h1>Invoice page</h1>
 					<nav class="d-flex align-items-center">
 						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
 						<a href="#">Product<span class="lnr lnr-arrow-right"></span></a> <a
@@ -56,39 +56,30 @@
 
 	<!--================Single Product Area =================-->
 	<div class="col-md-10 offset-1">
-		<h2 class="text-success">GIỎ HÀNG</h2>
+		<h2 class="text-success">ĐƠN HÀNG CỦA BẠN</h2>
 		<table class="table table-bordered table-default">
 			<tr>
 				<th>Tên sản phẩm</th>
-				<th>Hình ảnh</th>
-				<th>Giá</th>
 				<th>Số lượng</th>
+				<th>Đơn giá</th>
 				<th>Thành tiền</th>
-				<th>Action</th>
 			</tr>
 			<tbody>
-				
-				<tr th:each="item, iStat : ${cartSP}">
+
+				<tr th:each="item : ${hdct}">
 					<td th:text="${item.maSanPham.tenSanPham}"></td>
-					<td><img alt=""
-						th:src="@{/img/product/__${item.maSanPham.anhSanPham}__}"
-						height="100px"></td>
-					<td th:text="${item.maSanPham.donGia}"></td>
-					<td><input type="number" onchange="capNhatSLSP(this)"
-						th:value="${item.soLuong}"></td>
-					<td class="amount"
-						th:text="${#numbers.formatInteger(item.maSanPham.donGia*item.soLuong,0)}">
-					</td>
-				<td class="text-danger"><a th:href="@{/cart/item/delete?maGioHang=__${item.maGioHang.id}__&maSanPham=__${item.maSanPham.id}__}" th:text="Xóa"></a></td>
+					<td th:text="${item.soLuong}"></td>
+					<td th:text="${#numbers.formatInteger(item.donGia,0)}"></td>
+					<td th:text="${#numbers.formatInteger(item.donGia*item.soLuong, 0)}">
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="6" th:text="'Tổng tiền: '+${total}"></td>
+					<td class="text-primary" colspan="6" th:text="'Tổng tiền: '+${total}"></td>
 				</tr>
 			</tfoot>
 		</table>
-		<a th:if="${total}!=null" th:href="@{/invoice/add}" class="btn btn-success" style="margin-bottom: 10px; color: white">Đặt hàng</a>
+		<a class="btn text-white btn-success" th:text="${trangThai}? '' : 'Xác nhận thanh toán' "></a>
 	</div>
 
 	<!-- start footer Area -->
@@ -132,9 +123,6 @@
 											tabindex="-1" value="" type="text">
 									</div>
 
-									<!-- <div class="col-lg-4 col-md-4">
-												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-											</div>  -->
 								</div>
 								<div class="info"></div>
 							</form>
@@ -193,33 +181,7 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script th:src="@{/js/gmaps.min.js}"></script>
 	<script th:src="@{/js/main.js}"></script>
-	<script>
-		function capNhatSLSP(input) {
-			var tenSanPham = $(input).closest('tr').find('td:eq(0)').text();
-			var donGia = $(input).closest('tr').find('td:eq(2)').text();
-			var soLuong = $(input).val();
-			var thanhTien = donGia * soLuong;
-			$(input).closest('tr').find('.amount').text(thanhTien);
 
-			$.ajax({
-				url : "/cart/item/update",
-				type : "POST",
-				data : {
-					tenSanPham : tenSanPham,
-					soLuong : soLuong
-				},
-				success : function(response) {
-					console.log("ok");
-					location.reload();
-				},
-				error : function(xhr) {
-					console.log(xhr.responseText);
-					location.reload();
-
-				}
-			});
-		}
-	</script>
 </body>
 
 </html>
