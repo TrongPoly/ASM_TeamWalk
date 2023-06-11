@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fpoly.dao.SanPhamDAO;
-import com.fpoly.entity.KhachHang;
+
 import com.fpoly.entity.SanPham;
 import com.fpoly.services.OptionServiceLoaiSanPham;
 
@@ -35,6 +35,7 @@ public class SanPhamController {
 	
 	@RequestMapping("/admin/product")
 	public String ProductForm(Model model) {
+		
 		Map<Long, String> options = optionService.getAllOptions();
 		SanPham sp = new SanPham();
 		model.addAttribute("sanpham",sp);
@@ -50,7 +51,7 @@ public class SanPhamController {
 		var numberOfRecords = spdao.count();
 		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
 		model.addAttribute("numberOfPages", numberOfPages);
-		Pageable sort = PageRequest.of(p.orElse(0), 5, Sort.by("tenSanPham").ascending());
+		Pageable sort = PageRequest.of(p.orElse(0), 5, Sort.by("maLoai").ascending());
 		model.addAttribute("currIndex", p.orElse(0));
 		
 		
@@ -66,10 +67,11 @@ public class SanPhamController {
 	
 	@RequestMapping("/admin/product/save")
 	public String save(@ModelAttribute("sanpham") SanPham sp,Model model) {
-		if (sp.getTrangThai()) {
-			model.addAttribute("TT","Còn Hàng");
+		sp.getTrangThai();
+		if (Boolean.TRUE) {
+			model.addAttribute("trangthai","Còn Hàng");
 		}else
-			model.addAttribute("TT","Hết Hàng");
+			model.addAttribute("trangthai","Hết Hàng");
 	
 		spdao.save(sp);
 		return "redirect:/admin/productTable";

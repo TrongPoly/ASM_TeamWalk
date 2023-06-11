@@ -91,5 +91,6 @@ public class SanPham {
 	public void setTrangThai(Boolean trangThai) {
 		this.trangThai = trangThai;
 	}
+	
 
 }
