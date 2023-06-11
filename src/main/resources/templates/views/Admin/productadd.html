@@ -57,7 +57,7 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="login_box_img">
-						<img class="img-fluid" src="img/login.jpg" alt="">
+						<img class="img-fluid" src="/img/login.jpg" >
 						<div class="hover">
 							<h4>New Product?</h4>
 							<p>This is the page to add new products</p>
@@ -70,6 +70,7 @@
 						<h3>Product Form</h3>
 						<form class="row login_form" action="#" th:action="@{/admin/product/save}" method="post" id="contactForm" novalidate="novalidate"
 						th:object="${sanpham}" enctype="multipart/form-data">
+
 							
 							<div class="col-md-12 form-group ">
 								<input th:field="*{id}" type="text" readonly="true" class="form-control" id="last" name="name"
@@ -78,22 +79,22 @@
 							</div>
 							
 							<div class="col-md-12 form-group ">
-								<input th:field="*{tenSanPham}" type="text" class="form-control" id="last" name="name"
+								<input  th:field="*{tenSanPham}" type="text" class="form-control" id="last" name="name"
 								 placeholder="Tên Sản Phẩm">
 								
 							</div>
                             <div class="col-md-12 form-group">
-                                <input th:field="*{anhSanPham}" type="file" class="form-control" id="file" name="file">
+                                <input  th:field="*{anhSanPham}" type="file" class="form-control" id="file" name="file">
                                 
                             </div>
-							
-							<select class="col-md-12 form-group " th:field="*{maLoai.id}">
+							<div class="col-md-12 form-group ">
+							<select  class="col-md-12 form-group " th:field="*{maLoai.id}">
 											    <option th:each="option : ${options}" 
 											            th:value="${option.key}"
 											            th:text="${option.key}">
 											    </option>
 											</select>
-							
+							</div>
 						
 						<div class="col-md-12 form-group p_star">
 								<input th:field="*{donGia}" type="text" class="form-control" id="" name="" placeholder="Đơn Giá" >
@@ -109,10 +110,10 @@
                            
 							<div class="col-md-12 form-group p_star">
 								<div class="creat_account">
-									<input th:field="*{trangThai}" type="radio"  value="true"> còn hàng
+									<input th:field="*{trangThai}" type="radio"  value="true" name="option1" id="option1"> còn hàng
 									<label ></label>
                                    
-                                    <input  th:field="*{trangThai}"	 type="radio"  value="false"> hết hàng
+                                    <input  th:field="*{trangThai}"	 type="radio"  value="false" name="option1"  id="option1"> hết hàng
 									<label ></label>
 								</div>
 							</div>

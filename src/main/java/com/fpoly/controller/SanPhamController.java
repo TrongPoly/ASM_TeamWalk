@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fpoly.dao.SanPhamDAO;
-import com.fpoly.entity.KhachHang;
+
 import com.fpoly.entity.SanPham;
 import com.fpoly.services.OptionServiceLoaiSanPham;
 import com.fpoly.services.UploadFileService;
@@ -41,6 +41,7 @@ public class SanPhamController {
 
 	@RequestMapping("/admin/product")
 	public String ProductForm(Model model) {
+		
 		Map<Long, String> options = optionService.getAllOptions();
 		SanPham sp = new SanPham();
 		model.addAttribute("sanpham", sp);
@@ -56,7 +57,7 @@ public class SanPhamController {
 		var numberOfRecords = spdao.count();
 		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
 		model.addAttribute("numberOfPages", numberOfPages);
-		Pageable sort = PageRequest.of(p.orElse(0), 5, Sort.by("tenSanPham").ascending());
+		Pageable sort = PageRequest.of(p.orElse(0), 5, Sort.by("maLoai").ascending());
 		model.addAttribute("currIndex", p.orElse(0));
 
 		var sps = spdao.findAll(sort);
@@ -83,6 +84,7 @@ public class SanPhamController {
 		sp.setAnhSanPham(filename);
 
 		// Lưu sản phẩm vào cơ sở dữ liệu
+
 		spdao.save(sp);
 		return "redirect:/admin/productTable";
 	}
