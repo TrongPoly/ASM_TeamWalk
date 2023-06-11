@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.fpoly.dao.TaiKhoanDAO;
+import com.fpoly.entity.TaiKhoan;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -12,6 +13,8 @@ public class UserServiceImpl implements UserService {
 	TaiKhoanDAO tkDAO;
 	@Autowired
 	CookieImpl cookieImpl;
+	@Autowired
+	SessionService sessionService;
 
 	@Override
 	public boolean checkLogin(String email, String password) {
@@ -24,9 +27,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void checkLogged(Model model) {
-		if (cookieImpl.getValue("cuser") != null) {
+		TaiKhoan tKhoan = sessionService.get("user");
+		if (tKhoan != null) {
 			boolean isUser = true;
-			model.addAttribute("emailAccount", cookieImpl.getValue("cuser"));
+			model.addAttribute("emailAccount", tKhoan.getEmail());
 			model.addAttribute("isUser", isUser);
 		}
 	}
