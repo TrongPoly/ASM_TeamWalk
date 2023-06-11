@@ -17,6 +17,7 @@ public class SessionService {
 	}
 
 	public void set(String name, Object value) {
+		session.setMaxInactiveInterval(18000); // Thời gian số giây cho session này là 30 phút
 		session.setAttribute(name, value);
 	}
 

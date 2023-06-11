@@ -43,9 +43,12 @@ public class LoginController {
 		if (userService.checkLogin(taiKhoan.getEmail(), taiKhoan.getMatKhau())) {
 			TaiKhoan tk = taiKhoanDAO.getById(taiKhoan.getEmail());
 			sessionService.set("user", tk);
-
 			cookieImpl.add("cuser", taiKhoan.getEmail(), 10);
-			return "redirect:/index";
+			if (tk.getPhanQuyen()) {
+				return "redirect:/admin";
+			} else
+				return "redirect:/index";
+
 		}
 		model.addAttribute("msg", "Sai email hoặc mật khẩu");
 		return "views/user/login";

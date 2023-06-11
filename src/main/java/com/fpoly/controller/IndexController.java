@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
+import com.fpoly.dao.HoaDonDAO;
 import com.fpoly.dao.SanPhamDAO;
 import com.fpoly.entity.SanPham;
 import com.fpoly.entity.TaiKhoan;
@@ -40,6 +41,8 @@ public class IndexController {
 	SanPhamDAO spDAO;
 	@Autowired
 	UserServiceImpl userServiceImpl;
+	@Autowired
+	HoaDonDAO hoaDonDAO;
 
 	@GetMapping("/index")
 	public String getindex(Model model, @RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
@@ -59,5 +62,11 @@ public class IndexController {
 		return "views/user/chiTietSP";
 	}
 
+	@RequestMapping("/admin")
+	public String Admin(Model model) {
+		var hd = hoaDonDAO.findAll();
+		model.addAttribute("hd", hd);
+		return "views/Admin/adminn";
+	}
 
 }

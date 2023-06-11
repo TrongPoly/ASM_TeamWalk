@@ -23,72 +23,69 @@ import com.fpoly.entity.KhachHang;
 
 import jakarta.validation.Valid;
 
-
-
-
 @Controller
 public class KhachHangController {
 
 	@Autowired
 	KhachHangDAO khdao;
-	
+
 	@RequestMapping("/admin/customerTabled")
 	public String customerTable(@ModelAttribute("khachhang") KhachHang kh, Model model,
-		@RequestParam("p") Optional<Integer> p) {	
+			@RequestParam("p") Optional<Integer> p) {
 		var numberOfRecords = khdao.count();
 		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
 		model.addAttribute("numberOfPages", numberOfPages);
 		Pageable sort = PageRequest.of(p.orElse(0), 5, Sort.by("hangKhachHang").ascending());
 		model.addAttribute("currIndex", p.orElse(0));
 		var khs = khdao.findAll(sort);
-		model.addAttribute("khs",khs);// buộc lên bảng
-		return "views/Admin/customerTabled";	
+		model.addAttribute("khs", khs);// buộc lên bảng
+		return "views/Admin/customerTabled";
 	}
-	
+
 	@RequestMapping("/admin/customered")
 	public String Customer(Model model, Optional<Integer> p) {
 		KhachHang kh = new KhachHang();
-		model.addAttribute("khachhang",kh);
+		model.addAttribute("khachhang", kh);
 		List<KhachHang> khs = khdao.findAll();
-		model.addAttribute("khs",khs);
+		model.addAttribute("khs", khs);
 		return "views/Admin/customered";
 	}
-	
-	
-	@RequestMapping( value = "/admin/customer/save" , method = RequestMethod.POST)
-	public String Save(@Valid @ModelAttribute("khachhang") KhachHang kh, BindingResult khresult,Model model) {
-		
-		if(khresult.hasErrors()) {
+
+	@RequestMapping(value = "/admin/customer/save", method = RequestMethod.POST)
+	public String Save(@Valid @ModelAttribute("khachhang") KhachHang kh, BindingResult khresult, Model model) {
+
+		if (khresult.hasErrors()) {
 			return "views/Admin/customered";
 		}
 		khdao.save(kh);
-		
-		model.addAttribute("kh",kh);
+
+		model.addAttribute("kh", kh);
 		return "redirect:/admin/customerTabled";
 	}
-	
-	
+
 	@RequestMapping("/admin/customer/edit/{id}")
-	public String edit(Model model,@PathVariable("id") Long id) {
+	public String edit(Model model, @PathVariable("id") Long id) {
 		KhachHang kh = khdao.findById(id).get();
-		model.addAttribute("khachhang",kh);
+		model.addAttribute("khachhang", kh);
 		List<KhachHang> khs = khdao.findAll();
-		model.addAttribute("khs",khs);
+		model.addAttribute("khs", khs);
 		return "views/Admin/customered";
 	}
+
 	@GetMapping("/admin/customer/page")
-	public String paginate(@ModelAttribute("khachhang") KhachHang kh, Model model,@RequestParam("p") Optional<Integer> p) {
-		return this.customerTable(kh, model,p);
+	public String paginate(@ModelAttribute("khachhang") KhachHang kh, Model model,
+			@RequestParam("p") Optional<Integer> p) {
+		return this.customerTable(kh, model, p);
 	}
-	
+
 	@RequestMapping("/admin/customer/update")
 	public String update(@ModelAttribute("khachhang") KhachHang kh, Model model) {
 		khdao.save(kh);
 		return "views/Admin/customered";
 	}
-	
+
 	@RequestMapping(value = "/admin/customer/delete/{id}")
-	public String deleteId(@PathVariable("id") Long id ) {
+	public String deleteId(@PathVariable("id") Long id) {
 		khdao.deleteById(id);
 		return "redirect:/customerTabled";
 	}

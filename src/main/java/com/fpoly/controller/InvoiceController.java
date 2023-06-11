@@ -1,6 +1,7 @@
 package com.fpoly.controller;
 
 import java.math.BigDecimal;
+import java.net.http.HttpRequest;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,8 +34,10 @@ import com.fpoly.entity.TaiKhoan;
 import com.fpoly.services.CartService;
 import com.fpoly.services.CookieImpl;
 import com.fpoly.services.CookieService;
+import com.fpoly.services.MailerServiceImp;
 import com.fpoly.services.UserServiceImpl;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.experimental.var;
 
@@ -63,6 +66,8 @@ public class InvoiceController {
 	HoaDonDAO hoaDonDAO;
 	@Autowired
 	HoaDonChiTietDAO hoaDonChiTietDAO;
+	@Autowired
+	MailerServiceImp mailerServiceImp;
 
 	@GetMapping("/invoice/view")
 	public String invoiceView(Model model) {
@@ -87,6 +92,7 @@ public class InvoiceController {
 		long total = hoaDonChiTietDAO.total(hoaDon);
 		var hdct = hoaDonChiTietDAO.findByMaHoaDon(hoaDon);
 		model.addAttribute("hdct", hdct);
+		model.addAttribute("hoaDon", hoaDon);
 		model.addAttribute("total", total);
 		model.addAttribute("trangThai", trangThai);
 		return "views/user/invoiceDetails";
@@ -131,4 +137,13 @@ public class InvoiceController {
 		return "redirect:/invoice/view";
 	}
 
+	@RequestMapping("/requestConfirm")
+	public String SendEmail(@RequestParam("maHoaDon") String maHoaDon, @RequestParam("email") String email,
+			HttpServletRequest request) throws Exception {
+		mailerServiceImp.send(email, maHoaDon);
+		String referer = request.getHeader("referer");
+
+		// Chuyển hướng trang đến URL hiện tại để giữ nguyên các tham số
+		return "redirect:" + referer;
+	}
 }

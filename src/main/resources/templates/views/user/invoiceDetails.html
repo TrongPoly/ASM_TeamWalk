@@ -70,16 +70,20 @@
 					<td th:text="${item.maSanPham.tenSanPham}"></td>
 					<td th:text="${item.soLuong}"></td>
 					<td th:text="${#numbers.formatInteger(item.donGia,0)}"></td>
-					<td th:text="${#numbers.formatInteger(item.donGia*item.soLuong, 0)}">
+					<td
+						th:text="${#numbers.formatInteger(item.donGia*item.soLuong, 0)}">
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td class="text-primary" colspan="6" th:text="'Tổng tiền: '+${total}"></td>
+					<td class="text-primary" colspan="6"
+						th:text="'Tổng tiền: '+${total}"></td>
 				</tr>
 			</tfoot>
 		</table>
-		<a class="btn text-white btn-success" th:text="${trangThai}? '' : 'Xác nhận thanh toán' "></a>
+		<a class="btn text-white btn-success"
+			th:text="${trangThai}? '' : 'Xác nhận thanh toán' "
+			th:href="@{/requestConfirm?maHoaDon=__${hoaDon.id}__&email=__${hoaDon.nguoiMua.email.email}__}"></a>
 	</div>
 
 	<!-- start footer Area -->
