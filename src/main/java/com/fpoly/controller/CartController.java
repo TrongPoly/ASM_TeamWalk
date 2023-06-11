@@ -1,5 +1,6 @@
 package com.fpoly.controller;
 
+import java.net.http.HttpRequest;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ import com.fpoly.services.CookieImpl;
 import com.fpoly.services.UserService;
 import com.fpoly.services.UserServiceImpl;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.var;
 
 @Controller
@@ -71,7 +73,7 @@ public class CartController {
 	}
 
 	@RequestMapping("/sanpham/addtocart")
-	public String add(Model model, @RequestParam("id") long id) {
+	public String add(Model model, @RequestParam("id") long id, HttpServletRequest request) {
 		String email = cookieImpl.getValue("cuser");
 		if (email == null) {
 			return "redirect:/login";
@@ -125,7 +127,10 @@ public class CartController {
 			}
 
 		}
-		return "redirect:/index";
+		String referer = request.getHeader("referer");
+
+		// Chuyển hướng trang đến URL hiện tại để giữ nguyên các tham số
+		return "redirect:" + referer;
 	}
 
 	@ResponseBody

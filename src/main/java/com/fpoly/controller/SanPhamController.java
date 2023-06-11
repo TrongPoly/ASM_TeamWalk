@@ -28,7 +28,6 @@ import com.fpoly.services.UploadFileService;
 
 import jakarta.servlet.annotation.MultipartConfig;
 
-@MultipartConfig
 @Controller
 public class SanPhamController {
 
@@ -41,7 +40,7 @@ public class SanPhamController {
 
 	@RequestMapping("/admin/product")
 	public String ProductForm(Model model) {
-		
+
 		Map<Long, String> options = optionService.getAllOptions();
 		SanPham sp = new SanPham();
 		model.addAttribute("sanpham", sp);
@@ -76,7 +75,8 @@ public class SanPhamController {
 
 		// Lưu tệp vào thư mục
 		String filename = file.getOriginalFilename().toString();
-		String path = "/img/product/" + filename;
+		String path = "C:\\Users\\Admin\\eclipse-workspace\\ASM_TeamWalk\\src\\main\\resources\\static\\img\\product\\"
+				+ filename;
 		File savedFile = new File(path);
 		file.transferTo(savedFile);
 
@@ -84,7 +84,6 @@ public class SanPhamController {
 		sp.setAnhSanPham(filename);
 
 		// Lưu sản phẩm vào cơ sở dữ liệu
-
 		spdao.save(sp);
 		return "redirect:/admin/productTable";
 	}
