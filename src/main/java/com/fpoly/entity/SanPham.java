@@ -12,6 +12,11 @@ import java.io.Serializable;
 
 import org.hibernate.annotations.Nationalized;
 
+@NamedQueries({
+	@NamedQuery(name="findByTenSanPham", query = "select sp from SanPham sp "
+			+ "where sp.tenSanPham like ?1")})
+
+
 @Entity
 @Table(name = "san_pham")
 public class SanPham implements Serializable{

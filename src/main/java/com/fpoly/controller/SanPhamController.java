@@ -114,6 +114,35 @@ public class SanPhamController {
 		return "views/Admin/productadd";
 	}
 
+	@RequestMapping("/admin/product/search")
+	public String searchName(Model model, @RequestParam("name") Optional<String> name,
+			@RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
+		
+//		Pageable pageable = PageRequest.of(pageNo, 4);
+//		
+//		int totalPages = pageable.getPageSize();
+//		
+//		
+//		
+//		model.addAttribute("totalPages", totalPages);
+//		
+//		model.addAttribute("currenIdenx", pageNo);
+		var numberOfRecords = spdao.count();
+		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
+		model.addAttribute("numberOfPages", numberOfPages);
+		Pageable sort = PageRequest.of(pageNo, 5, Sort.by("maLoai").ascending());
+		model.addAttribute("currIndex", pageNo);
+		
+		var sps = spdao.findByTenSanPham("%" + name.orElse("")+ "%", sort);
+		model.addAttribute("sps", sps);
+		
+		
+		return "views/Admin/productTabled";
+	}
+	
+	
+	
+	
 	@ModelAttribute("trangthais")
 	public Map<Boolean, String> getTrangThai() {
 		Map<Boolean, String> map = new HashMap<>();
