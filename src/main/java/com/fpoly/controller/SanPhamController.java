@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,8 @@ import com.fpoly.services.OptionServiceLoaiSanPham;
 import com.fpoly.services.UploadFileService;
 
 import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.validation.Valid;
+import lombok.val;
 
 @Controller
 public class SanPhamController {
@@ -70,9 +73,15 @@ public class SanPhamController {
 	}
 
 	@RequestMapping("/admin/product/save")
-	public String save(@ModelAttribute("sanpham") SanPham sp, @RequestParam("file") MultipartFile file, Model model)
+	public String save(@Valid @ModelAttribute("sanpham") SanPham sp, BindingResult result,@RequestParam("file") MultipartFile file,  Model model)
 			throws IOException {
-
+		
+		if(result.hasErrors()) {
+			Map<Long, String> options = optionService.getAllOptions();
+			model.addAttribute("options", options);
+			return "views/Admin/productadd";
+		}
+		
 		// Lưu tệp vào thư mục
 		String filename = file.getOriginalFilename().toString();
 		String path = "C:\\Users\\Admin\\eclipse-workspace\\ASM_TeamWalk\\src\\main\\resources\\static\\img\\product\\"
