@@ -79,7 +79,7 @@
 					<td class="amount"
 						th:text="${#numbers.formatInteger(item.maSanPham.donGia*item.soLuong,0)}">
 					</td>
-				<td class="text-danger"><a th:href="@{/cart/item/delete?maGioHang=__${item.maGioHang.id}__&maSanPham=__${item.maSanPham.id}__}" th:text="Xóa"></a></td>
+				<td class="text-danger"><a th:href="@{/cart/item/delete?maGioHang=__${item.maGioHang.id}__&maSanPham=__${item.maSanPham.id}__}" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?');" th:text="Xóa"></a></td>
 				</tr>
 			</tbody>
 			<tfoot>
@@ -88,7 +88,7 @@
 				</tr>
 			</tfoot>
 		</table>
-		<a th:if="${total}!=null" th:href="@{/invoice/add}" class="btn btn-success" style="margin-bottom: 10px; color: white">Đặt hàng</a>
+		<a th:if="${total}!=null" th:href="@{/invoice/add}" onclick="return confirm('Xác nhận đặt hàng?');" class="btn btn-success" style="margin-bottom: 10px; color: white">Đặt hàng</a>
 	</div>
 
 	<!-- start footer Area -->

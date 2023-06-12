@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
 import com.fpoly.dao.HoaDonDAO;
+import com.fpoly.dao.KhachHangDAO;
 import com.fpoly.dao.SanPhamDAO;
+import com.fpoly.entity.KhachHang;
 import com.fpoly.entity.SanPham;
 import com.fpoly.entity.TaiKhoan;
 import com.fpoly.services.CookieImpl;
@@ -43,6 +45,8 @@ public class IndexController {
 	UserServiceImpl userServiceImpl;
 	@Autowired
 	HoaDonDAO hoaDonDAO;
+	@Autowired
+	KhachHangDAO khachHangDAO;
 
 	@GetMapping("/index")
 	public String getindex(Model model, @RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
@@ -67,6 +71,43 @@ public class IndexController {
 		var hd = hoaDonDAO.findAll();
 		model.addAttribute("hd", hd);
 		return "views/Admin/adminn";
+	}
+
+	@RequestMapping("/Profile")
+	public String viewInfor(Model model) {
+		userServiceImpl.checkLogged(model);
+		TaiKhoan taiKhoan = sessionService.get("user");
+		KhachHang khachHang = khachHangDAO.getByEmail(taiKhoan);
+		model.addAttribute("kh", khachHang);
+		Boolean view = true;
+		model.addAttribute("view", view);
+		return "views/user/UserInformation";
+	}
+
+	@RequestMapping("/Profile/edit")
+	public String profileUpdate(@ModelAttribute("khachHang") KhachHang khachHang, Model model) {
+		userServiceImpl.checkLogged(model);
+
+		TaiKhoan taiKhoan = sessionService.get("user");
+		khachHang = khachHangDAO.getByEmail(taiKhoan);
+		model.addAttribute("kh1", khachHang);
+		Boolean view = false;
+		model.addAttribute("view", view);
+		return "views/user/UserInformation";
+	}
+
+	@PostMapping("/Profile/save")
+	public String profileSave(@RequestParam("id") long id, @ModelAttribute("khachHang") KhachHang khachHang,
+			Model model) {
+		KhachHang kh = khachHangDAO.getById(id);
+		khachHang.setEmail(kh.getEmail());
+		khachHang.setDiemTichLuy(kh.getDiemTichLuy());
+		khachHang.setHangKhachHang(kh.getHangKhachHang());
+		khachHang.setId(id);
+		khachHangDAO.save(khachHang);
+
+		return "redirect:/Profile";
+
 	}
 
 }

@@ -65,9 +65,6 @@
             <th scope="col">Email</th>
             <th scope="col">Địa Chỉ</th>
             <th scope="col">CCCD</th>
-            <th scope="col">Điểm Tích Lũy</th>
-            <th scope="col">Hạng Khách Hàng</th>
-            <th	scope="col"></th>
           </tr>
         </thead>
        <tbody>
@@ -78,11 +75,7 @@
             <td	th:text="${kh.email.email}"></td>
             <td	th:text="${kh.diaChi}"></td>
             <td	th:text="${kh.soCanCuoc}"></td>
-            <td	th:text="${kh.diemTichLuy}"></td>
-            <td>
-                <a th:href="@{/admin/customer/edit/__${kh.id}__}"><span class="btn btn-warning">Sửa</span></a> 
-                <a th:href="@{/admin/customer/delete/__${kh.id}__}"><span class="btn btn-danger">Xoá</span></a>
-            </td>
+          
           </tr>
        </tbody>
 				</table>

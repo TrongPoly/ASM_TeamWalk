@@ -86,7 +86,7 @@
 						<td><a th:href="@{/admin/product/edit/__${sp.id}__}"
 							class="btn btn-warning">Sửa</a> <a
 							th:href="@{/admin/product/delete/__${sp.id}__}"><span
-								class="btn btn-danger">Xoá</span></a></td>
+								class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">Xoá</span></a></td>
 					</tr>
 				</table>
 
