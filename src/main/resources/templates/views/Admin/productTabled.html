@@ -52,13 +52,24 @@
 				</div>
 			</div>
 		</div>
+		
 	</section>
 	<!-- End Banner Area -->
 
 	<!--================Form Box Area =================-->
+	<form action="#" th:action="@{/admin/product/search}" class="d-flex justify-content-between">
+					<input th:name="name"	type="text" class="form-control" id="search_input" placeholder="Search Here">
+					<button type="submit" class="btn" >tìm</button>
+					
+				</form>
 	<section class=" section_gap">
 		<div class="">
 			<div class="">
+			<div class="search_input" >
+			<div class="container">
+				
+			</div>
+		</div>
 				<table class="table col-10 offset-1">
 					<thead class="thead-white">
 						<tr>

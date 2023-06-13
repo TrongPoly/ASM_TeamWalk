@@ -1,39 +1,56 @@
 package com.fpoly.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+
 import org.hibernate.annotations.Nationalized;
+
+@NamedQueries({
+	@NamedQuery(name="findByTenSanPham", query = "select sp from SanPham sp "
+			+ "where sp.tenSanPham like ?1")})
+
 
 @Entity
 @Table(name = "san_pham")
-public class SanPham {
+public class SanPham implements Serializable{
 	@Id
 	@Column(name = "ma_san_pham", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Size(max = 100)
+	@Size(max = 100, message = "{Size.tenSanPham}")
 	@Nationalized
 	@Column(name = "ten_san_pham", length = 100)
+	@NotBlank(message = "{Blank.tenSanPham}")
 	private String tenSanPham;
 
 	@Size(max = 50)
 	@Column(name = "anh_san_pham", length = 50)
+	@NotNull(message = "{Null.anhSanPham}")
 	private String anhSanPham;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ma_loai")
+	@NotNull(message = "{Null.maLoai}")
 	private LoaiSanPham maLoai;
 
 	@Column(name = "don_gia")
+	@NotNull(message = "{Null.donGia}")
 	private Integer donGia;
 
 	@Column(name = "so_luong_ton")
+	@NotNull(message = "{Null.soLuongTon}")
 	private Integer soLuongTon;
 
 	@Column(name = "trang_thai")
+	@NotNull(message = "{Null.trangThai}")
 	private Boolean trangThai;
 
 	public Long getId() {

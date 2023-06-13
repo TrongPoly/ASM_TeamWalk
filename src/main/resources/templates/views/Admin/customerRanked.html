@@ -76,16 +76,22 @@
                             </div>				
                             <div class="col-md-12 form-group p_star">
                                 <input th:field="*{tenHang}" type="text" class="form-control" placeholder="Tên Hạng">
-                                
+                                <div class="alert alert-warning"
+									th:if="${#fields.hasErrors('tenHang')}"
+									th:errors="*{tenHang}"></div>
                             </div>
 							<div class="col-md-12 form-group p_star">
 							<input th:field="*{diemToiThieu}" type="text" class="form-control" placeholder="Điểm Tối Thiểu">
-							
+							<div class="alert alert-warning"
+									th:if="${#fields.hasErrors('diemToiThieu')}"
+									th:errors="*{diemToiThieu}"></div>
 						</div>
 						
                         <div class="col-md-12 form-group p_star">
 							<input th:field="*{moTa}" type="text" class="form-control" placeholder="Mô Tả">
-							
+							<div class="alert alert-warning"
+									th:if="${#fields.hasErrors('moTa')}"
+									th:errors="*{moTa}"></div>
 						</div>
 					
                            

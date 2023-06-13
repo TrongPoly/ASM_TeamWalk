@@ -81,11 +81,14 @@
 							<div class="col-md-12 form-group ">
 								<input  th:field="*{tenSanPham}" type="text" class="form-control" id="last" name="name"
 								 placeholder="Tên Sản Phẩm">
+								 <div class="alert alert-warning"
+									th:if="${#fields.hasErrors('tenSanPham')}"
+									th:errors="*{tenSanPham}"></div>
 								
 							</div>
                             <div class="col-md-12 form-group">
                                 <input   type="file" class="form-control" id="file" name="file">
-                                
+                               
                             </div>
 							<div class="col-md-12 form-group ">
 							<select  class="col-md-12 form-group " th:field="*{maLoai.id}">
@@ -94,17 +97,24 @@
 											            th:text="${option.key}">
 											    </option>
 											</select>
+											 <div class="alert alert-warning"
+									th:if="${#fields.hasErrors('maLoai.id')}"
+									th:errors="*{maLoai.id}"></div>
 							</div>
 						
 						<div class="col-md-12 form-group p_star">
 								<input th:field="*{donGia}" type="text" class="form-control" id="" name="" placeholder="Đơn Giá" >
-                               
+                                <div class="alert alert-warning"
+									th:if="${#fields.hasErrors('donGia')}"
+									th:errors="*{donGia}"></div>
                             </div>
 						
 
 							<div class="col-md-12 form-group p_star">
 								<input th:field="*{soLuongTon}" type="text" class="form-control" id="" name="" placeholder="Số Lượng Tồn" >
-                               
+                                <div class="alert alert-warning"
+									th:if="${#fields.hasErrors('soLuongTon')}"
+									th:errors="*{soLuongTon}"></div>
                             </div>
 						
                            
@@ -116,6 +126,9 @@
                                     <input  th:field="*{trangThai}"	 type="radio"  value="false" name="option1"  id="option1"> hết hàng
 									<label ></label>
 								</div>
+								 <div class="alert alert-warning"
+									th:if="${#fields.hasErrors('trangThai')}"
+									th:errors="*{trangThai}"></div>
 							</div>
 							<div class="col-md-12 form-group">
 								

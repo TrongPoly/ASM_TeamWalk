@@ -1,6 +1,7 @@
 package com.fpoly.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -17,17 +18,19 @@ public class HangKhachHang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size(max = 50)
+    @Size(max = 50, message = "{Size.tenHang}")
     @Nationalized
     @Column(name = "ten_hang", length = 50)
+    @NotBlank(message = "{Blank.tenHang}")
     private String tenHang;
 
     @Nationalized
     @Lob
     @Column(name = "mo_ta")
+    @NotBlank(message = "{Blank.moTa}")
     private String moTa;
 
-    @NotNull
+    @NotNull(message = "{Null.diemToiThieu}")
     @Column(name = "diem_toi_thieu", nullable = false)
     private Integer diemToiThieu;
 
