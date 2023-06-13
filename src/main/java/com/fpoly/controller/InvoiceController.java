@@ -140,7 +140,7 @@ public class InvoiceController {
 	@RequestMapping("/requestConfirm")
 	public String SendEmail(@RequestParam("maHoaDon") String maHoaDon, @RequestParam("email") String email,
 			HttpServletRequest request, Model model) throws Exception {
-//		mailerServiceImp.send(email, maHoaDon);
+		mailerServiceImp.send(email, maHoaDon);
 		String referer = request.getHeader("referer");
 		System.out.println(referer);
 		model.addAttribute("msgEmail", "Gửi yêu cầu xác nhận thành công");

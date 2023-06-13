@@ -74,7 +74,7 @@
 					<td th:text="${item.ghiChu}"></td>
 					<td th:text="${item.ngayThanhToan}">
 					<td
-						th:text="${item.trangThai}? 'Đã thanh toán' : 'Chưa thanh toán' "></td>
+						th:text="${item.trangThai}? 'Đã nhận hàng' : 'Đang giao' "></td>
 					<td> <a th:href="@{/invoice/details?id=__${item.id}__&trangThai=__${item.trangThai}__}">Xem</a> </td>
 				</tr>
 			</tbody>
