@@ -48,10 +48,9 @@ public class RegisterController {
 		}
 		taiKhoan.setPhanQuyen(false);
 		taiKhoanDAO.save(taiKhoan);
-		System.out.println(taiKhoan.getEmail());
 		KhachHang kh = new KhachHang();
+		kh.setDiemTichLuy(0);
 		kh.setEmail(taiKhoan);
-		System.out.println("Lần 2" + kh.getEmail());
 		khachHangDAO.save(kh);
 		return "redirect:/login";
 	}

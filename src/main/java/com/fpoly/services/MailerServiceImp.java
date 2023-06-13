@@ -35,4 +35,30 @@ public class MailerServiceImp {
 		sender.send(message);
 	}
 
+	public void huyDon(String body, String KhachHang, String maDon) throws Exception {
+		// Tạo message
+		MimeMessage message = sender.createMimeMessage();
+		// Sử dụng Helper để thiết lập các thông tin cần thiết cho message
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+		helper.setFrom("trongnppc02979@fpt.edu.vn");
+		helper.setTo("trongnguyen32293@gmail.com");
+		helper.setSubject("YÊU CẦU HỦY ĐƠN");
+		helper.setText("Bạn có yêu cầu xác nhận trạng thái đã thanh toán đơn cho " + KhachHang + " với mã đơn hàng "
+				+ maDon + ". Lý do: " + body, true);
+		sender.send(message);
+	}
+
+	public void SendCodeFogotPw(String email, int code) throws Exception {
+		// Tạo message
+		MimeMessage message = sender.createMimeMessage();
+		// Sử dụng Helper để thiết lập các thông tin cần thiết cho message
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+		helper.setFrom("trongnppc02979@fpt.edu.vn");
+		helper.setTo(email);
+		helper.setSubject("YÊU CẦU CẤP LẠI MẬT KHẨU");
+		helper.setText("[Cảnh báo] Yêu cầu cấp lại mật khẩu của Quý khách đang được thực hiện.\r\n"
+				+ "Vui lòng nhập mã OTP sau để xác thực: " + code, true);
+		sender.send(message);
+	}
+
 }

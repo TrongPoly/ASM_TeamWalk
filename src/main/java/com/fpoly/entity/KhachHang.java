@@ -17,7 +17,7 @@ import org.hibernate.annotations.Nationalized;
 @Setter
 @Entity
 @Table(name = "khach_hang")
-public class KhachHang implements Serializable{
+public class KhachHang implements Serializable {
 	@Id
 	@Column(name = "ma_khach_hang", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,6 @@ public class KhachHang implements Serializable{
 
 	@Size(max = 15)
 	@Column(name = "so_dien_thoai", length = 15)
-	@NotNull
 	private String soDienThoai;
 
 	@OneToOne(fetch = FetchType.LAZY)

@@ -17,7 +17,7 @@ public class CookieImpl implements CookieService {
 	@Override
 	public Cookie add(String name, String value, int hours) {
 		Cookie cookie = new Cookie(name, value);
-		cookie.setMaxAge(hours * 60 * 60);
+		cookie.setMaxAge(hours * 60);
 		response.addCookie(cookie);
 		return cookie;
 	}
