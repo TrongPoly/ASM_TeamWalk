@@ -73,15 +73,11 @@ public class SanPhamController {
 	}
 
 	@RequestMapping("/admin/product/save")
-	public String save(@Valid @ModelAttribute("sanpham") SanPham sp, BindingResult result,@RequestParam("file") MultipartFile file,  Model model)
+	public String save(@ModelAttribute("sanpham") SanPham sp, @RequestParam("file") MultipartFile file, Model model)
 			throws IOException {
-		
-		if(result.hasErrors()) {
-			Map<Long, String> options = optionService.getAllOptions();
-			model.addAttribute("options", options);
-			return "views/Admin/productadd";
-		}
-		
+		Map<Long, String> options = optionService.getAllOptions();
+		model.addAttribute("options", options);
+
 		// Lưu tệp vào thư mục
 		String filename = file.getOriginalFilename().toString();
 		String path = "C:\\Users\\Admin\\eclipse-workspace\\ASM_TeamWalk\\src\\main\\resources\\static\\img\\product\\"
@@ -117,7 +113,7 @@ public class SanPhamController {
 	@RequestMapping("/admin/product/search")
 	public String searchName(Model model, @RequestParam("name") Optional<String> name,
 			@RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
-		
+
 //		Pageable pageable = PageRequest.of(pageNo, 4);
 //		
 //		int totalPages = pageable.getPageSize();
@@ -132,17 +128,13 @@ public class SanPhamController {
 		model.addAttribute("numberOfPages", numberOfPages);
 		Pageable sort = PageRequest.of(pageNo, 5, Sort.by("maLoai").ascending());
 		model.addAttribute("currIndex", pageNo);
-		
-		var sps = spdao.findByTenSanPham("%" + name.orElse("")+ "%", sort);
+
+		var sps = spdao.findByTenSanPham("%" + name.orElse("") + "%", sort);
 		model.addAttribute("sps", sps);
-		
-		
+
 		return "views/Admin/productTabled";
 	}
-	
-	
-	
-	
+
 	@ModelAttribute("trangthais")
 	public Map<Boolean, String> getTrangThai() {
 		Map<Boolean, String> map = new HashMap<>();

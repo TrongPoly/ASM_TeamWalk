@@ -22,6 +22,7 @@ import com.fpoly.dao.HoaDonDAO;
 import com.fpoly.dao.KhachHangDAO;
 import com.fpoly.dao.SanPhamDAO;
 import com.fpoly.dao.TaiKhoanDAO;
+import com.fpoly.dao.TrangThaiHoaDonDAO;
 import com.fpoly.entity.GioHang;
 import com.fpoly.entity.GioHangChiTiet;
 import com.fpoly.entity.GioHangChiTietId;
@@ -31,6 +32,7 @@ import com.fpoly.entity.HoaDonChiTietId;
 import com.fpoly.entity.KhachHang;
 import com.fpoly.entity.SanPham;
 import com.fpoly.entity.TaiKhoan;
+import com.fpoly.entity.TrangThaiHoaDon;
 import com.fpoly.services.CartService;
 import com.fpoly.services.CookieImpl;
 import com.fpoly.services.CookieService;
@@ -68,6 +70,8 @@ public class InvoiceController {
 	HoaDonChiTietDAO hoaDonChiTietDAO;
 	@Autowired
 	MailerServiceImp mailerServiceImp;
+	@Autowired
+	TrangThaiHoaDonDAO trangThaiHoaDonDAO;
 
 	@GetMapping("/invoice/view")
 	public String invoiceView(Model model) {
@@ -85,7 +89,7 @@ public class InvoiceController {
 	}
 
 	@RequestMapping("/invoice/details")
-	public String invoiceDetails(@RequestParam("trangThai") Boolean trangThai, @RequestParam("id") long id,
+	public String invoiceDetails(@RequestParam("trangThai") Integer trangThai, @RequestParam("id") long id,
 			Model model) {
 		userServiceImpl.checkLogged(model);
 		HoaDon hoaDon = hoaDonDAO.getById(id);
@@ -111,7 +115,8 @@ public class InvoiceController {
 		LocalDate ngayLap = LocalDate.now();
 		hd.setNgayLap(ngayLap);
 		hd.setNguoiMua(khachHang);
-		hd.setTrangThai(false);
+		TrangThaiHoaDon trangThaiHoaDon = trangThaiHoaDonDAO.getById(1);
+		hd.setTrangThai(trangThaiHoaDon);
 		var hoaDon = hoaDonDAO.save(hd);
 
 		GioHang gioHang = gioHangDAO.getByNguoiSoHuu(khachHang);

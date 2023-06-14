@@ -57,24 +57,34 @@
 		<table class="table table-bordered table-default">
 			<tr>
 				<th>Mã hóa đơn</th>
+				<th>Tên khách</th>
 				<th>Email khách</th>
 				<th>Ngày lập</th>
 				<th>Ngày thanh toán</th>
+				<th>Trạng thái</th>
 				<th>Action</th>
 			</tr>
 			<tbody>
 
 				<tr th:each="item : ${hd}">
 					<td th:text="${item.id}"></td>
+					<td th:text="${item.nguoiMua.tenKhachHang}"></td>
 					<td th:text="${item.nguoiMua.email.email}"></td>
 					<td th:text="${item.ngayLap}"></td>
 					<td
 						th:text="${item.ngayThanhToan}!=null? ${item.ngayThanhToan}:'Chưa thanh toán'"></td>
-					<td><a th:unless="${item.trangThai}"
-						th:href="@{/admin/paymentConfirm?id=__${item.id}__}">Xác
-							nhận thanh toán</a>
-							
-							<span class="text-success" th:if="${item.trangThai}">Đã thanh toán</span>
+					<td th:text="${item.trangThai.tenTrangThai}"></td>
+					<td><a 
+						th:href="@{/admin/invoiceDetails?id=__${item.id}__}">Xem</a> <br>
+						<a class="text-success" th:if="${item.trangThai.id}==2"
+						th:href="@{/admin/paymentConfirm?id=__${item.id}__&trangthai=3}">Xác nhận
+							thanh toán</a>
+							<a class="text-success" th:if="${item.trangThai.id}==1"
+						th:href="@{/admin/paymentConfirm?id=__${item.id}__&trangthai=2}">Xác nhận
+							đang giao</a>
+							<br>
+							<a class="text-danger" th:if="${item.trangThai.id}==1"
+						th:href="@{/admin/paymentConfirm?id=__${item.id}__&trangthai=4}">Hủy đơn</a>
 							</td>
 
 				</tr>

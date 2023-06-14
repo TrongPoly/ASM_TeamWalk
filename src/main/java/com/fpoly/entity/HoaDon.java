@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @Table(name = "hoa_don")
 public class HoaDon {
 	@Id
-	@Column(name = "ma_hoa_don", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ma_hoa_don", nullable = false)
 	private Long id;
 
 	@Column(name = "ngay_lap")
@@ -28,8 +28,9 @@ public class HoaDon {
 	@Column(name = "ngay_thanh_toan")
 	private LocalDate ngayThanhToan;
 
-	@Column(name = "trang_thai")
-	private Boolean trangThai;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "trang_thai")
+	private TrangThaiHoaDon trangThai;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nguoi_mua")
@@ -67,11 +68,11 @@ public class HoaDon {
 		this.ngayThanhToan = ngayThanhToan;
 	}
 
-	public Boolean getTrangThai() {
+	public TrangThaiHoaDon getTrangThai() {
 		return trangThai;
 	}
 
-	public void setTrangThai(Boolean trangThai) {
+	public void setTrangThai(TrangThaiHoaDon trangThai) {
 		this.trangThai = trangThai;
 	}
 
@@ -83,7 +84,7 @@ public class HoaDon {
 		this.nguoiMua = nguoiMua;
 	}
 
-	public HoaDon(Long id, LocalDate ngayLap, String ghiChu, LocalDate ngayThanhToan, Boolean trangThai,
+	public HoaDon(Long id, LocalDate ngayLap, String ghiChu, LocalDate ngayThanhToan, TrangThaiHoaDon trangThai,
 			KhachHang nguoiMua) {
 		super();
 		this.id = id;

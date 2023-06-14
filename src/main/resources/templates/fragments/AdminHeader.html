@@ -24,15 +24,23 @@
            
 							<li class="nav-item submenu dropdown">
 								<a href="/admin/customerTabled" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Customer</a>
+								 aria-expanded="false">Khách hàng</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="/admin/customerTabled">Customer</a></li>
-									<li class="nav-item"><a class="nav-link" href="/admin/customerRanked">Customer Rank</a></li>
+									<li class="nav-item"><a class="nav-link" href="/admin/customerTabled">Khách hàng</a></li>
+									<li class="nav-item"><a class="nav-link" href="/admin/customerRanked">Hạng khách hàng</a></li>
 								</ul>
 							</li>
-                    	        <li class="nav-item"><a class="nav-link" href="/admin/product">Product</a></li>	
+							<li class="nav-item submenu dropdown">
+								<a href="/admin/customerTabled" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Thống kê</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" th:href="@{/admin/doanhThu}">Doanh thu</a></li>
+									<li class="nav-item"><a class="nav-link" href="/admin">...</a></li>
+								</ul>
+							</li>
+                    	        <li class="nav-item"><a class="nav-link" href="/admin/product">Sản phẩm</a></li>	
 
-                    	        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>	
+                    	        <li class="nav-item"><a class="nav-link" href="/logout">Đăng xuất</a></li>	
 
                            
 						</ul>

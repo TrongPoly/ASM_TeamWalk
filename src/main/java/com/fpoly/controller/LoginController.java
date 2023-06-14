@@ -149,24 +149,6 @@ public class LoginController {
 		}
 		model.addAttribute("msg", "Mã không đúng, vui lòng nhập lại");
 		model.addAttribute("sendCode", true);
-
-//		model.addAttribute("reSendCode", "Gửi lại mã");
-
-//		TaiKhoan taiKhoan = taiKhoanDAO.findById(email).get();
-//		if (taiKhoan == null) {
-//			model.addAttribute("msg", "Địa chỉ Email không đúng");
-//			return "/views/user/ForgotPassword";
-//		} else {
-//			int max = 9999;
-//			int min = 1000;
-//			int range = max - min + 1;
-//			int rand = (int) (Math.random() * range) + min;
-//			cookieImpl.add("email", email, 30);
-//			cookieImpl.add("code", String.valueOf(rand), 5);
-//			mailerServiceImp.SendCodeFogotPw(email, rand);
-//			model.addAttribute("sendCode", true);
-//			model.addAttribute("msg", "Đã gửi mã OPT đến email của bạn");
-//		}
 		return "/views/user/ForgotPassword";
 
 	}

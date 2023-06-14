@@ -18,7 +18,7 @@ public interface HoaDonChiTietDAO extends JpaRepository<HoaDonChiTiet, HoaDonChi
 	Long total(HoaDon maHD);
 
 	@Query("select new ReportDoanhThu(hdct.maSanPham.maLoai.tenLoai, sum(hdct.soLuong), sum(hdct.soLuong*hdct.donGia))"
-			+ " from HoaDonChiTiet hdct where hdct.maHoaDon.trangThai=true and Month(hdct.maHoaDon.ngayThanhToan)=?1"
+			+ " from HoaDonChiTiet hdct where hdct.maHoaDon.trangThai.id=3 and Month(hdct.maHoaDon.ngayThanhToan)=?1"
 			+ "  and Year(hdct.maHoaDon.ngayThanhToan)=?2 Group by hdct.maSanPham.maLoai.tenLoai")
 	List<ReportDoanhThu> reportDoanhThu(Integer month, Integer year);
 }
