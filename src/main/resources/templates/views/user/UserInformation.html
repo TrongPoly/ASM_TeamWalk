@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<head>
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="CodePixar">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>T electronic device</title>
+
+<!--
+		CSS
+		============================================= -->
+<link rel="stylesheet" th:href="@{/css/linearicons.css}">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
+<link rel="stylesheet" th:href="@{/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/css/nouislider.min.css}">
+<link rel="stylesheet" th:href="@{/css/ion.rangeSlider.css}" />
+<link rel="stylesheet" th:href="@{/css/ion.rangeSlider.skinFlat.css}" />
+<link rel="stylesheet" th:href="@{/css/mainForm.css}">
+</head>
+
+<body>
+
+	<!-- Start Header Area -->
+	<div th:replace="~{fragments/header :: header}"></div>
+	<!-- End Header Area -->
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div
+				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>
+						Welcome To <br> Customer management
+					</h1>
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Login Box Area =================-->
+	<div class="container">
+		<!-- Nội dung -->
+		<!-- VIEW PROFILE -->
+
+		<div th:if="${view}" class="card col-12">
+			<div class="card-header">
+				<h3>Thông tin cá nhân</h3>
+			</div>
+			<div class="card-body">
+				<form>
+					<div class="form-group">
+						<label for="fullname">Họ tên:</label>
+						<p class="form-control-static" th:text="${kh.tenKhachHang}"></p>
+					</div>
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<p class="form-control-static" th:text="${kh.email.email}"></p>
+					</div>
+					<div class="form-group">
+						<label for="phone">Số điện thoại:</label>
+						<p class="form-control-static" th:text="${kh.soDienThoai}"></p>
+					</div>
+					<div class="form-group">
+						<label for="address">Địa chỉ:</label>
+						<p class="form-control-static" th:text="${kh.diaChi}"></p>
+					</div>
+					<div class="form-group">
+						<label for="idcard">Số căn cước:</label>
+						<p class="form-control-static" th:text="${kh.soCanCuoc}"></p>
+					</div>
+					<div>
+						<a class="btn btn-info" th:href="@{/Profile/edit}">Cập nhật
+							thông tin</a>
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+		<!-- EDIT PROFILE -->
+		<div th:unless="${view}" class="row">
+		<div class="card col-6">
+			<div class="card-header">
+				<h3>Thông tin cá nhân</h3>
+			</div>
+			<div class="card-body">
+				<form>
+					<div class="form-group">
+						<label for="fullname">Họ tên:</label>
+						<p class="form-control-static" th:text="${kh1.tenKhachHang}"></p>
+					</div>
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<p class="form-control-static" th:text="${kh1.email.email}"></p>
+					</div>
+					<div class="form-group">
+						<label for="phone">Số điện thoại:</label>
+						<p class="form-control-static" th:text="${kh1.soDienThoai}"></p>
+					</div>
+					<div class="form-group">
+						<label for="address">Địa chỉ:</label>
+						<p class="form-control-static" th:text="${kh1.diaChi}"></p>
+					</div>
+					<div class="form-group">
+						<label for="idcard">Số căn cước:</label>
+						<p class="form-control-static" th:text="${kh1.soCanCuoc}"></p>
+					</div>
+					
+
+				</form>
+			</div>
+		</div>
+			<div class="card col-6">
+				<div class="card-header">
+					<h3>Cập nhật thông tin cá nhân</h3>
+				</div>
+				<div class="card-body">
+					<form th:action="@{/Profile/save?id=__${kh1.id}__}" th:object="${khachHang}"
+						method="post">
+						<div class="form-group">
+							<label for="fullname">Họ tên:</label> <input type="text"
+								class="form-control" th:field="${kh1.tenKhachHang}"
+								th:value="${kh1.tenKhachHang}">
+						</div>
+
+						<div class="form-group">
+							<label for="phone">Số điện thoại:</label> <input type="tel"
+								class="form-control" id="phone" th:field="${kh1.soDienThoai}"
+								th:value="${kh1.soDienThoai}">
+						</div>
+						<div class="form-group">
+							<label for="address">Địa chỉ:</label> <input type="text"
+								class="form-control" th:field="${kh1.diaChi}" id="address"
+								th:value="${kh1.diaChi}">
+						</div>
+						<div class="form-group">
+							<label for="idcard">Số căn cước:</label> <input type="text"
+								class="form-control" id="idcard" th:field="${kh1.soCanCuoc}"
+								th:value="${kh1.soCanCuoc}">
+						</div>
+						<button class="btn btn-info">Lưu</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+
+
+
+
+	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+		crossorigin="anonymous"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/jquery.ajaxchimp.min.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/jquery.sticky.js"></script>
+	<script src="js/nouislider.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<!--gmaps Js-->
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="js/gmaps.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+
+</html>
