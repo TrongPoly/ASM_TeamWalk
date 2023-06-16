@@ -238,7 +238,7 @@
 				<div class="price">
 					<h6 th:text="${item.donGia}"></h6>
 				</div>
-				<div th:if="${item.trangThai}" class="prd-bottom">
+				<div th:if="${item.soLuongTon}!=0" class="prd-bottom">
 
 					<a th:href="@{/sanpham/addtocart?id=__${item.id}__}" class="social-info"> <span class="ti-bag"></span>
 						<p class="hover-text">add to bag</p>
@@ -251,7 +251,7 @@
 						<p class="hover-text">view more</p>
 					</a>
 				</div>
-				<div th:unless="${item.trangThai}" > <br>
+				<div th:unless="${item.soLuongTon}!=0" > <br>
 				<h3 class="text-danger" >Hết hàng</h3>
 				</div>
 			</div>

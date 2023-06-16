@@ -60,7 +60,7 @@
 				<th>Tên khách</th>
 				<th>Email khách</th>
 				<th>Ngày lập</th>
-				<th>Ngày thanh toán</th>
+				<th>Ngày cập nhật trạng thái</th>
 				<th>Trạng thái</th>
 				<th>Action</th>
 			</tr>
@@ -83,7 +83,7 @@
 						th:href="@{/admin/paymentConfirm?id=__${item.id}__&trangthai=2}">Xác nhận
 							đang giao</a>
 							<br>
-							<a class="text-danger" th:if="${item.trangThai.id}==1"
+							<a class="text-danger" th:if="${item.trangThai.id}<3"
 						th:href="@{/admin/paymentConfirm?id=__${item.id}__&trangthai=4}">Hủy đơn</a>
 							</td>
 

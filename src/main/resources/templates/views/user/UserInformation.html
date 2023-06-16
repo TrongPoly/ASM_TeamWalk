@@ -59,8 +59,10 @@
 	<div class="container">
 		<!-- Nội dung -->
 		<!-- VIEW PROFILE -->
-
+<br>
+<h4 class="text-danger" th:text="${msgProfile}"></h4>
 		<div th:if="${view}" class="card col-12">
+			
 			<div class="card-header">
 				<h3>Thông tin cá nhân</h3>
 			</div>
@@ -97,44 +99,44 @@
 
 		<!-- EDIT PROFILE -->
 		<div th:unless="${view}" class="row">
-		<div class="card col-6">
-			<div class="card-header">
-				<h3>Thông tin cá nhân</h3>
-			</div>
-			<div class="card-body">
-				<form>
-					<div class="form-group">
-						<label for="fullname">Họ tên:</label>
-						<p class="form-control-static" th:text="${kh1.tenKhachHang}"></p>
-					</div>
-					<div class="form-group">
-						<label for="email">Email:</label>
-						<p class="form-control-static" th:text="${kh1.email.email}"></p>
-					</div>
-					<div class="form-group">
-						<label for="phone">Số điện thoại:</label>
-						<p class="form-control-static" th:text="${kh1.soDienThoai}"></p>
-					</div>
-					<div class="form-group">
-						<label for="address">Địa chỉ:</label>
-						<p class="form-control-static" th:text="${kh1.diaChi}"></p>
-					</div>
-					<div class="form-group">
-						<label for="idcard">Số căn cước:</label>
-						<p class="form-control-static" th:text="${kh1.soCanCuoc}"></p>
-					</div>
-					
+			<div class="card col-6">
+				<div class="card-header">
+					<h3>Thông tin cá nhân</h3>
+				</div>
+				<div class="card-body">
+					<form>
+						<div class="form-group">
+							<label for="fullname">Họ tên:</label>
+							<p class="form-control-static" th:text="${kh1.tenKhachHang}"></p>
+						</div>
+						<div class="form-group">
+							<label for="email">Email:</label>
+							<p class="form-control-static" th:text="${kh1.email.email}"></p>
+						</div>
+						<div class="form-group">
+							<label for="phone">Số điện thoại:</label>
+							<p class="form-control-static" th:text="${kh1.soDienThoai}"></p>
+						</div>
+						<div class="form-group">
+							<label for="address">Địa chỉ:</label>
+							<p class="form-control-static" th:text="${kh1.diaChi}"></p>
+						</div>
+						<div class="form-group">
+							<label for="idcard">Số căn cước:</label>
+							<p class="form-control-static" th:text="${kh1.soCanCuoc}"></p>
+						</div>
 
-				</form>
+
+					</form>
+				</div>
 			</div>
-		</div>
 			<div class="card col-6">
 				<div class="card-header">
 					<h3>Cập nhật thông tin cá nhân</h3>
 				</div>
 				<div class="card-body">
-					<form th:action="@{/Profile/save?id=__${kh1.id}__}" th:object="${khachHang}"
-						method="post">
+					<form th:action="@{/Profile/save?id=__${kh1.id}__}"
+						th:object="${khachHang}" method="post">
 						<div class="form-group">
 							<label for="fullname">Họ tên:</label> <input type="text"
 								class="form-control" th:field="${kh1.tenKhachHang}"
@@ -160,7 +162,7 @@
 					</form>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 	<div th:replace="~{fragments/footer :: footer}"></div>

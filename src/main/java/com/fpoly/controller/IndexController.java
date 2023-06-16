@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
 import com.fpoly.dao.HoaDonDAO;
@@ -75,11 +76,15 @@ public class IndexController {
 
 	@RequestMapping("/Profile")
 	public String viewInfor(Model model) {
+
 		userServiceImpl.checkLogged(model);
 		TaiKhoan taiKhoan = sessionService.get("user");
 		KhachHang khachHang = khachHangDAO.getByEmail(taiKhoan);
 		model.addAttribute("kh", khachHang);
 		Boolean view = true;
+		// Kiểm tra xem thuộc tính 'msgProfile' có tồn tại trong RedirectAttributes hay
+		// không
+
 		model.addAttribute("view", view);
 		return "views/user/UserInformation";
 	}

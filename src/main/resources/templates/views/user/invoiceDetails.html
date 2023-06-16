@@ -82,12 +82,12 @@
 			</tfoot>
 		</table>
 		<a class="btn text-white btn-success"
-			th:text="${trangThai}==2? 'Xác nhận đã nhận hàng và thanh toán' : '' "
+			th:text="${hoaDon.trangThai.id}==2? 'Xác nhận đã nhận hàng và thanh toán' : '' "
 			th:href="@{/requestConfirm?maHoaDon=__${hoaDon.id}__&email=__${hoaDon.nguoiMua.email.email}__}"></a>
 		<span class="text-success" th:text="${msgEmail}"></span> <a
 			class="btn text-white btn-info"
-			th:text="${trangThai}==1? 'Hủy đơn' : '' "
-			th:href="@{/huyDon?trangThai=__${trangThai}__&id=__${hoaDon.id}__}"></a>
+			th:text="${hoaDon.trangThai.id}==1? 'Hủy đơn' : '' "
+			th:href="@{/huyDon?id=__${hoaDon.id}__}"></a>
 		<span class="text-success" th:text="${msgEmail}"></span>
 		<form th:if="${ghiLyDo}" th:action="@{/doHuyDon}" class="form-group">
 			<h4 class="text-info">Lý do</h4>

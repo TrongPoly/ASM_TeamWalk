@@ -1,5 +1,7 @@
 package com.fpoly.services;
 
+import java.util.List;
+
 import org.springframework.ui.Model;
 
 import com.fpoly.entity.GioHang;
@@ -12,4 +14,5 @@ public interface CartService {
 	GioHangChiTiet update(GioHangChiTietId id, int soLuong);
 
 	Long TinhTotal(GioHang gioHang);
+
 }

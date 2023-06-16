@@ -46,20 +46,17 @@ public class InvoiceManagement {
 		HoaDon hoaDon = hoaDonDAO.getById(id);
 		TrangThaiHoaDon trangThaiHoaDon = trangThaiHoaDonDAO.getById(trangthai);
 		hoaDon.setTrangThai(trangThaiHoaDon);
-		if (trangthai == 3) {
-			LocalDate ngayThanhToan = LocalDate.now();
-			hoaDon.setNgayThanhToan(ngayThanhToan);
-		}
-
+		LocalDate ngayThanhToan = LocalDate.now();
+		hoaDon.setNgayThanhToan(ngayThanhToan);
 		hoaDonDAO.save(hoaDon);
 		return "redirect:/admin";
 	}
 
 	@RequestMapping("/huyDon")
-	public String viewHuyDon(Model model, @RequestParam("trangThai") Integer trangThai, @RequestParam("id") long id) {
+	public String viewHuyDon(Model model, @RequestParam("id") long id) {
 		model.addAttribute("ghiLyDo", true);
-		invoiceController.invoiceDetails(trangThai, id, model);
-		cookieService.add("maHoaDon", String.valueOf(id), 5);
+		invoiceController.invoiceDetails(id, model);
+		cookieService.add("maHoaDon", String.valueOf(id), 30);
 		return "views/user/invoiceDetails";
 	}
 

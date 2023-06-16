@@ -2,6 +2,7 @@ package com.fpoly.controller;
 
 import java.net.http.HttpRequest;
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import com.fpoly.entity.SanPham;
 import com.fpoly.entity.TaiKhoan;
 import com.fpoly.services.CartService;
 import com.fpoly.services.CookieImpl;
+import com.fpoly.services.SessionService;
 import com.fpoly.services.UserService;
 import com.fpoly.services.UserServiceImpl;
 
@@ -52,24 +54,33 @@ public class CartController {
 	CartService cart;
 	@Autowired
 	CartService cartService;
+	@Autowired
+	SessionService sessionService;
 
 	@RequestMapping("/viewCart")
 	public String viewCart(Model model) {
 		userServiceImpl.checkLogged(model);
-		// lấy giá trị cookie value = email đã đăng nhập
-		String email = cookieImpl.getValue("cuser");
-		// tìm tài khoản với email
-		TaiKhoan taiKhoan = taiKhoanDAO.getById(email);
+		// lấy taiKhoan đã lưu vào session
+		TaiKhoan taiKhoan = sessionService.get("user");
 		// Lấy mã khách thông qua email đăng nhập
 		KhachHang IdKhach = khachHangDAO.getByEmail(taiKhoan);
 		// Lấy đối tượng giỏ hàng theo id khách
 		GioHang gioHang = gioHangDAO.getByNguoiSoHuu(IdKhach);
 		// Lấy mã giỏ hàng từ đối tượng giỏ hàng tìm được
 		var cartSP = gioHangChiTietDAO.findByMaGioHang(gioHang);
+		for (int i = 0; i < cartSP.size(); i++) {
+			if (cartSP.get(i).getMaSanPham().getSoLuongTon() == 0) {
+				gioHangChiTietDAO.delete(cartSP.get(i));
+			} else if (cartSP.get(i).getSoLuong() > cartSP.get(i).getMaSanPham().getSoLuongTon()) {
+				cartSP.get(i).setSoLuong(cartSP.get(i).getMaSanPham().getSoLuongTon());
+				gioHangChiTietDAO.save(cartSP.get(i));
+			}
+		}
 		model.addAttribute("cartSP", cartSP);
 		// Tính total giỏ hàng
 		model.addAttribute("total", cartService.TinhTotal(gioHang));
 		return "/views/user/cart";
+
 	}
 
 	@RequestMapping("/sanpham/addtocart")
@@ -100,7 +111,6 @@ public class CartController {
 				ghct.setMaGioHang(gioHang);
 				ghct.setMaSanPham(sanPham);
 				ghct.setSoLuong(1);
-
 				gioHangChiTietDAO.save(ghct);
 			}
 			// Ngược lại thì thêm sản phẩm vào giỏ hàng hiện tại với ma người sở hữu
@@ -152,8 +162,14 @@ public class CartController {
 		GioHangChiTiet gioHangChiTiet = gioHangChiTietDAO.getByMaSanPhamAndMaGioHang(sp, gioHang);
 		// gọi cartService phương thức update số lượng trong service
 		GioHangChiTiet updatedItem = cart.update(gioHangChiTiet.getId(), soLuong);
+		if (updatedItem.getSoLuong() > sp.getSoLuongTon()) {
+			updatedItem = cart.update(gioHangChiTiet.getId(), sp.getSoLuongTon());
+		} else if (updatedItem.getSoLuong() <= 0) {
+			updatedItem = cart.update(gioHangChiTiet.getId(), 1);
+
+		}
 		gioHangChiTietDAO.save(updatedItem);
-		model.addAttribute("total", cartService.TinhTotal(gioHang));
+
 		return updatedItem;
 	}
 
