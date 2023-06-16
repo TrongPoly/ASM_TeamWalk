@@ -60,7 +60,8 @@
 						<img class="img-fluid" src="/img/login.jpg" alt="">
 						<div class="hover">
 							<h4>New Customer Rank?</h4>
-							<p>This is the page to add new Rank</p>
+							<p>This is the page to add new Rank</p><br>
+							<p>And this is the page to list customer rank</p>
 							<a class="primary-btn" href="/admin/customerRanktabled">Customer Rank Details</a>
 						</div>
 					</div>
@@ -71,32 +72,36 @@
 						<form class="row login_form" action="#" th:action="@{/admin/customerRankTabled/save}" method="post" id="contactForm" 
 						th:object="${hangkhachhang}">	
 						 <div class="col-md-12 form-group p_star">
-                                <input th:field="*{id}" type="text" class="form-control" placeholder="Mã Hạng" readonly="true">
+						 <label class="pull-left">Mã Hạng</label>
+                                <input th:field="*{id}" type="text" class="form-control" readonly="true">
                                 
                             </div>				
                             <div class="col-md-12 form-group p_star">
-                                <input th:field="*{tenHang}" type="text" class="form-control" placeholder="Tên Hạng">
+                            <label class="pull-left">Tên Hạng</label>
+                                <input th:field="*{tenHang}" type="text" class="form-control">
                                 <div class="alert alert-warning"
 									th:if="${#fields.hasErrors('tenHang')}"
 									th:errors="*{tenHang}"></div>
                             </div>
 							<div class="col-md-12 form-group p_star">
-							<input th:field="*{diemToiThieu}" type="text" class="form-control" placeholder="Điểm Tối Thiểu">
+							<label class="pull-left">Điểm Tối Thiểu</label>
+							<input th:field="*{diemToiThieu}" type="text" class="form-control" >
 							<div class="alert alert-warning"
 									th:if="${#fields.hasErrors('diemToiThieu')}"
 									th:errors="*{diemToiThieu}"></div>
 						</div>
 						
                         <div class="col-md-12 form-group p_star">
-							<input th:field="*{moTa}" type="text" class="form-control" placeholder="Mô Tả">
+                        <label class="pull-left">Mô Tả</label>
+							<input th:field="*{moTa}" type="text" class="form-control" >
 							<div class="alert alert-warning"
 									th:if="${#fields.hasErrors('moTa')}"
 									th:errors="*{moTa}"></div>
 						</div>
 					
-                           
+                           	
 							<div class="col-md-12 form-group p_star">
-								<div class="creat_account">
+								<div class="creat_account" style="display: none;">
 									<input th:filed="*{trangThai}" type="radio" id="f-option1" name="selector" value="option1" >
 									<label for="f-option1">Lựa Chọn 1</label>
                                    
