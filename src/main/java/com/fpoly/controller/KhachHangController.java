@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fpoly.dao.KhachHangDAO;
+import com.fpoly.dao.TaiKhoanDAO;
 import com.fpoly.entity.KhachHang;
+import com.fpoly.entity.TaiKhoan;
 
 import jakarta.validation.Valid;
 
@@ -28,7 +30,10 @@ public class KhachHangController {
 
 	@Autowired
 	KhachHangDAO khdao;
-
+	
+	@Autowired
+	TaiKhoanDAO tkdao;
+	
 	@RequestMapping("/admin/customerTabled")
 	public String customerTable(@ModelAttribute("khachhang") KhachHang kh, Model model,
 			@RequestParam("p") Optional<Integer> p) {
@@ -49,6 +54,20 @@ public class KhachHangController {
 		List<KhachHang> khs = khdao.findAll();
 		model.addAttribute("khs", khs);
 		return "views/Admin/customered";
+	}
+	
+	@RequestMapping("/admin/chanuser")
+	public String Block(Model model ,@RequestParam("email") String email, @RequestParam("trangThai") Boolean trangThai) {
+		// tìm tk 
+		TaiKhoan tk = tkdao.getById(email);
+		//set Trạng Thái
+		tk.setTrangThai(trangThai);
+		//luu
+		tkdao.save(tk);
+		// thông báo
+		model.addAttribute("msg", "Đã chặn người dùng thành công");
+		
+		return "forward:/admin/customerTabled";
 	}
 
 	@RequestMapping(value = "/admin/customer/save", method = RequestMethod.POST)

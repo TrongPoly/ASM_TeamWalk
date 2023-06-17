@@ -57,6 +57,7 @@
 		<div class="section_gap">
 			<div class="">
 				<table class="table col-10 offset-1">
+				<h5 th:text="${msg}"></h5>
 				<thead class="thead-white">
           <tr>
             <th scope="col">Mã Khách Hàng</th>
@@ -65,6 +66,8 @@
             <th scope="col">Email</th>
             <th scope="col">Địa Chỉ</th>
             <th scope="col">CCCD</th>
+            <th scope="col">Trạng Thái</th>
+            <th></th>
           </tr>
         </thead>
        <tbody>
@@ -75,6 +78,13 @@
             <td	th:text="${kh.email.email}"></td>
             <td	th:text="${kh.diaChi}"></td>
             <td	th:text="${kh.soCanCuoc}"></td>
+            <td th:text="${kh.email.trangThai}? 'Còn Hoạt Động' : 'Đã Chặn'"></td>
+ 			<td>
+  			 <a th:if="${kh.email.trangThai}" class="btn btn-info"
+    		    th:href="@{/admin/chanuser(email=${kh.email.email},trangThai=false)}">Chặn</a>
+  			 <a th:unless="${kh.email.trangThai}" class="btn btn-info"
+     		    th:href="@{/admin/chanuser(email=${kh.email.email},trangThai=true)}">Bỏ Chặn</a>
+			</td>
           
           </tr>
        </tbody>
