@@ -61,4 +61,16 @@ public class MailerServiceImp {
 		sender.send(message);
 	}
 
+	public void SendSuccessRegister(String email) throws Exception {
+		// Tạo message
+		MimeMessage message = sender.createMimeMessage();
+		// Sử dụng Helper để thiết lập các thông tin cần thiết cho message
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+		helper.setFrom("trongnppc02979@fpt.edu.vn");
+		helper.setTo(email);
+		helper.setSubject("(T-ELECTRONIC) ĐĂNG KÝ TÀI KHOẢN THÀNH CÔNG");
+		helper.setText("T-Electronic xin thông báo Quý khách đã đăng ký tài khoản eBank thành công ", true);
+		sender.send(message);
+	}
+
 }

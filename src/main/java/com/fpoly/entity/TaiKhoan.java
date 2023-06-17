@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,10 +17,12 @@ public class TaiKhoan {
 	@Id
 	@Size(max = 50)
 	@Column(name = "email", nullable = false, length = 50)
+	@NotBlank(message = "{Blank.Email}")
 	private String email;
 
 	@Size(max = 10)
 	@Column(name = "mat_khau", length = 10)
+	@NotBlank(message = "{Blank.Password}")
 	private String matKhau;
 
 	@Column(name = "phan_quyen")

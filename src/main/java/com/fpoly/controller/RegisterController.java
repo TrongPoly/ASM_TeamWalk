@@ -15,6 +15,7 @@ import com.fpoly.dao.KhachHangDAO;
 import com.fpoly.dao.TaiKhoanDAO;
 import com.fpoly.entity.KhachHang;
 import com.fpoly.entity.TaiKhoan;
+import com.fpoly.services.MailerServiceImp;
 
 import jakarta.validation.Valid;
 import lombok.experimental.var;
@@ -25,6 +26,8 @@ public class RegisterController {
 	TaiKhoanDAO taiKhoanDAO;
 	@Autowired
 	KhachHangDAO khachHangDAO;
+	@Autowired
+	MailerServiceImp mailerServiceImp;
 
 	@RequestMapping("/register")
 	public String register(@ModelAttribute("taikhoan") TaiKhoan taiKhoan) {
@@ -33,7 +36,7 @@ public class RegisterController {
 
 	@PostMapping("/register")
 	public String doRegister(@Valid @ModelAttribute("taikhoan") TaiKhoan taiKhoan, BindingResult result, Model model,
-			@RequestParam("comfirm") String cf) {
+			@RequestParam("comfirm") String cf) throws Exception {
 		if (result.hasErrors()) {
 			return "views/user/DangKy";
 		}
@@ -47,11 +50,14 @@ public class RegisterController {
 			return "views/user/DangKy";
 		}
 		taiKhoan.setPhanQuyen(false);
+		taiKhoan.setTrangThai(true);
 		taiKhoanDAO.save(taiKhoan);
 		KhachHang kh = new KhachHang();
 		kh.setDiemTichLuy(0);
 		kh.setEmail(taiKhoan);
 		khachHangDAO.save(kh);
-		return "redirect:/login";
+		model.addAttribute("messageRegister", "Đăng ký thành công");
+		mailerServiceImp.SendSuccessRegister(taiKhoan.getEmail());
+		return "views/user/login";
 	}
 }
