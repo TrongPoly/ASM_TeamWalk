@@ -78,8 +78,18 @@ public class SanPhamController {
 		Map<Long, String> options = optionService.getAllOptions();
 		model.addAttribute("options", options);
 
+		if (sp.getSoLuongTon() == 0) {
+			sp.setTrangThai(false); // set trạng thái là hết hàng nếu số lượng tồn = 0
+		}
+
+//
+//		    if (result.hasErrors()) {
+//		       
+//		        return "views/Admin/productadd";
+//		    }
 		// Lưu tệp vào thư mục
 		String filename = file.getOriginalFilename().toString();
+//		String path = "E:\\java5\\product\\"+ filename;
 		String path = "C:\\Users\\Admin\\eclipse-workspace\\ASM_TeamWalk\\src\\main\\resources\\static\\img\\product\\"
 				+ filename;
 		File savedFile = new File(path);

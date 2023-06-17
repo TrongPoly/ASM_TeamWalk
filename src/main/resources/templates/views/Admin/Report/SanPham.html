@@ -70,14 +70,22 @@
 					<option th:each="item : ${year}" th:value="${item}" th:text="${item}"></option>
 				</select>
 			</div>
+			<div class="form-group">
+				<label for="loai-select">Loại:</label>
+				 <select class="form-control"
+					id="loai-select" name="loai">
+					<option value="0">Không</option>
+					<option th:each="item : ${loai}" th:value="${item.id}" th:text="${item.tenLoai}"></option>
+				</select>
+			</div>
 			<button type="submit" class="btn btn-primary">Lọc</button>
 		</form>
 	<br>
 		<table class="table table-bordered table-default">
 			<tr>
-				<th>Loại hàng</th>
-				<th>Tổng số lượng bán</th>
-				<th>Tổng tiền</th>
+				<th>Tên sản phẩm</th>
+				<th>Tổng số lượng đã bán</th>
+				<th>Số lượng hiện có</th>
 			</tr>
 			<tbody>
 
