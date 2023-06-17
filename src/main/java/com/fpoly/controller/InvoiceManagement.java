@@ -60,8 +60,8 @@ public class InvoiceManagement {
 
 			for (int i = 0; i < hdct.size(); i++) {
 				SanPham sanPham = sanPhamDAO.getById(hdct.get(i).getMaSanPham().getId());
-
 				sanPham.setSoLuongTon(sanPham.getSoLuongTon() + hdct.get(i).getSoLuong());
+				sanPham.setTrangThai(true);
 				sanPhamDAO.save(sanPham);
 			}
 		}

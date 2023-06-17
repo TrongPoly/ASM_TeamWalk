@@ -41,6 +41,7 @@ import com.fpoly.services.CartService;
 import com.fpoly.services.CookieImpl;
 import com.fpoly.services.CookieService;
 import com.fpoly.services.MailerServiceImp;
+import com.fpoly.services.SessionService;
 import com.fpoly.services.UserServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -76,6 +77,8 @@ public class InvoiceController {
 	MailerServiceImp mailerServiceImp;
 	@Autowired
 	TrangThaiHoaDonDAO trangThaiHoaDonDAO;
+	@Autowired
+	SessionService sessionService;
 
 	@Autowired
 	HttpServletRequest request;
@@ -85,8 +88,8 @@ public class InvoiceController {
 		userServiceImpl.checkLogged(model);
 
 		// lấy giá trị cookie value = email đã đăng nhập
-		String email = cookieImpl.getValue("cuser");
-		TaiKhoan taiKhoan = taiKhoanDAO.getById(email);
+//		String email = cookieImpl.getValue("cuser");
+		TaiKhoan taiKhoan = sessionService.get("user");
 		// tìm khách với email
 		KhachHang khachHang = khachHangDAO.getByEmail(taiKhoan);
 
@@ -113,10 +116,9 @@ public class InvoiceController {
 	public String invoiceAdd(Model model) {
 
 		userServiceImpl.checkLogged(model);
-		// lấy giá trị cookie value = email đã đăng nhập
-		String email = cookieImpl.getValue("cuser");
-		TaiKhoan taiKhoan = taiKhoanDAO.getById(email);
-		// tìm khách với email
+
+		TaiKhoan taiKhoan = sessionService.get("user");
+
 		KhachHang khachHang = khachHangDAO.getByEmail(taiKhoan);
 		if (khachHang.getDiaChi() == null || khachHang.getTenKhachHang() == null
 				|| khachHang.getSoDienThoai() == null) {
@@ -163,6 +165,9 @@ public class InvoiceController {
 				break;
 			}
 			sanPham.setSoLuongTon(sanPham.getSoLuongTon() - hoaDonChiTiet.getSoLuong());
+			if (sanPham.getSoLuongTon() == 0) {
+				sanPham.setTrangThai(false);
+			}
 			hoaDonChiTietDAO.save(hoaDonChiTiet);
 			sanPhamDAO.save(sanPham);
 
@@ -173,6 +178,7 @@ public class InvoiceController {
 				SanPham sanPham = sanPhamDAO.getById(gioHangChiTiet.get(i).getMaSanPham().getId());
 
 				sanPham.setSoLuongTon(sanPham.getSoLuongTon() + hdct.get(i).getSoLuong());
+				sanPham.setTrangThai(true);
 				sanPhamDAO.save(sanPham);
 				hoaDonChiTietDAO.delete(hdct.get(i));
 			}
@@ -187,6 +193,7 @@ public class InvoiceController {
 		return "redirect:/invoice/view";
 	}
 
+	// Người dùng xác nhận đã nhận hàng
 	@RequestMapping("/requestConfirm")
 	public String SendEmail(@RequestParam("maHoaDon") String maHoaDon, @RequestParam("email") String email,
 			HttpServletRequest request, Model model) throws Exception {

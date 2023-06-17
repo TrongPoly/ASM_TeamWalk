@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -68,8 +69,9 @@ public class IndexController {
 	}
 
 	@RequestMapping("/admin")
-	public String Admin(Model model) {
-		var hd = hoaDonDAO.findAll();
+	public String Admin(Model model, @RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
+		Pageable pageable = PageRequest.of(pageNo, 5, Sort.by("id").descending());
+		var hd = hoaDonDAO.findAll(pageable);
 		model.addAttribute("hd", hd);
 		return "views/Admin/adminn";
 	}
@@ -113,6 +115,11 @@ public class IndexController {
 
 		return "redirect:/Profile";
 
+	}
+
+	@GetMapping("/errorPage")
+	public String errorPage() {
+		return "/views/user/ErrorPage";
 	}
 
 }

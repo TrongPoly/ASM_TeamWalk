@@ -37,7 +37,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 		if (error.length() > 0) {
 			// quay lại trang index
-			response.sendRedirect("/index");
+			response.sendRedirect("/errorPage");
 			return false;
 		}
 		// }
