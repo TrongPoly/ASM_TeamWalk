@@ -30,8 +30,8 @@
 <link rel="stylesheet" th:href="@{/css/nouislider.min.css}">
 <link rel="stylesheet" th:href="@{/css/ion.rangeSlider.css}" />
 <link rel="stylesheet" th:href="@{/css/ion.rangeSlider.skinFlat.css}" />
-<link rel="stylesheet" th:href="@{/css/mainForm.css}">
-</head>
+<link rel="stylesheet" th:href="@{/css/mainsp.css}">
+</head>	
 
 <body>
 
@@ -60,7 +60,8 @@
 						<img class="img-fluid" src="/img/login.jpg" >
 						<div class="hover">
 							<h4>New Product?</h4>
-							<p>This is the page to add new products</p>
+							<p>This is the page to add new product</p> <br>
+							<p>And this is the page to list products</p>
 							<a class="primary-btn" href="/admin/productTable">Product Details</a>
 						</div>
 					</div>
@@ -73,24 +74,26 @@
 
 							
 							<div class="col-md-12 form-group ">
-								<input th:field="*{id}" type="text" readonly="true" class="form-control" id="last" name="name"
-								 placeholder="Mã Sản Phẩm">
+							<label class="pull-left">Mã Sản Phẩm</label>
+								<input th:field="*{id}" type="text" readonly="true" class="form-control" id="last" name="name">
 								
 							</div>
 							
 							<div class="col-md-12 form-group ">
-								<input  th:field="*{tenSanPham}" type="text" class="form-control" id="last" name="name"
-								 placeholder="Tên Sản Phẩm">
+							<label class="pull-left">Tên Sản Phẩm</label>
+								<input  th:field="*{tenSanPham}" type="text" class="form-control" id="last" name="name">
 								 <div class="alert alert-warning"
 									th:if="${#fields.hasErrors('tenSanPham')}"
 									th:errors="*{tenSanPham}"></div>
 								
 							</div>
                             <div class="col-md-12 form-group">
-                                <input   type="file" class="form-control" id="file" name="file">
+                            <label class="pull-left">Ảnh Sản Phẩm</label>
+                                <input  th:value="${anhSanPham}" type="file" class="form-control" id="file" name="file">
                                
                             </div>
 							<div class="col-md-12 form-group ">
+							<label class="pull-left">Loại Sản Phẩm</label>
 							<select  class="col-md-12 form-group " th:field="*{maLoai.id}">
 											    <option th:each="option : ${options}" 
 											            th:value="${option.key}"
@@ -103,7 +106,8 @@
 							</div>
 						
 						<div class="col-md-12 form-group p_star">
-								<input th:field="*{donGia}" type="text" class="form-control" id="" name="" placeholder="Đơn Giá" >
+						<label class="pull-left">Đơn Giá</label>
+								<input th:field="*{donGia}" type="text" class="form-control" id="" name="" >
                                 <div class="alert alert-warning"
 									th:if="${#fields.hasErrors('donGia')}"
 									th:errors="*{donGia}"></div>
@@ -111,7 +115,8 @@
 						
 
 							<div class="col-md-12 form-group p_star">
-								<input th:field="*{soLuongTon}" type="text" class="form-control" id="" name="" placeholder="Số Lượng Tồn" >
+							<label class="pull-left">Số Lượng Tồn</label>
+								<input th:field="*{soLuongTon}" type="text" class="form-control" id="so_luong_ton" name=""  onchange="setTrangThai(this)" onblur="validateSoLuongTon()">
                                 <div class="alert alert-warning"
 									th:if="${#fields.hasErrors('soLuongTon')}"
 									th:errors="*{soLuongTon}"></div>
@@ -119,11 +124,11 @@
 						
                            
 							<div class="col-md-12 form-group p_star">
-								<div class="creat_account">
-									<input th:field="*{trangThai}" type="radio"  value="true" name="option1" id="option1"> còn hàng
+								<div class="creat_account"  style="display: none;">
+									<input th:field="*{trangThai}" type="radio"  value="true" name="option1" id="radio_con_hang" > còn hàng
 									<label ></label>
                                    
-                                    <input  th:field="*{trangThai}"	 type="radio"  value="false" name="option1"  id="option1"> hết hàng
+                                    <input  th:field="*{trangThai}"	 type="radio" checked="false"  value="false" name="option1"  id="radio_het_hang" > hết hàng
 									<label ></label>
 								</div>
 								 <div class="alert alert-warning"
@@ -132,7 +137,7 @@
 							</div>
 							<div class="col-md-12 form-group">
 								
-									<button type="save" value="save" class="primary-btn">Save</button>
+									<button type="save" value="save" class="primary-btn" onclick="return confirm('Bạn có chắc muốn thêm sản phẩm này?');">Save</button>
 								
 								
 							</div>
@@ -141,8 +146,25 @@
 				</div>
 			</div>
 			</div>
-		</div>
+		<!-- Add these divs for the success and error messages -->
+
 	</section>
+
+	<script>
+	function setTrangThai(input) {
+	    if (input.value == 0) {
+	        document.getElementById("radio_het_hang").checked = true;
+	        document.getElementById("radio_con_hang").disabled = true;
+	    } else {
+	        document.getElementById("radio_con_hang").checked = true;
+	        document.getElementById("radio_het_hang").disabled = true;
+	    }
+	}
+
+
+	
+	
+</script>
 			<div th:replace="~{fragments/footer :: footer}"></div>	
 	
 

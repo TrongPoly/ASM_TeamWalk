@@ -59,7 +59,7 @@ public class SanPhamController {
 		var numberOfRecords = spdao.count();
 		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
 		model.addAttribute("numberOfPages", numberOfPages);
-		Pageable sort = PageRequest.of(p.orElse(0), 5, Sort.by("maLoai").ascending());
+		Pageable sort = PageRequest.of(p.orElse(0), 5, Sort.by("id").descending());
 		model.addAttribute("currIndex", p.orElse(0));
 
 		var sps = spdao.findAll(sort);
@@ -75,12 +75,22 @@ public class SanPhamController {
 	@RequestMapping("/admin/product/save")
 	public String save(@ModelAttribute("sanpham") SanPham sp, @RequestParam("file") MultipartFile file, Model model)
 			throws IOException {
-		Map<Long, String> options = optionService.getAllOptions();
-		model.addAttribute("options", options);
 
+		
+		  if (sp.getSoLuongTon() == 0) {
+		        sp.setTrangThai(false); // set trạng thái là hết hàng nếu số lượng tồn = 0
+		    }
+		    
+//
+//		    if (result.hasErrors()) {
+//		       
+//		        return "views/Admin/productadd";
+//		    }
+ Map<Long, String> options = optionService.getAllOptions();
+		        model.addAttribute("options", options);
 		// Lưu tệp vào thư mục
 		String filename = file.getOriginalFilename().toString();
-		String path = "C:\\Users\\Admin\\eclipse-workspace\\ASM_TeamWalk\\src\\main\\resources\\static\\img\\product\\"
+		String path = "E:\\java5\\product\\"
 				+ filename;
 		File savedFile = new File(path);
 		file.transferTo(savedFile);
@@ -126,7 +136,7 @@ public class SanPhamController {
 		var numberOfRecords = spdao.count();
 		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
 		model.addAttribute("numberOfPages", numberOfPages);
-		Pageable sort = PageRequest.of(pageNo, 5, Sort.by("maLoai").ascending());
+		Pageable sort = PageRequest.of(pageNo, 5, Sort.by("id").descending());
 		model.addAttribute("currIndex", pageNo);
 
 		var sps = spdao.findByTenSanPham("%" + name.orElse("") + "%", sort);
