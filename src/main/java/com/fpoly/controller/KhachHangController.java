@@ -22,6 +22,7 @@ import com.fpoly.dao.KhachHangDAO;
 import com.fpoly.dao.TaiKhoanDAO;
 import com.fpoly.entity.KhachHang;
 import com.fpoly.entity.TaiKhoan;
+import com.fpoly.services.SessionService;
 
 import jakarta.validation.Valid;
 
@@ -30,13 +31,15 @@ public class KhachHangController {
 
 	@Autowired
 	KhachHangDAO khdao;
-	
+
 	@Autowired
 	TaiKhoanDAO tkdao;
-	
+
+	@Autowired
+	SessionService sessionService;
+
 	@RequestMapping("/admin/customerTabled")
-	public String customerTable(Model model,
-			@RequestParam("p") Optional<Integer> p) {
+	public String customerTable(Model model, @RequestParam("p") Optional<Integer> p) {
 		var numberOfRecords = khdao.count();
 		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
 		model.addAttribute("numberOfPages", numberOfPages);
@@ -55,21 +58,20 @@ public class KhachHangController {
 		model.addAttribute("khs", khs);
 		return "views/Admin/customered";
 	}
-	
+
 	@RequestMapping("/admin/chanuser")
-	public String Block(Model model ,@RequestParam("email") String email, @RequestParam("trangThai") Boolean trangThai) {
-		// tìm tk 
-		TaiKhoan tk = tkdao.getById(email);
-		//set Trạng Thái
-		tk.setTrangThai(trangThai);
-		
-	
-		
-		//luu
-		tkdao.save(tk);
-		// thông báo
-		model.addAttribute("msg", "Đã chặn người dùng thành công");
-		
+	public String blockUser(Model model, @RequestParam("email") String email,
+			@RequestParam("trangThai") Boolean trangThai) {
+		TaiKhoan currentUser = sessionService.get("user");
+		 if (currentUser != null && currentUser.getEmail().equals(email)) {
+			model.addAttribute("error", "Bạn không thể chặn chính mình.");
+		} else {
+			// Tiến hành chặn người dùng khác
+			TaiKhoan tk = tkdao.getById(email);
+			tk.setTrangThai(trangThai);
+			tkdao.save(tk);
+			model.addAttribute("msg", "Đã chặn người dùng thành công.");
+		}
 		return "forward:/admin/customerTabled";
 	}
 
@@ -111,7 +113,7 @@ public class KhachHangController {
 		khdao.deleteById(id);
 		return "redirect:/customerTabled";
 	}
-	
+
 	@RequestMapping("/admin/customer/search")
 	public String searchName(Model model, @RequestParam("name") Optional<String> name,
 			@RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
@@ -133,8 +135,6 @@ public class KhachHangController {
 
 		var khs = khdao.findByTenKhachHang("%" + name.orElse("") + "%", sort);
 		model.addAttribute("khs", khs);
-		
-		
 
 		return "views/Admin/customerTabled";
 	}

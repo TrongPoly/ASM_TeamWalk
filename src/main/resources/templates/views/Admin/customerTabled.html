@@ -85,10 +85,10 @@
             <td	th:text="${kh.email.email}"></td>
             <td	th:text="${kh.diaChi}"></td>
             <td	th:text="${kh.soCanCuoc}"></td>
-            <td th:text="${kh.email.trangThai}? 'Còn Hoạt Động' : 'Đã Chặn'"></td>
+            <td th:text="${kh.email.trangThai}? 'Còn Hoạt Động' : 'Đã Chặn'">
  			<td>
   			 <a th:if="${kh.email.trangThai}" class="btn btn-info"
-    		    th:href="@{/admin/chanuser(email=${kh.email.email},trangThai=false)}">Chặn</a>
+    		    th:href="@{/admin/chanuser(email=${kh.email.email},trangThai=false)}">Chặn</a> 
   			 <a th:unless="${kh.email.trangThai}" class="btn btn-info"
      		    th:href="@{/admin/chanuser(email=${kh.email.email},trangThai=true)}">Bỏ Chặn</a>
 			</td>
