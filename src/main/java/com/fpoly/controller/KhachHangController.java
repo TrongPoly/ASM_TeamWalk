@@ -35,12 +35,12 @@ public class KhachHangController {
 	TaiKhoanDAO tkdao;
 	
 	@RequestMapping("/admin/customerTabled")
-	public String customerTable(@ModelAttribute("khachhang") KhachHang kh, Model model,
+	public String customerTable(Model model,
 			@RequestParam("p") Optional<Integer> p) {
 		var numberOfRecords = khdao.count();
 		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
 		model.addAttribute("numberOfPages", numberOfPages);
-		Pageable sort = PageRequest.of(p.orElse(0), 5, Sort.by("hangKhachHang").ascending());
+		Pageable sort = PageRequest.of(p.orElse(0), 5, Sort.by("id").ascending());
 		model.addAttribute("currIndex", p.orElse(0));
 		var khs = khdao.findAll(sort);
 		model.addAttribute("khs", khs);// buộc lên bảng
@@ -62,6 +62,9 @@ public class KhachHangController {
 		TaiKhoan tk = tkdao.getById(email);
 		//set Trạng Thái
 		tk.setTrangThai(trangThai);
+		
+	
+		
 		//luu
 		tkdao.save(tk);
 		// thông báo
@@ -94,7 +97,7 @@ public class KhachHangController {
 	@GetMapping("/admin/customer/page")
 	public String paginate(@ModelAttribute("khachhang") KhachHang kh, Model model,
 			@RequestParam("p") Optional<Integer> p) {
-		return this.customerTable(kh, model, p);
+		return this.customerTable(model, p);
 	}
 
 	@RequestMapping("/admin/customer/update")
@@ -108,4 +111,32 @@ public class KhachHangController {
 		khdao.deleteById(id);
 		return "redirect:/customerTabled";
 	}
+	
+	@RequestMapping("/admin/customer/search")
+	public String searchName(Model model, @RequestParam("name") Optional<String> name,
+			@RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
+
+//		Pageable pageable = PageRequest.of(pageNo, 4);
+//		
+//		int totalPages = pageable.getPageSize();
+//		
+//		
+//		
+//		model.addAttribute("totalPages", totalPages);
+//		
+//		model.addAttribute("currenIdenx", pageNo);
+		var numberOfRecords = khdao.count();
+		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
+		model.addAttribute("numberOfPages", numberOfPages);
+		Pageable sort = PageRequest.of(pageNo, 5, Sort.by("id").ascending());
+		model.addAttribute("currIndex", pageNo);
+
+		var khs = khdao.findByTenKhachHang("%" + name.orElse("") + "%", sort);
+		model.addAttribute("khs", khs);
+		
+		
+
+		return "views/Admin/customerTabled";
+	}
+
 }

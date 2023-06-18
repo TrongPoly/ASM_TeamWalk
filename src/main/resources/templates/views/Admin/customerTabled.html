@@ -53,13 +53,20 @@
 	
 
 	<!--================Form Box Area =================-->
-	
-		<div class="section_gap">
+	<form action="#" th:action="@{/admin/customer/search}" class=" col-6 offset-1 order-rable d-flex">
+					<input th:name="name"	type="text" class="form-control" id="search_input" placeholder="Tên Khách Hàng">
+					<button type="submit" class="btn btn-success offset-1" >tìm</button>
+					
+				</form>
+		<section class="section_gap">
+			<div class="search_input" ></div>
 			<div class="">
 				<table class="table col-10 offset-1">
-				<h5 th:text="${msg}"></h5>
+				 
+				
 				<thead class="thead-white">
           <tr>
+         
             <th scope="col">Mã Khách Hàng</th>
             <th scope="col">Họ Và Tên</th>
             <th scope="col">Số Điện Thoại</th>
@@ -90,7 +97,9 @@
        </tbody>
 				</table>
 			</div>
-		</div>
+		</section>
+		
+		
 		
 	 <nav aria-label="Page navigation example">
       <ul class="pagination">

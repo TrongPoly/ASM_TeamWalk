@@ -33,12 +33,10 @@ public class SanPham implements Serializable{
 
 	@Size(max = 50)
 	@Column(name = "anh_san_pham", length = 50)
-	@NotNull(message = "{Null.anhSanPham}")
 	private String anhSanPham;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ma_loai")
-	@NotNull(message = "{Null.maLoai}")
 	private LoaiSanPham maLoai;
 
 	@Column(name = "don_gia")
@@ -50,7 +48,6 @@ public class SanPham implements Serializable{
 	private Integer soLuongTon;
 
 	@Column(name = "trang_thai")
-	@NotNull(message = "{Null.trangThai}")
 	private Boolean trangThai;
 
 	public Long getId() {
