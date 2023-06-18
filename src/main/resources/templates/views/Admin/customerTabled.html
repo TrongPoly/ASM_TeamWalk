@@ -3,22 +3,23 @@
 <head>
 <meta charset="utf-8">
 <head>
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Favicon-->
-	<link rel="shortcut icon" href="img/fav.png">
-	<!-- Author Meta -->
-	<meta name="author" content="CodePixar">
-	<!-- Meta Description -->
-	<meta name="description" content="">
-	<!-- Meta Keyword -->
-	<meta name="keywords" content="">
-	<!-- meta character set -->
-	<meta charset="UTF-8">
-	<!-- Site Title -->
-	<title> T electronic device</title>
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="CodePixar">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>T electronic device</title>
 
-	<!--
+<!--
 		CSS
 		============================================= -->
 <link rel="stylesheet" th:href="@{/css/linearicons.css}">
@@ -35,77 +36,91 @@
 
 <body>
 
-		<!-- Start Header Area -->
+	<!-- Start Header Area -->
 	<div th:replace="~{fragments/AdminHeader :: header}"></div>
 
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
-			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div
+				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
 					<h1>Welcome To Page Customer Table</h1>
-				
+
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- End Banner Area -->
-	
+
 
 	<!--================Form Box Area =================-->
-	
-		<div class="section_gap">
-			<div class="">
-				<table class="table col-10 offset-1">
+
+	<div class="section_gap">
+		<div class="">
+
+			<table class="table col-10 offset-1">
 				<thead class="thead-white">
-          <tr>
-            <th scope="col">Mã Khách Hàng</th>
-            <th scope="col">Họ Và Tên</th>
-            <th scope="col">Số Điện Thoại</th>
-            <th scope="col">Email</th>
-            <th scope="col">Địa Chỉ</th>
-            <th scope="col">CCCD</th>
-          </tr>
-        </thead>
-       <tbody>
-        <tr th:each="kh : ${khs} " >
-            <td th:text="${kh.id}"></td>
-            <td	th:text="${kh.tenKhachHang}"></td>
-           	<td	th:text="${kh.soDienThoai}"></td>
-            <td	th:text="${kh.email.email}"></td>
-            <td	th:text="${kh.diaChi}"></td>
-            <td	th:text="${kh.soCanCuoc}"></td>
-          
-          </tr>
-       </tbody>
-				</table>
-			</div>
+					<tr>
+						<th scope="col">Mã Khách Hàng</th>
+						<th scope="col">Họ Và Tên</th>
+						<th scope="col">Số Điện Thoại</th>
+						<th scope="col">Email</th>
+						<th scope="col">Địa Chỉ</th>
+						<th scope="col">CCCD</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="kh : ${khs} ">
+						<td th:text="${kh.id}"></td>
+						<td th:text="${kh.tenKhachHang}"></td>
+						<td th:text="${kh.soDienThoai}"></td>
+						<td th:text="${kh.email.email}"></td>
+						<td th:text="${kh.diaChi}"></td>
+						<td th:text="${kh.soCanCuoc}"></td>
+						<td th:text="${kh.email.trangThai}? 'Còn hoạt động' : 'Đã chặn' "></td>
+						<td><a th:if="${kh.email.trangThai}" class="btn btn-info"
+							th:href="@{/**?email=__${kh.email.email}__&trangThai=0}">Chặn</a> 
+							
+							<a
+							th:unless="${kh.email.trangThai}" class="btn btn-info"
+							th:href="@{/**?email=__${kh.email.email}__&trangThai=1}">Bỏ Chặn</a></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		
-	 <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" th:href="@{/admin/customer/page?p=__${currIndex-1}__}" href="#">Previous</a></li>
-        <tr th:each="i: ${#numbers.sequence(0, numberOfPages - 1)}">
-          <li class="page-item"><a th:style="${'background-color:' + (i==currIndex?'lightgrey':'white')}" 
-          th:href="@{/admin/customer/page?p=__${i}__}" class="page-link" href="#" th:text="${i+1}"></a></li>
-        </tr>
-        <li class="page-item"><a class="page-link" th:href="@{/admin/customer/page?p=__${currIndex+1}__}" href="#">Next</a></li>
-      </ul>
-    </nav>
-	
-	
-	
+	</div>
+
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<li class="page-item"><a class="page-link"
+				th:href="@{/admin/customer/page?p=__${currIndex-1}__}" href="#">Previous</a></li>
+			<tr th:each="i: ${#numbers.sequence(0, numberOfPages - 1)}">
+				<li class="page-item"><a
+					th:style="${'background-color:' + (i==currIndex?'lightgrey':'white')}"
+					th:href="@{/admin/customer/page?p=__${i}__}" class="page-link"
+					href="#" th:text="${i+1}"></a></li>
+			</tr>
+			<li class="page-item"><a class="page-link"
+				th:href="@{/admin/customer/page?p=__${currIndex+1}__}" href="#">Next</a></li>
+		</ul>
+	</nav>
+
+
+
 	<!--================End Login Box Area =================-->
 
 
-    
 
-			<div th:replace="~{fragments/footer :: footer}"></div>	
+
+	<div th:replace="~{fragments/footer :: footer}"></div>
 
 
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-	 crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+		crossorigin="anonymous"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/jquery.ajaxchimp.min.js"></script>
 	<script src="js/jquery.nice-select.min.js"></script>
@@ -114,7 +129,8 @@
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<!--gmaps Js-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="js/gmaps.min.js"></script>
 	<script src="js/main.js"></script>
 </body>

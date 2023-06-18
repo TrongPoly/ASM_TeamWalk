@@ -27,20 +27,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 		String uri = request.getRequestURI();
 		// lấy thông tin về user từ session.
 		TaiKhoan user = sessionService.get("user");
-		String error = "";
 
-		if (user == null) {
-			error = "Please login!";
-		} else if (!user.getPhanQuyen() && uri.startsWith("/admin")) {
-			error = "Access denied!";
-		}
-
-		if (error.length() > 0) {
-			// quay lại trang index
+		if (user == null || !user.getPhanQuyen() && uri.startsWith("/admin")) {
 			response.sendRedirect("/errorPage");
 			return false;
 		}
-		// }
 
 		return true;
 	}

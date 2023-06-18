@@ -53,9 +53,10 @@
 	</section>
 
 	<div class="col-md-10 offset-1">
-		<h2 class="text-success">Doanh thu</h2>
-		<form class="col-4" action="#"
-			th:action="@{/admin/resetDoanhThu}">
+		<h2 class="text-success">Sản Phẩm</h2>
+		<form class="row" action="#"
+			th:action="@{/admin/resetSanPham}">
+			<div class="col-4" >
 			<div class="form-group">
 				<label for="month-select">Tháng:</label> <select
 					class="form-control" id="month-select" name="month">
@@ -70,6 +71,8 @@
 					<option th:each="item : ${year}" th:value="${item}" th:text="${item}"></option>
 				</select>
 			</div>
+			</div>
+			<div class="col-4">
 			<div class="form-group">
 				<label for="loai-select">Loại:</label>
 				 <select class="form-control"
@@ -78,9 +81,12 @@
 					<option th:each="item : ${loai}" th:value="${item.id}" th:text="${item.tenLoai}"></option>
 				</select>
 			</div>
+			<br>
 			<button type="submit" class="btn btn-primary">Lọc</button>
+			</div>
 		</form>
 	<br>
+		<h5 class="text-success" th:text="${msg}"></h5>
 		<table class="table table-bordered table-default">
 			<tr>
 				<th>Tên sản phẩm</th>
@@ -90,18 +96,12 @@
 			<tbody>
 
 				<tr th:each="item : ${rp}">
-					<td th:text="${item.tenLoaiHang}"></td>
+					<td th:text="${item.tenSP}"></td>
 					<td th:text="${item.soLuong}"></td>
-					<td th:text="${item.tongTien.setScale(0)}"></td>
+					<td th:text="${item.soLuongTon}"></td>
 				</tr>
 			</tbody>
-			<tfoot>
-			<tr >
-			<td ></td>
-			<td ></td>
-			<td th:text="${total}"></td>
-			</tr>
-			</tfoot>
+			
 		</table>
 		
 	</div>

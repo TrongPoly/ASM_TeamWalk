@@ -113,15 +113,15 @@ public class InvoiceController {
 
 	@Transactional
 	@RequestMapping("/invoice/add")
-	public String invoiceAdd(Model model) {
+	public String invoiceAdd(Model model) throws Exception {
 
 		userServiceImpl.checkLogged(model);
 
 		TaiKhoan taiKhoan = sessionService.get("user");
 
 		KhachHang khachHang = khachHangDAO.getByEmail(taiKhoan);
-		if (khachHang.getDiaChi() == null || khachHang.getTenKhachHang() == null
-				|| khachHang.getSoDienThoai() == null) {
+		if (khachHang.getDiaChi().isBlank() || khachHang.getTenKhachHang().isBlank()
+				|| khachHang.getSoDienThoai().isBlank()) {
 
 			model.addAttribute("msgProfile", "*Vui lòng thêm thông tin cá nhân trước khi đặt hàng");
 			model.addAttribute("kh", khachHang);
@@ -186,10 +186,11 @@ public class InvoiceController {
 			hoaDonDAO.delete(hd);
 			model.addAttribute("messageSLSP", "*Một số sản phẩm có thể không còn đủ số lượng");
 			model.addAttribute("messageSLSP1", "Chúng tôi đã đặt lại số lượng tối đa cho bạn");
-			// Chuyển hướng trang đến URL hiện tại để giữ nguyên các tham số
+
 			return "forward:/viewCart";
 		}
 		gioHangChiTietDAO.deleteAllByMaGioHang(gioHang);
+		mailerServiceImp.datHang(khachHang.getTenKhachHang(), hoaDon.getId());
 		return "redirect:/invoice/view";
 	}
 

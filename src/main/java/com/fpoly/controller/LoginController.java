@@ -125,7 +125,8 @@ public class LoginController {
 			int rand = (int) (Math.random() * range) + min;
 			cookieImpl.add("email", email, 30);
 			cookieImpl.add("code", String.valueOf(rand), 5);
-			mailerServiceImp.SendCodeFogotPw(email, rand);
+//			mailerServiceImp.SendCodeFogotPw(email, rand);
+			System.out.println(rand);
 			model.addAttribute("sendCode", true);
 			model.addAttribute("msg", "Đã gửi mã OPT đến email của bạn");
 		}
@@ -166,8 +167,8 @@ public class LoginController {
 			tk.setMatKhau(mk);
 			taiKhoanDAO.save(tk);
 			model.addAttribute("success", true);
-			model.addAttribute("message", "Mật khẩu đã được thay đổi");
-			return "/views/user/CreateNewPw";
+			model.addAttribute("msg", "Mật khẩu đã được thay đổi");
+			return "forward:/login";
 		}
 		model.addAttribute("err", "Xác nhận mật khẩu không đúng");
 		return "/views/user/CreateNewPw";

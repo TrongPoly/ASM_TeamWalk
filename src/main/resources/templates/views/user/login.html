@@ -104,7 +104,8 @@
 								<br>
 								<h5 class="text-success" th:text="${messageRegister}"></h5>
 								<div>
-									<h5 class="text-danger" th:text="${msg}"></h5>
+									<h5 th:if="${success}" class="text-success" th:text="${msg}"></h5>
+									<h5 th:unless="${success}" class="text-danger" th:text="${msg}"></h5>
 								</div>
 								<a th:href="@{/forgotPassword}">Forgot Password?</a>
 							</div>
