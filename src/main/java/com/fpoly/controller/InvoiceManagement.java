@@ -55,6 +55,7 @@ public class InvoiceManagement {
 		LocalDate ngayThanhToan = LocalDate.now();
 		hoaDon.setNgayThanhToan(ngayThanhToan);
 		hoaDonDAO.save(hoaDon);
+
 		if (trangthai == 4) {
 			var hdct = hoaDonChiTietDAO.findByMaHoaDon(hoaDon);
 

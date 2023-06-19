@@ -27,11 +27,23 @@ public class MailerServiceImp {
 		// Sử dụng Helper để thiết lập các thông tin cần thiết cho message
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
 		helper.setFrom("trongnppc02979@fpt.edu.vn");
-		helper.setTo("trongnguyen32293@gmail.com");
+		helper.setTo("trongnppc02979@gmail.com");
 		helper.setSubject("XÁC NHẬN ĐÃ NHẬN HÀNG VÀ THANH TOÁN");
 		helper.setText(
 				"Bạn có yêu cầu xác nhận trạng thái đã thanh toán đơn cho " + KhachHang + " với mã đơn hàng " + maDon,
 				true);
+		sender.send(message);
+	}
+
+	public void datHang(String KhachHang, Long hoaDon) throws Exception {
+		// Tạo message
+		MimeMessage message = sender.createMimeMessage();
+		// Sử dụng Helper để thiết lập các thông tin cần thiết cho message
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+		helper.setFrom("trongnppc02979@fpt.edu.vn");
+		helper.setTo("trongnppc02979@gmail.com");
+		helper.setSubject("CÓ ĐƠN ĐẶT HÀNG MỚI");
+		helper.setText("Bạn có đơn hàng mới cần xử lý cho " + KhachHang + " với mã đơn hàng " + hoaDon, true);
 		sender.send(message);
 	}
 
@@ -41,10 +53,11 @@ public class MailerServiceImp {
 		// Sử dụng Helper để thiết lập các thông tin cần thiết cho message
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
 		helper.setFrom("trongnppc02979@fpt.edu.vn");
-		helper.setTo("trongnguyen32293@gmail.com");
+		helper.setTo("trongnppc02979@gmail.com");
 		helper.setSubject("YÊU CẦU HỦY ĐƠN");
-		helper.setText("Bạn có yêu cầu xác nhận trạng thái đã thanh toán đơn cho " + KhachHang + " với mã đơn hàng "
-				+ maDon + ". Lý do: " + body, true);
+		helper.setText(
+				"Bạn có yêu cầu xác nhận hủy đơn cho " + KhachHang + " với mã đơn hàng " + maDon + ". Lý do: " + body,
+				true);
 		sender.send(message);
 	}
 
@@ -69,7 +82,7 @@ public class MailerServiceImp {
 		helper.setFrom("trongnppc02979@fpt.edu.vn");
 		helper.setTo(email);
 		helper.setSubject("(T-ELECTRONIC) ĐĂNG KÝ TÀI KHOẢN THÀNH CÔNG");
-		helper.setText("T-Electronic xin thông báo Quý khách đã đăng ký tài khoản eBank thành công ", true);
+		helper.setText("T-Electronic xin thông báo Quý khách đã đăng ký tài khoản thành công ", true);
 		sender.send(message);
 	}
 

@@ -147,10 +147,7 @@ public class CartController {
 	@PostMapping("/cart/item/update")
 	public GioHangChiTiet updateSLCardItem(@RequestParam("tenSanPham") String tenSP,
 			@RequestParam("soLuong") Integer soLuong, Model model) {
-		// lấy giá trị cookie value = email đã đăng nhập
-		String email = cookieImpl.getValue("cuser");
-		// tìm tài khoản với email
-		TaiKhoan taiKhoan = taiKhoanDAO.getById(email);
+		TaiKhoan taiKhoan = sessionService.get("user");
 		// Lấy mã khách thông qua email đăng nhập
 		KhachHang IdKhach = khachHangDAO.getByEmail(taiKhoan);
 		// Lấy đối tượng giỏ hàng theo id khách

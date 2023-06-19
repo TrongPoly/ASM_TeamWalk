@@ -53,8 +53,10 @@
 	</section>
 
 	<div class="col-md-10 offset-1">
-		<h2 class="text-success">Doanh thu</h2>
-		<form class="col-4" action="#" th:action="@{/admin/resetDoanhThu}">
+		<h2 class="text-success">Sản Phẩm</h2>
+		<form class="row" action="#"
+			th:action="@{/admin/resetSanPham}">
+			<div class="col-4" >
 			<div class="form-group">
 				<label for="month-select">Tháng:</label> <select
 					class="form-control" id="month-select" name="month">
@@ -63,40 +65,45 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="year-select">Năm:</label> <select class="form-control"
+				<label for="year-select">Năm:</label>
+				 <select class="form-control"
 					id="year-select" name="year">
-					<option th:each="item : ${year}" th:value="${item}"
-						th:text="${item}"></option>
+					<option th:each="item : ${year}" th:value="${item}" th:text="${item}"></option>
 				</select>
 			</div>
+			</div>
+			<div class="col-4">
+			<div class="form-group">
+				<label for="loai-select">Loại:</label>
+				 <select class="form-control"
+					id="loai-select" name="loai">
+					<option value="0">Không</option>
+					<option th:each="item : ${loai}" th:value="${item.id}" th:text="${item.tenLoai}"></option>
+				</select>
+			</div>
+			<br>
 			<button type="submit" class="btn btn-primary">Lọc</button>
+			</div>
 		</form>
-		<br>
+	<br>
 		<h5 class="text-success" th:text="${msg}"></h5>
-
 		<table class="table table-bordered table-default">
 			<tr>
-				<th>Loại hàng</th>
-				<th>Tổng số lượng bán</th>
-				<th>Tổng tiền</th>
+				<th>Tên sản phẩm</th>
+				<th>Tổng số lượng đã bán</th>
+				<th>Số lượng hiện có</th>
 			</tr>
 			<tbody>
 
 				<tr th:each="item : ${rp}">
-					<td th:text="${item.tenLoaiHang}"></td>
+					<td th:text="${item.tenSP}"></td>
 					<td th:text="${item.soLuong}"></td>
-					<td th:text="${item.tongTien.setScale(0)}"></td>
+					<td th:text="${item.soLuongTon}"></td>
 				</tr>
 			</tbody>
-			<tfoot>
-				<tr>
-					<td></td>
-					<td></td>
-					<td th:text="${total}"></td>
-				</tr>
-			</tfoot>
+			
 		</table>
-
+		
 	</div>
 	<!-- End Banner Area -->
 

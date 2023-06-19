@@ -89,7 +89,7 @@ public class SanPhamController {
 		}
 		// Lưu tệp vào thư mục
 			String filename = file.getOriginalFilename().toString();
-			String path = "E:\\java5\\product\\" + filename;
+			String path = "C:\\Users\\Admin\\eclipse-workspace\\ASM_TeamWalk\\src\\main\\resources\\static\\img\\product\\" + filename;
 			File savedFile = new File(path);
 			try {
 				file.transferTo(savedFile);

@@ -72,7 +72,7 @@
 					<td th:text="${item.nguoiMua.email.email}"></td>
 					<td th:text="${item.ngayLap}"></td>
 					<td
-						th:text="${item.ngayThanhToan}!=null? ${item.ngayThanhToan}:'Chưa thanh toán'"></td>
+						th:text="${item.ngayThanhToan}"></td>
 					<td th:text="${item.trangThai.tenTrangThai}"></td>
 					<td><a 
 						th:href="@{/admin/invoiceDetails?id=__${item.id}__}">Xem</a> <br>

@@ -10,4 +10,6 @@ import com.fpoly.entity.KhachHang;
 public interface HoaDonDAO extends JpaRepository<HoaDon, Long> {
 	List<HoaDon> findByNguoiMua(KhachHang nguoiMua);
 
+	@Query("select distinct YEAR(hd.ngayThanhToan) from HoaDon hd where hd.ngayThanhToan is not null")
+	List<String> getYearHoaDon();
 }
