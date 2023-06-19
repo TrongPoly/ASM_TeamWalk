@@ -48,6 +48,10 @@ public class LoginController {
 		}
 		if (userService.checkLogin(taiKhoan.getEmail(), taiKhoan.getMatKhau())) {
 			TaiKhoan tk = taiKhoanDAO.getById(taiKhoan.getEmail());
+			if (tk.getTrangThai() == false) {
+				model.addAttribute("msg", "Tài khoản đã bị chặn");
+				return "views/user/login";
+			}
 			sessionService.set("user", tk);
 			cookieImpl.add("cuser", taiKhoan.getEmail(), 10);
 			if (tk.getPhanQuyen()) {

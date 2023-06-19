@@ -28,7 +28,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 		// lấy thông tin về user từ session.
 		TaiKhoan user = sessionService.get("user");
 
-		if (user == null || !user.getPhanQuyen() && uri.startsWith("/admin")) {
+		if (user == null) {
+			response.sendRedirect("/errorPage");
+			return false;
+		} else if (user.getPhanQuyen() == false || !user.getPhanQuyen() && uri.startsWith("/admin")) {
 			response.sendRedirect("/errorPage");
 			return false;
 		}
