@@ -84,10 +84,15 @@ public class InvoiceManagement {
 		TaiKhoan tKhoan = sessionService.get("user");
 		KhachHang khachHang = khachHangDAO.getByEmail(tKhoan);
 		String maHoaDon = cookieService.getValue("maHoaDon");
+		if (body.isBlank()) {
+			model.addAttribute("msg", "Vui lòng ghi lý do");
+			return "forward:/invoice/details?id=" + maHoaDon;
+		}
+
 		mailerServiceImp.huyDon(body, khachHang.getTenKhachHang(), maHoaDon);
-		String referer = request.getHeader("referer");
-		// Chuyển hướng trang đến URL hiện tại để giữ nguyên các tham số
-		return "redirect:" + referer;
+		model.addAttribute("msg", "Yêu cầu hủy đơn thành công");
+
+		return "forward:/invoice/details?id=" + maHoaDon;
 	}
 
 	@RequestMapping("/admin/invoiceDetails")

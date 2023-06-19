@@ -52,24 +52,24 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</section>
 	<!-- End Banner Area -->
 
 	<!--================Form Box Area =================-->
-	<form action="#" th:action="@{/admin/product/search}" class=" col-6 offset-1 order-rable d-flex">
-					<input th:name="name"	type="text" class="form-control" id="search_input" placeholder="Tên Sản Phẩm">
-					<button type="submit" class="btn btn-success offset-1" >tìm</button>
-					
-				</form>
+	<form action="#" th:action="@{/admin/product/search}"
+		class=" col-6 offset-1 order-rable d-flex">
+		<input th:name="name" type="text" class="form-control"
+			id="search_input" placeholder="Tên Sản Phẩm">
+		<button type="submit" class="btn btn-success offset-1">tìm</button>
+
+	</form>
 	<section class=" section_gap">
 		<div class="">
 			<div class="">
-			<div class="search_input" >
-			<div class="container">
-				
-			</div>
-		</div>
+				<div class="search_input">
+					<div class="container"></div>
+				</div>
 				<table class="table col-10 offset-1">
 					<thead class="thead-white">
 						<tr>
@@ -87,9 +87,8 @@
 					<tr th:each="sp : ${sps}">
 						<td th:text="${sp.id}"></td>
 						<td th:text="${sp.tenSanPham}"></td>
-						<td><img alt=""
-							th:src="@{/img/product/__${sp.anhSanPham}__}" width="100px"
-							height="100px" /></td>
+						<td><img alt="" th:src="@{/img/product/__${sp.anhSanPham}__}"
+							width="100px" height="100px" /></td>
 						<td th:text="${sp.maLoai.tenLoai}"></td>
 						<td th:text="${sp.donGia}"></td>
 						<td th:text="${sp.soLuongTon}"></td>
@@ -97,7 +96,8 @@
 						<td><a th:href="@{/admin/product/edit/__${sp.id}__}"
 							class="btn btn-warning">Sửa</a> <a
 							th:href="@{/admin/product/delete/__${sp.id}__}"><span
-								class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">Xoá</span></a></td>
+								class="btn btn-danger"
+								onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">Xoá</span></a></td>
 					</tr>
 				</table>
 
@@ -122,7 +122,7 @@
 
 
 
-			<div th:replace="~{fragments/footer :: footer}"></div>	
+	<div th:replace="~{fragments/footer :: footer}"></div>
 
 
 

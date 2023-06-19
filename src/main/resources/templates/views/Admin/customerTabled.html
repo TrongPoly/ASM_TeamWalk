@@ -55,67 +55,74 @@
 
 
 	<!--================Form Box Area =================-->
-	<form action="#" th:action="@{/admin/customer/search}" class=" col-6 offset-1 order-rable d-flex">
-					<input th:name="name"	type="text" class="form-control" id="search_input" placeholder="Tên Khách Hàng">
-					<button type="submit" class="btn btn-success offset-1" >tìm</button>
-					
-				</form>
+	<form action="#" th:action="@{/admin/customer/search}"
+		class=" col-6 offset-1 order-rable d-flex">
+		<input th:name="name" type="text" class="form-control"
+			id="search_input" placeholder="Tên Khách Hàng">
+		<button type="submit" class="btn btn-success offset-1">tìm</button>
+
+	</form>
+	<div class="col-10 offset-1">
+		<h5 class="text-primary" th:text="${msg}"></h5>
 		<section class="section_gap">
-			<div class="search_input" ></div>
+			<div class="search_input"></div>
 			<div class="">
-				<table class="table col-10 offset-1">
-				 
-				
-				<thead class="thead-white">
-          <tr>
-         
-            <th scope="col">Mã Khách Hàng</th>
-            <th scope="col">Họ Và Tên</th>
-            <th scope="col">Số Điện Thoại</th>
-            <th scope="col">Email</th>
-            <th scope="col">Địa Chỉ</th>
-            <th scope="col">CCCD</th>
-            <th scope="col">Trạng Thái</th>
-            <th></th>
-          </tr>
-        </thead>
-       <tbody>
-        <tr th:each="kh : ${khs} " >
-            <td th:text="${kh.id}"></td>
-            <td	th:text="${kh.tenKhachHang}"></td>
-           	<td	th:text="${kh.soDienThoai}"></td>
-            <td	th:text="${kh.email.email}"></td>
-            <td	th:text="${kh.diaChi}"></td>
-            <td	th:text="${kh.soCanCuoc}"></td>
-            <td th:text="${kh.email.trangThai}? 'Còn Hoạt Động' : 'Đã Chặn'">
- 			<td>
-  			 <a th:if="${kh.email.trangThai}" class="btn btn-info"
-    		    th:href="@{/admin/chanuser(email=${kh.email.email},trangThai=false)}">Chặn</a> 
-  			 <a th:unless="${kh.email.trangThai}" class="btn btn-info"
-     		    th:href="@{/admin/chanuser(email=${kh.email.email},trangThai=true)}">Bỏ Chặn</a>
-			</td>
-          
-          </tr>
-       </tbody>
+				<table class="table ">
+
+
+					<thead class="thead-white">
+						<tr>
+
+							<th scope="col">Mã Khách Hàng</th>
+							<th scope="col">Họ Và Tên</th>
+							<th scope="col">Số Điện Thoại</th>
+							<th scope="col">Email</th>
+							<th scope="col">Địa Chỉ</th>
+							<th scope="col">CCCD</th>
+							<th scope="col">Trạng Thái</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="kh : ${khs} ">
+							<td th:text="${kh.id}"></td>
+							<td th:text="${kh.tenKhachHang}"></td>
+							<td th:text="${kh.soDienThoai}"></td>
+							<td th:text="${kh.email.email}"></td>
+							<td th:text="${kh.diaChi}"></td>
+							<td th:text="${kh.soCanCuoc}"></td>
+							<td th:text="${kh.email.trangThai}? 'Còn Hoạt Động' : 'Đã Chặn'">
+							<td><a th:if="${kh.email.trangThai}" class="btn btn-info"
+								th:href="@{/admin/chanuser(email=${kh.email.email},trangThai=false)}">Chặn</a>
+								<a th:unless="${kh.email.trangThai}" class="btn btn-info"
+								th:href="@{/admin/chanuser(email=${kh.email.email},trangThai=true)}">Bỏ
+									Chặn</a></td>
+
+						</tr>
+					</tbody>
 				</table>
 			</div>
 		</section>
-		
-		
-		
-	 <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" th:href="@{/admin/customer/page?p=__${currIndex-1}__}" href="#">Previous</a></li>
-        <tr th:each="i: ${#numbers.sequence(0, numberOfPages - 1)}">
-          <li class="page-item"><a th:style="${'background-color:' + (i==currIndex?'lightgrey':'white')}" 
-          th:href="@{/admin/customer/page?p=__${i}__}" class="page-link" href="#" th:text="${i+1}"></a></li>
-        </tr>
-        <li class="page-item"><a class="page-link" th:href="@{/admin/customer/page?p=__${currIndex+1}__}" href="#">Next</a></li>
-      </ul>
-    </nav>
-	
-	
-	
+	</div>
+
+
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<li class="page-item"><a class="page-link"
+				th:href="@{/admin/customer/page?p=__${currIndex-1}__}" href="#">Previous</a></li>
+			<tr th:each="i: ${#numbers.sequence(0, numberOfPages - 1)}">
+				<li class="page-item"><a
+					th:style="${'background-color:' + (i==currIndex?'lightgrey':'white')}"
+					th:href="@{/admin/customer/page?p=__${i}__}" class="page-link"
+					href="#" th:text="${i+1}"></a></li>
+			</tr>
+			<li class="page-item"><a class="page-link"
+				th:href="@{/admin/customer/page?p=__${currIndex+1}__}" href="#">Next</a></li>
+		</ul>
+	</nav>
+
+
+
 	<!--================End Login Box Area =================-->
 
 

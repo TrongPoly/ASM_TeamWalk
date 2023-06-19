@@ -63,14 +63,18 @@ public class KhachHangController {
 	public String blockUser(Model model, @RequestParam("email") String email,
 			@RequestParam("trangThai") Boolean trangThai) {
 		TaiKhoan currentUser = sessionService.get("user");
-		 if (currentUser != null && currentUser.getEmail().equals(email)) {
-			model.addAttribute("error", "Bạn không thể chặn chính mình.");
+		if (currentUser != null && currentUser.getEmail().equals(email)) {
+			model.addAttribute("msg", "Bạn không thể chặn chính mình.");
 		} else {
 			// Tiến hành chặn người dùng khác
 			TaiKhoan tk = tkdao.getById(email);
 			tk.setTrangThai(trangThai);
 			tkdao.save(tk);
-			model.addAttribute("msg", "Đã chặn người dùng thành công.");
+			if (!trangThai) {
+				model.addAttribute("msg", "Đã chặn người dùng thành công.");
+			} else {
+				model.addAttribute("msg", "Bỏ chặn người dùng thành công.");
+			}
 		}
 		return "forward:/admin/customerTabled";
 	}

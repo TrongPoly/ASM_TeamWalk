@@ -74,35 +74,37 @@ public class SanPhamController {
 
 	@RequestMapping("/admin/product/save")
 	public String save(@Valid @ModelAttribute("sanpham") SanPham sp, BindingResult result,
-			@RequestParam("file") MultipartFile file, Model model){
-
-		if (sp.getSoLuongTon() == 0) {
-			sp.setTrangThai(false); // set trạng thái là hết hàng nếu số lượng tồn = 0
-		}
+			@RequestParam("file") MultipartFile file, Model model) {
 
 		if (result.hasErrors()) {
 			Map<Long, String> options = optionService.getAllOptions();
 			model.addAttribute("options", options);
-			
 
 			return "views/Admin/productadd";
 		}
-		// Lưu tệp vào thư mục
-			String filename = file.getOriginalFilename().toString();
-			String path = "C:\\Users\\Admin\\eclipse-workspace\\ASM_TeamWalk\\src\\main\\resources\\static\\img\\product\\" + filename;
-			File savedFile = new File(path);
-			try {
-				file.transferTo(savedFile);
-			} catch (IllegalStateException e) {
-				spdao.save(sp);
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 
-			// Thiết lập đường dẫn cho sản phẩm
-			sp.setAnhSanPham(filename);
+		if (sp.getSoLuongTon() == 0) {
+			sp.setTrangThai(false); // set trạng thái là hết hàng nếu số lượng tồn = 0
+		} else {
+			sp.setTrangThai(true);
+		}
+		// Lưu tệp vào thư mục
+		String filename = file.getOriginalFilename().toString();
+		String path = "C:\\Users\\Admin\\eclipse-workspace\\ASM_TeamWalk\\src\\main\\resources\\static\\img\\product\\"
+				+ filename;
+		File savedFile = new File(path);
+		try {
+			file.transferTo(savedFile);
+		} catch (IllegalStateException e) {
+			spdao.save(sp);
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// Thiết lập đường dẫn cho sản phẩm
+		sp.setAnhSanPham(filename);
 
 		// Lưu sản phẩm vào cơ sở dữ liệu
 		spdao.save(sp);
@@ -150,6 +152,5 @@ public class SanPhamController {
 
 		return "views/Admin/productTabled";
 	}
-
 
 }

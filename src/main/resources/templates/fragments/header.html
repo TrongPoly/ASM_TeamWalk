@@ -27,14 +27,11 @@
 								th:href="@{/index}">Home</a></li>
 							<li class="nav-item submenu dropdown"><a href="#"
 								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
+								role="button" aria-haspopup="true" aria-expanded="false">Category</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link"
-										href="/product/laptop">LAPTOP</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="checkout.html">ĐIỆN THOẠI</a></li>
-									<li class="nav-item"><a class="nav-link" href="cart.html">MÁY
-											TÍNH BẢNG</a></li>
+									<li th:each="item : ${loaiSP}" class="nav-item"><a class="nav-link"
+										th:href="@{/category?loai=__${item.id}__}" th:text="${item.tenLoai}"></a></li>
+									
 								</ul></li>
 							<li class="nav-item submenu dropdown"><a href="#"
 								class="nav-link dropdown-toggle" data-toggle="dropdown"

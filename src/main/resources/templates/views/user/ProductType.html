@@ -261,13 +261,11 @@
 		</div>
 		<nav class="col-2 offset-5" aria-label="Page navigation example">
 			<ul class="pagination">
-				<!-- tạo ra một danh sách các số từ 0 đến tổng số trang trừ đi 1 -->
-				<!--để tạo ra các liên kết tới các trang khác nhau -->
-				<tr th:each="n : ${#numbers.sequence(0, sp.totalPages-1)}">
-					<li class="page-item"><a class="page-link" href="#"
-						th:style="${'background-color:' 
-							+ (n==currIndex?'lightgrey':'white')}"
-						th:href="@{/index?page=__${n}__}" th:text=${n+1}></a></li>
+				<tr th:each="i: ${#numbers.sequence(0, numberOfPages - 1)}">
+					<li class="page-item"><a
+						th:style="${'background-color:' + (i==currIndex?'lightgrey':'white')}"
+						th:href="@{/category?page=__${i}__&loai=__${loai}__}" class="page-link"
+						href="#" th:text="${i+1}"></a></li>
 				</tr>
 			</ul>
 		</nav>

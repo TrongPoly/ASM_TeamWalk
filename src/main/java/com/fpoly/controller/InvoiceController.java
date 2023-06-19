@@ -120,8 +120,8 @@ public class InvoiceController {
 		TaiKhoan taiKhoan = sessionService.get("user");
 
 		KhachHang khachHang = khachHangDAO.getByEmail(taiKhoan);
-		if (khachHang.getDiaChi().isBlank() || khachHang.getTenKhachHang().isBlank()
-				|| khachHang.getSoDienThoai().isBlank()) {
+		if (khachHang.getTenKhachHang() == null || khachHang.getDiaChi().isBlank()
+				|| khachHang.getTenKhachHang().isBlank() || khachHang.getSoDienThoai().isBlank()) {
 
 			model.addAttribute("msgProfile", "*Vui lòng thêm thông tin cá nhân trước khi đặt hàng");
 			model.addAttribute("kh", khachHang);

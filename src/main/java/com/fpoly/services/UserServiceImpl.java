@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.fpoly.dao.LoaiSanPhamDAO;
 import com.fpoly.dao.TaiKhoanDAO;
 import com.fpoly.entity.TaiKhoan;
 
@@ -15,6 +16,8 @@ public class UserServiceImpl implements UserService {
 	CookieImpl cookieImpl;
 	@Autowired
 	SessionService sessionService;
+	@Autowired
+	LoaiSanPhamDAO loaiSanPhamDAO;
 
 	@Override
 	public boolean checkLogin(String email, String password) {
@@ -28,6 +31,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void checkLogged(Model model) {
 		TaiKhoan tKhoan = sessionService.get("user");
+		var loaiSP = loaiSanPhamDAO.findAll();
+		model.addAttribute("loaiSP", loaiSP);
 		if (tKhoan != null) {
 			boolean isUser = true;
 			model.addAttribute("emailAccount", tKhoan.getEmail());

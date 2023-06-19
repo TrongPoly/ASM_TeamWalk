@@ -49,6 +49,8 @@ public class IndexController {
 	HoaDonDAO hoaDonDAO;
 	@Autowired
 	KhachHangDAO khachHangDAO;
+	@Autowired
+	SanPhamDAO sanPhamDAO;
 
 	@GetMapping("/index")
 	public String getindex(Model model, @RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
@@ -57,6 +59,22 @@ public class IndexController {
 		var sp = spDAO.findAll(pageable);
 		model.addAttribute("sp", sp);
 		return "views/user/index";
+	}
+
+	@GetMapping("/category")
+	public String getIndexLaptop(Model model, @RequestParam(name = "page", defaultValue = "0") Integer pageNo,
+			@RequestParam("loai") Long loai) {
+		userServiceImpl.checkLogged(model);
+
+		Pageable pageable = PageRequest.of(pageNo, 8);
+		var sp = spDAO.findByCategory(loai, pageable);
+		var numberOfRecords = spDAO.findByCategory(loai).size();
+		System.out.println(numberOfRecords);
+		var numberOfPages = (int) Math.ceil(numberOfRecords / 8.0);
+		model.addAttribute("numberOfPages", numberOfPages);
+		model.addAttribute("sp", sp);
+		model.addAttribute("loai", loai);
+		return "views/user/ProductType";
 	}
 
 	@GetMapping("/sanpham/chitiet")

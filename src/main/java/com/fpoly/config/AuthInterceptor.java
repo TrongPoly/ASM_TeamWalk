@@ -31,7 +31,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		if (user == null) {
 			response.sendRedirect("/errorPage");
 			return false;
-		} else if (user.getPhanQuyen() == false || !user.getPhanQuyen() && uri.startsWith("/admin")) {
+		} else if (user.getTrangThai() == false || !user.getPhanQuyen() && uri.startsWith("/admin")) {
 			response.sendRedirect("/errorPage");
 			return false;
 		}
