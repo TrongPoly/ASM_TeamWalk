@@ -86,7 +86,7 @@
 					<tbody>
 						<tr th:each="kh : ${khs} ">
 							<td th:text="${kh.id}"></td>
-							<td th:text="${kh.tenKhachHang}"></td>
+							<td th:class="${kh.email.phanQuyen}? 'text-danger' : 'text-info' " th:text="${kh.tenKhachHang}"></td>
 							<td th:text="${kh.soDienThoai}"></td>
 							<td th:text="${kh.email.email}"></td>
 							<td th:text="${kh.diaChi}"></td>

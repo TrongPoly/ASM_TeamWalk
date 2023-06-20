@@ -15,4 +15,6 @@ public interface KhachHangDAO extends JpaRepository<KhachHang, Long> {
 
 	@Query("SELECT kh FROM KhachHang kh WHERE kh.tenKhachHang LIKE %:tenKhachHang%")
 	List<KhachHang> findByTenKhachHang(String tenKhachHang, Pageable pageable);
+
+	KhachHang findByTenKhachHang(String tenKhachHang);
 }

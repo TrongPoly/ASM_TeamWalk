@@ -83,15 +83,15 @@
 				</tr>
 			</tfoot>
 		</table>
-		<a class="btn text-white btn-success"
-			th:text="${hoaDon.trangThai.id}==2? 'Xác nhận đã nhận hàng và thanh toán' : '' "
-			th:href="@{/requestConfirm?maHoaDon=__${hoaDon.id}__&email=__${hoaDon.nguoiMua.email.email}__}"></a>
-		<span class="text-success" th:text="${msgEmail}"></span> <a
-			class="btn text-white btn-info"
-			th:text="${hoaDon.trangThai.id}==1? 'Hủy đơn' : '' "
-			th:href="@{/huyDon?id=__${hoaDon.id}__}"></a>
-		<span class="text-success" th:text="${msgEmail}"></span>
+		<a th:if="${hoaDon.trangThai.id}==2"
+			class="btn text-white btn-success"
+			th:href="@{/requestConfirm?maHoaDon=__${hoaDon.id}__&email=__${hoaDon.nguoiMua.email.email}__}">Xác
+			nhận đã nhận hàng</a> <span class="text-success" th:text="${msgEmail}"></span>
+		<a th:if="${hoaDon.trangThai.id}==1" class="btn text-white btn-info"
+			th:href="@{/huyDon?id=__${hoaDon.id}__}">Hủy đơn</a> <span
+			class="text-success" th:text="${msgEmail}"></span>
 		<form th:if="${ghiLyDo}" th:action="@{/doHuyDon}" class="form-group">
+			<input type="hidden" name="maHoaDon" th:value="${hoaDon.id}">
 			<h4 class="text-info">Lý do</h4>
 			<textarea name="body" class="form-control" rows="7" cols="70"></textarea>
 			<button class="btn btn-info">Xác nhận</button>

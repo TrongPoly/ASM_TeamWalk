@@ -61,6 +61,7 @@ public class IndexController {
 		return "views/user/index";
 	}
 
+	// lọc theo mã
 	@GetMapping("/category")
 	public String getIndexLaptop(Model model, @RequestParam(name = "page", defaultValue = "0") Integer pageNo,
 			@RequestParam("loai") Long loai) {
@@ -87,10 +88,16 @@ public class IndexController {
 	}
 
 	@RequestMapping("/admin")
-	public String Admin(Model model, @RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
+	public String Admin(Model model, @RequestParam("name") Optional<String> tenKhachHang,
+			@RequestParam(name = "page", defaultValue = "0") Integer pageNo) {
 		Pageable pageable = PageRequest.of(pageNo, 5, Sort.by("id").descending());
-		var hd = hoaDonDAO.findAll(pageable);
+		var hd = hoaDonDAO.findByName("%" + tenKhachHang.orElse("") + "%", pageable);
+		var numberOfRecords = hoaDonDAO.findByName("%" + tenKhachHang.orElse("") + "%").size();
+		System.out.println(numberOfRecords);
+		var numberOfPages = (int) Math.ceil(numberOfRecords / 5.0);
 		model.addAttribute("hd", hd);
+		model.addAttribute("numberOfPages", numberOfPages);
+		model.addAttribute("tenKhachHang", tenKhachHang);
 		return "views/Admin/adminn";
 	}
 
@@ -102,8 +109,6 @@ public class IndexController {
 		KhachHang khachHang = khachHangDAO.getByEmail(taiKhoan);
 		model.addAttribute("kh", khachHang);
 		Boolean view = true;
-		// Kiểm tra xem thuộc tính 'msgProfile' có tồn tại trong RedirectAttributes hay
-		// không
 
 		model.addAttribute("view", view);
 		return "views/user/UserInformation";

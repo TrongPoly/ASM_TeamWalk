@@ -76,7 +76,8 @@ public class CartController {
 				gioHangChiTietDAO.save(cartSP.get(i));
 			}
 		}
-		model.addAttribute("cartSP", cartSP);
+		var cartSP2 = gioHangChiTietDAO.findByMaGioHang(gioHang);
+		model.addAttribute("cartSP", cartSP2);
 		// Tính total giỏ hàng
 		model.addAttribute("total", cartService.TinhTotal(gioHang));
 		return "/views/user/cart";

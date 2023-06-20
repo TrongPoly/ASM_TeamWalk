@@ -58,8 +58,7 @@
 	<div class="col-md-10 offset-1">
 		<h2 class="text-success">GIỎ HÀNG</h2>
 		<h4 class="text-danger" th:text="${messageSLSP}"></h4>
-		<h6 class="text-info"  th:text="${messageSLSP1}"></h6>
-		<table class="table table-bordered table-default">
+		<table th:if="${total}!=null" class="table table-bordered table-default">
 			<tr>
 				<th>Tên sản phẩm</th>
 				<th>Hình ảnh</th>

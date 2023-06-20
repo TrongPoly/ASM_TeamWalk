@@ -73,17 +73,14 @@ public class InvoiceManagement {
 	@RequestMapping("/huyDon")
 	public String viewHuyDon(Model model, @RequestParam("id") long id) {
 		model.addAttribute("ghiLyDo", true);
-		invoiceController.invoiceDetails(id, model);
-		cookieService.add("maHoaDon", String.valueOf(id), 30);
-		return "views/user/invoiceDetails";
+		return "forward:/invoice/details?id=" + id;
 	}
 
 	@RequestMapping("/doHuyDon")
-	public String doHuyDon(@RequestParam("body") String body, Model model, HttpServletRequest request)
-			throws Exception {
+	public String doHuyDon(@RequestParam("body") String body, @RequestParam("maHoaDon") String maHoaDon, Model model,
+			HttpServletRequest request) throws Exception {
 		TaiKhoan tKhoan = sessionService.get("user");
 		KhachHang khachHang = khachHangDAO.getByEmail(tKhoan);
-		String maHoaDon = cookieService.getValue("maHoaDon");
 		if (body.isBlank()) {
 			model.addAttribute("msg", "Vui lòng ghi lý do");
 			return "forward:/invoice/details?id=" + maHoaDon;

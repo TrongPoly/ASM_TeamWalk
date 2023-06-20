@@ -57,7 +57,7 @@ public class ReportController {
 
 	@RequestMapping("/admin/sanPham")
 	public String sanPham(Model model) {
-		var rp = hoaDonChiTietDAO.reportSanPham(4, 2023);
+		var rp = hoaDonChiTietDAO.reportSanPham(1, 2023);
 		var year = hoaDonDAO.getYearHoaDon();
 		var loai = loaiSanPhamDAO.findAll();
 		model.addAttribute("year", year);

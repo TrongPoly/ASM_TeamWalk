@@ -126,7 +126,6 @@ public class InvoiceController {
 			model.addAttribute("msgProfile", "*Vui lòng thêm thông tin cá nhân trước khi đặt hàng");
 			model.addAttribute("kh", khachHang);
 			Boolean view = true;
-
 			model.addAttribute("view", view);
 			return "views/user/UserInformation";
 
@@ -185,9 +184,8 @@ public class InvoiceController {
 
 			hoaDonDAO.delete(hd);
 			model.addAttribute("messageSLSP", "*Một số sản phẩm có thể không còn đủ số lượng");
-			model.addAttribute("messageSLSP1", "Chúng tôi đã đặt lại số lượng tối đa cho bạn");
 
-			return "forward:/viewCart";
+			return "/views/user/cart";
 		}
 		gioHangChiTietDAO.deleteAllByMaGioHang(gioHang);
 		mailerServiceImp.datHang(khachHang.getTenKhachHang(), hoaDon.getId());
